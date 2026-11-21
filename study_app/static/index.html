@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>まなびサポート｜算数と国語の練習</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <div class="logo">まなび<span>サポート</span></div>
+      <p>算数と国語を、楽しく練習しよう！</p>
+    </div>
+    <div id="account-badge" class="account-badge">アカウントを えらんでね</div>
+  </header>
+
+  <main class="wrap">
+    <nav class="mode-nav">
+      <button id="mode-drill" class="mode-btn selected">📝 ドリル</button>
+      <button id="mode-farm" class="mode-btn">🌱 農場ゲーム</button>
+    </nav>
+
+    <div id="drill-view">
+    <section id="setup" class="card">
+      <h1>きょうは 何を 練習する？</h1>
+
+      <div class="field account-field">
+        <h2>① だれが がんばる？</h2>
+        <div class="account-row">
+          <select id="account-select"></select>
+          <button id="account-login" class="small-btn">このアカウントで遊ぶ</button>
+          <button id="account-new" class="small-btn sub">新しくつくる</button>
+          <button id="account-delete" class="small-btn danger">消す</button>
+        </div>
+        <div id="account-form" class="account-form hidden">
+          <input id="new-nickname" type="text" maxlength="12" placeholder="なまえ（12文字まで）">
+          <input id="new-pin" type="password" inputmode="numeric" maxlength="4" placeholder="PIN（4けた）">
+          <button id="create-account" class="small-btn">つくる</button>
+        </div>
+        <p class="hint">PIN は アカウントを 切りかえるときに 使います。メールアドレスは 不要です。</p>
+      </div>
+
+      <div class="field">
+        <h2>② 学年をえらぶ</h2>
+        <div id="grades" class="chips"></div>
+      </div>
+
+      <div class="field">
+        <h2>③ 教科をえらぶ</h2>
+        <div id="subjects" class="chips"></div>
+      </div>
+
+      <div class="field">
+        <h2>④ ジャンルをえらぶ <small>（チェックしないと ぜんぶ）</small></h2>
+        <div id="topics" class="topics"></div>
+      </div>
+
+      <div class="field row">
+        <label>問題の数
+          <select id="count">
+            <option value="5">5問</option>
+            <option value="10" selected>10問</option>
+            <option value="15">15問</option>
+            <option value="20">20問</option>
+          </select>
+        </label>
+        <label>むずかしさ
+          <select id="difficulty"></select>
+        </label>
+      </div>
+
+      <button id="start" class="big-btn">問題をスタート ▶</button>
+    </section>
+
+    <section id="quiz" class="card hidden">
+      <div class="quiz-head">
+        <span id="progress-label" class="badge"></span>
+        <button id="quit" class="link-btn">やめる</button>
+      </div>
+      <div class="progress"><div id="progress-bar"></div></div>
+      <div id="passage" class="passage hidden"></div>
+      <h2 id="question" class="question"></h2>
+      <div id="choices" class="choices"></div>
+      <div id="input-area" class="input-area hidden">
+        <input id="answer-input" type="text" inputmode="text" placeholder="こたえを いれてね" autocomplete="off">
+        <button id="submit" class="big-btn small">こたえる</button>
+      </div>
+      <div id="feedback" class="feedback hidden"></div>
+      <button id="next" class="big-btn hidden">つぎの問題へ ▶</button>
+    </section>
+
+    <section id="result" class="card hidden">
+      <div id="stars" class="stars"></div>
+      <h1 id="result-title"></h1>
+      <p id="result-detail" class="result-detail"></p>
+      <p id="earned-points" class="earned"></p>
+      <div id="review" class="review"></div>
+      <div class="actions">
+        <button id="again" class="big-btn">もういちど</button>
+        <button id="back" class="big-btn sub">せっていに もどる</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <h1>これまでの 記録</h1>
+        <button id="clear-progress" class="link-btn">記録を 消す</button>
+      </div>
+      <div id="progress-summary" class="stats"></div>
+      <h2>ポイントの わけ</h2>
+      <div id="point-breakdown" class="point-list"></div>
+      <h2>最近の ポイント</h2>
+      <div id="point-events" class="point-list"></div>
+      <h2>まちがえた 問題</h2>
+      <div id="wrong-list" class="wrong-list"></div>
+      <p class="privacy">記録は このパソコンの中だけに 保存されます。インターネットには 送られません。</p>
+    </section>
+    </div>
+
+    <section id="farm-view" class="card hidden">
+      <div class="section-head">
+        <h1>🌱 わたしの農場</h1>
+        <button id="farm-refresh" class="link-btn">🔄 更新</button>
+      </div>
+      <p class="hint">ドリルで えた ポイントを つかって、畑や どうぶつを ふやしましょう。</p>
+
+      <div id="farm-status" class="farm-status"></div>
+      <div class="farm-exp"><div id="farm-exp-bar"></div></div>
+
+      <h2>畑</h2>
+      <p class="hint">たねを えらんでから、空き畑を クリックすると 植えられます。</p>
+      <div id="seed-picker" class="seed-picker"></div>
+      <div id="farm-grid" class="farm-grid"></div>
+      <button id="farm-expand" class="big-btn sub">畑を ひろげる</button>
+
+      <h2>どうぶつ</h2>
+      <div id="farm-animals" class="farm-cards"></div>
+
+      <h2>たてもの</h2>
+      <div id="farm-buildings" class="farm-cards"></div>
+    </section>
+  </main>
+
+  <footer>
+    漢字データ: 文部科学省「学年別漢字配当表」をもとにした
+    <a href="https://eleschool-compass.com/contents/kanji/kanji-data.php" target="_blank" rel="noopener">スクールコンパス公開データ</a>
+    ／ 文章・ことばの問題は本アプリ用のオリジナル
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

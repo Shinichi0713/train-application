@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+study_app/data/progress.sqlite3
+.venv/
+venv/

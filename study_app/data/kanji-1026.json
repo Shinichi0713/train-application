@@ -1,0 +1,9245 @@
+{
+ "name": "学年別漢字配当表 1026字",
+ "description": "文部科学省 小学校学習指導要領の学年別漢字配当表にもとづく1,026字の一覧。学年・画数・音読み・訓読み・部首と、各字の解説ページのURLを収めている。",
+ "license": "https://eleschool-compass.com/terms.html",
+ "creator": "スクールコンパス編集部",
+ "source": "文部科学省 小学校学習指導要領 別表 学年別漢字配当表",
+ "built": "2026-09-02",
+ "count": 1026,
+ "kanji": [
+  {
+   "char": "一",
+   "grade": 1,
+   "strokes": "1",
+   "on": "いち・いつ",
+   "kun": "ひと・ひと（つ）",
+   "radical": "一",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/04e00.php"
+  },
+  {
+   "char": "七",
+   "grade": 1,
+   "strokes": "2",
+   "on": "しち",
+   "kun": "なな・なな（つ）・なの",
+   "radical": "一",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/04e03.php"
+  },
+  {
+   "char": "九",
+   "grade": 1,
+   "strokes": "2",
+   "on": "きゅう・く",
+   "kun": "ここの・ここの（つ）",
+   "radical": "乙",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/04e5d.php"
+  },
+  {
+   "char": "二",
+   "grade": 1,
+   "strokes": "2",
+   "on": "に",
+   "kun": "ふた・ふた（つ）",
+   "radical": "二",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/04e8c.php"
+  },
+  {
+   "char": "人",
+   "grade": 1,
+   "strokes": "2",
+   "on": "じん・にん",
+   "kun": "ひと",
+   "radical": "人",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/04eba.php"
+  },
+  {
+   "char": "入",
+   "grade": 1,
+   "strokes": "2",
+   "on": "にゅう",
+   "kun": "い（る）・い（れる）・はい（る）",
+   "radical": "入",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/05165.php"
+  },
+  {
+   "char": "八",
+   "grade": 1,
+   "strokes": "2",
+   "on": "はち",
+   "kun": "や・や（つ）・やっ（つ）・よう",
+   "radical": "八",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/0516b.php"
+  },
+  {
+   "char": "力",
+   "grade": 1,
+   "strokes": "2",
+   "on": "りょく・りき",
+   "kun": "ちから",
+   "radical": "力",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/0529b.php"
+  },
+  {
+   "char": "十",
+   "grade": 1,
+   "strokes": "2",
+   "on": "じゅう・じっ",
+   "kun": "とお・と",
+   "radical": "十",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/05341.php"
+  },
+  {
+   "char": "三",
+   "grade": 1,
+   "strokes": "3",
+   "on": "さん",
+   "kun": "み・み（つ）・みっ（つ）",
+   "radical": "一",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/04e09.php"
+  },
+  {
+   "char": "上",
+   "grade": 1,
+   "strokes": "3",
+   "on": "じょう・しょう",
+   "kun": "うえ・うわ・かみ・あ（げる）・あ（がる）・のぼ（る）・のぼ（せる）・のぼ（す）",
+   "radical": "一",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/04e0a.php"
+  },
+  {
+   "char": "下",
+   "grade": 1,
+   "strokes": "3",
+   "on": "か・げ",
+   "kun": "した・しも・もと・さ（げる）・さ（がる）・くだ（る）・くだ（す）・くだ（さる）・お（ろす）・お（りる）",
+   "radical": "一",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/04e0b.php"
+  },
+  {
+   "char": "千",
+   "grade": 1,
+   "strokes": "3",
+   "on": "せん",
+   "kun": "ち",
+   "radical": "十",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/05343.php"
+  },
+  {
+   "char": "口",
+   "grade": 1,
+   "strokes": "3",
+   "on": "こう・く",
+   "kun": "くち",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/053e3.php"
+  },
+  {
+   "char": "土",
+   "grade": 1,
+   "strokes": "3",
+   "on": "ど・と",
+   "kun": "つち",
+   "radical": "土",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/0571f.php"
+  },
+  {
+   "char": "夕",
+   "grade": 1,
+   "strokes": "3",
+   "on": "せき",
+   "kun": "ゆう",
+   "radical": "夕",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/05915.php"
+  },
+  {
+   "char": "大",
+   "grade": 1,
+   "strokes": "3",
+   "on": "だい・たい",
+   "kun": "おお・おお（きい）・おお（いに）",
+   "radical": "大",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/05927.php"
+  },
+  {
+   "char": "女",
+   "grade": 1,
+   "strokes": "3",
+   "on": "じょ・にょ・にょう",
+   "kun": "おんな・め",
+   "radical": "女",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/05973.php"
+  },
+  {
+   "char": "子",
+   "grade": 1,
+   "strokes": "3",
+   "on": "し・す",
+   "kun": "こ",
+   "radical": "子",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/05b50.php"
+  },
+  {
+   "char": "小",
+   "grade": 1,
+   "strokes": "3",
+   "on": "しょう",
+   "kun": "ちい（さい）・こ・お",
+   "radical": "小",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/05c0f.php"
+  },
+  {
+   "char": "山",
+   "grade": 1,
+   "strokes": "3",
+   "on": "さん",
+   "kun": "やま",
+   "radical": "山",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/05c71.php"
+  },
+  {
+   "char": "川",
+   "grade": 1,
+   "strokes": "3",
+   "on": "せん",
+   "kun": "かわ",
+   "radical": "川",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/05ddd.php"
+  },
+  {
+   "char": "中",
+   "grade": 1,
+   "strokes": "4",
+   "on": "ちゅう・じゅう",
+   "kun": "なか",
+   "radical": "丨",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/04e2d.php"
+  },
+  {
+   "char": "五",
+   "grade": 1,
+   "strokes": "4",
+   "on": "ご",
+   "kun": "いつ・いつ（つ）",
+   "radical": "二",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/04e94.php"
+  },
+  {
+   "char": "六",
+   "grade": 1,
+   "strokes": "4",
+   "on": "ろく",
+   "kun": "む・む（つ）・むっ（つ）・むい",
+   "radical": "八",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/0516d.php"
+  },
+  {
+   "char": "円",
+   "grade": 1,
+   "strokes": "4",
+   "on": "えん",
+   "kun": "まる（い）",
+   "radical": "冂",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/05186.php"
+  },
+  {
+   "char": "天",
+   "grade": 1,
+   "strokes": "4",
+   "on": "てん",
+   "kun": "あめ・あま",
+   "radical": "大",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/05929.php"
+  },
+  {
+   "char": "手",
+   "grade": 1,
+   "strokes": "4",
+   "on": "しゅ",
+   "kun": "て・た",
+   "radical": "手",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/0624b.php"
+  },
+  {
+   "char": "文",
+   "grade": 1,
+   "strokes": "4",
+   "on": "ぶん・もん",
+   "kun": "ふみ",
+   "radical": "文",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/06587.php"
+  },
+  {
+   "char": "日",
+   "grade": 1,
+   "strokes": "4",
+   "on": "にち・じつ",
+   "kun": "ひ・か",
+   "radical": "日",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/065e5.php"
+  },
+  {
+   "char": "月",
+   "grade": 1,
+   "strokes": "4",
+   "on": "げつ・がつ",
+   "kun": "つき",
+   "radical": "月",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/06708.php"
+  },
+  {
+   "char": "木",
+   "grade": 1,
+   "strokes": "4",
+   "on": "ぼく・もく",
+   "kun": "き・こ",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/06728.php"
+  },
+  {
+   "char": "水",
+   "grade": 1,
+   "strokes": "4",
+   "on": "すい",
+   "kun": "みず",
+   "radical": "水",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/06c34.php"
+  },
+  {
+   "char": "火",
+   "grade": 1,
+   "strokes": "4",
+   "on": "か",
+   "kun": "ひ・ほ",
+   "radical": "火",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/0706b.php"
+  },
+  {
+   "char": "犬",
+   "grade": 1,
+   "strokes": "4",
+   "on": "けん",
+   "kun": "いぬ",
+   "radical": "犬",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/072ac.php"
+  },
+  {
+   "char": "王",
+   "grade": 1,
+   "strokes": "4",
+   "on": "おう",
+   "kun": "なし",
+   "radical": "王",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/0738b.php"
+  },
+  {
+   "char": "出",
+   "grade": 1,
+   "strokes": "5",
+   "on": "しゅつ・すい",
+   "kun": "で（る）・だ（す）",
+   "radical": "凵",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/051fa.php"
+  },
+  {
+   "char": "右",
+   "grade": 1,
+   "strokes": "5",
+   "on": "う・ゆう",
+   "kun": "みぎ",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/053f3.php"
+  },
+  {
+   "char": "四",
+   "grade": 1,
+   "strokes": "5",
+   "on": "し",
+   "kun": "よ・よ（つ）・よっ（つ）・よん",
+   "radical": "囗",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/056db.php"
+  },
+  {
+   "char": "左",
+   "grade": 1,
+   "strokes": "5",
+   "on": "さ",
+   "kun": "ひだり",
+   "radical": "工",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/05de6.php"
+  },
+  {
+   "char": "本",
+   "grade": 1,
+   "strokes": "5",
+   "on": "ほん",
+   "kun": "もと",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/0672c.php"
+  },
+  {
+   "char": "正",
+   "grade": 1,
+   "strokes": "5",
+   "on": "せい・しょう",
+   "kun": "ただ（しい）・ただ（す）・まさ",
+   "radical": "止",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/06b63.php"
+  },
+  {
+   "char": "玉",
+   "grade": 1,
+   "strokes": "5",
+   "on": "ぎょく",
+   "kun": "たま",
+   "radical": "玉",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/07389.php"
+  },
+  {
+   "char": "生",
+   "grade": 1,
+   "strokes": "5",
+   "on": "せい・しょう",
+   "kun": "い（きる）・い（かす）・い（ける）・う（まれる）・う（む）・お（う）・は（える）・は（やす）・き・なま",
+   "radical": "生",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/0751f.php"
+  },
+  {
+   "char": "田",
+   "grade": 1,
+   "strokes": "5",
+   "on": "でん",
+   "kun": "た",
+   "radical": "田",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/07530.php"
+  },
+  {
+   "char": "白",
+   "grade": 1,
+   "strokes": "5",
+   "on": "はく・びゃく",
+   "kun": "しろ・しら・しろ（い）",
+   "radical": "白",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/0767d.php"
+  },
+  {
+   "char": "目",
+   "grade": 1,
+   "strokes": "5",
+   "on": "もく・ぼく",
+   "kun": "め・ま",
+   "radical": "目",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/076ee.php"
+  },
+  {
+   "char": "石",
+   "grade": 1,
+   "strokes": "5",
+   "on": "せき・しゃく・こく",
+   "kun": "いし",
+   "radical": "石",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/077f3.php"
+  },
+  {
+   "char": "立",
+   "grade": 1,
+   "strokes": "5",
+   "on": "りつ・りゅう",
+   "kun": "た（つ）・た（てる）",
+   "radical": "立",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/07acb.php"
+  },
+  {
+   "char": "休",
+   "grade": 1,
+   "strokes": "6",
+   "on": "きゅう",
+   "kun": "やす（む）・やす（まる）・やす（める）",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/04f11.php"
+  },
+  {
+   "char": "先",
+   "grade": 1,
+   "strokes": "6",
+   "on": "せん",
+   "kun": "さき",
+   "radical": "儿",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/05148.php"
+  },
+  {
+   "char": "名",
+   "grade": 1,
+   "strokes": "6",
+   "on": "めい・みょう",
+   "kun": "な",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/0540d.php"
+  },
+  {
+   "char": "字",
+   "grade": 1,
+   "strokes": "6",
+   "on": "じ",
+   "kun": "あざ",
+   "radical": "子",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/05b57.php"
+  },
+  {
+   "char": "年",
+   "grade": 1,
+   "strokes": "6",
+   "on": "ねん",
+   "kun": "とし",
+   "radical": "干",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/05e74.php"
+  },
+  {
+   "char": "早",
+   "grade": 1,
+   "strokes": "6",
+   "on": "そう・さっ",
+   "kun": "はや（い）・はや（まる）・はや（める）",
+   "radical": "日",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/065e9.php"
+  },
+  {
+   "char": "気",
+   "grade": 1,
+   "strokes": "6",
+   "on": "き・け",
+   "kun": "なし",
+   "radical": "气",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/06c17.php"
+  },
+  {
+   "char": "百",
+   "grade": 1,
+   "strokes": "6",
+   "on": "ひゃく",
+   "kun": "なし",
+   "radical": "白",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/0767e.php"
+  },
+  {
+   "char": "竹",
+   "grade": 1,
+   "strokes": "6",
+   "on": "ちく",
+   "kun": "たけ",
+   "radical": "竹",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/07af9.php"
+  },
+  {
+   "char": "糸",
+   "grade": 1,
+   "strokes": "6",
+   "on": "し",
+   "kun": "いと",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/07cf8.php"
+  },
+  {
+   "char": "耳",
+   "grade": 1,
+   "strokes": "6",
+   "on": "じ",
+   "kun": "みみ",
+   "radical": "耳",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/08033.php"
+  },
+  {
+   "char": "虫",
+   "grade": 1,
+   "strokes": "6",
+   "on": "ちゅう",
+   "kun": "むし",
+   "radical": "虫",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/0866b.php"
+  },
+  {
+   "char": "村",
+   "grade": 1,
+   "strokes": "7",
+   "on": "そん",
+   "kun": "むら",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/06751.php"
+  },
+  {
+   "char": "男",
+   "grade": 1,
+   "strokes": "7",
+   "on": "だん・なん",
+   "kun": "おとこ",
+   "radical": "田",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/07537.php"
+  },
+  {
+   "char": "町",
+   "grade": 1,
+   "strokes": "7",
+   "on": "ちょう",
+   "kun": "まち",
+   "radical": "田",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/0753a.php"
+  },
+  {
+   "char": "花",
+   "grade": 1,
+   "strokes": "7",
+   "on": "か",
+   "kun": "はな",
+   "radical": "艹",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/082b1.php"
+  },
+  {
+   "char": "見",
+   "grade": 1,
+   "strokes": "7",
+   "on": "けん",
+   "kun": "み（る）・み（える）・み（せる）",
+   "radical": "見",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/0898b.php"
+  },
+  {
+   "char": "貝",
+   "grade": 1,
+   "strokes": "7",
+   "on": "なし",
+   "kun": "かい",
+   "radical": "貝",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/08c9d.php"
+  },
+  {
+   "char": "赤",
+   "grade": 1,
+   "strokes": "7",
+   "on": "せき・しゃく",
+   "kun": "あか・あか（い）・あか（らむ）・あか（らめる）",
+   "radical": "赤",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/08d64.php"
+  },
+  {
+   "char": "足",
+   "grade": 1,
+   "strokes": "7",
+   "on": "そく",
+   "kun": "あし・た（りる）・た（る）・た（す）",
+   "radical": "足",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/08db3.php"
+  },
+  {
+   "char": "車",
+   "grade": 1,
+   "strokes": "7",
+   "on": "しゃ",
+   "kun": "くるま",
+   "radical": "車",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/08eca.php"
+  },
+  {
+   "char": "学",
+   "grade": 1,
+   "strokes": "8",
+   "on": "がく",
+   "kun": "まな（ぶ）",
+   "radical": "子",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/05b66.php"
+  },
+  {
+   "char": "林",
+   "grade": 1,
+   "strokes": "8",
+   "on": "りん",
+   "kun": "はやし",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/06797.php"
+  },
+  {
+   "char": "空",
+   "grade": 1,
+   "strokes": "8",
+   "on": "くう",
+   "kun": "そら・あ（く）・あ（ける）・から",
+   "radical": "穴",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/07a7a.php"
+  },
+  {
+   "char": "金",
+   "grade": 1,
+   "strokes": "8",
+   "on": "きん・こん",
+   "kun": "かね・かな",
+   "radical": "金",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/091d1.php"
+  },
+  {
+   "char": "雨",
+   "grade": 1,
+   "strokes": "8",
+   "on": "う",
+   "kun": "あめ・あま",
+   "radical": "雨",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/096e8.php"
+  },
+  {
+   "char": "青",
+   "grade": 1,
+   "strokes": "8",
+   "on": "せい・しょう",
+   "kun": "あお・あお（い）",
+   "radical": "青",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/09752.php"
+  },
+  {
+   "char": "草",
+   "grade": 1,
+   "strokes": "9",
+   "on": "そう",
+   "kun": "くさ",
+   "radical": "艹",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/08349.php"
+  },
+  {
+   "char": "音",
+   "grade": 1,
+   "strokes": "9",
+   "on": "おん・いん",
+   "kun": "おと・ね",
+   "radical": "音",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/097f3.php"
+  },
+  {
+   "char": "校",
+   "grade": 1,
+   "strokes": "10",
+   "on": "こう",
+   "kun": "なし",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/06821.php"
+  },
+  {
+   "char": "森",
+   "grade": 1,
+   "strokes": "12",
+   "on": "しん",
+   "kun": "もり",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g1/068ee.php"
+  },
+  {
+   "char": "刀",
+   "grade": 2,
+   "strokes": "2",
+   "on": "とう",
+   "kun": "かたな",
+   "radical": "刀",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05200.php"
+  },
+  {
+   "char": "万",
+   "grade": 2,
+   "strokes": "3",
+   "on": "まん・ばん",
+   "kun": "なし",
+   "radical": "一",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/04e07.php"
+  },
+  {
+   "char": "丸",
+   "grade": 2,
+   "strokes": "3",
+   "on": "がん",
+   "kun": "まる・まる（い）・まる（める）",
+   "radical": "丶",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/04e38.php"
+  },
+  {
+   "char": "工",
+   "grade": 2,
+   "strokes": "3",
+   "on": "こう・く",
+   "kun": "なし",
+   "radical": "工",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05de5.php"
+  },
+  {
+   "char": "弓",
+   "grade": 2,
+   "strokes": "3",
+   "on": "きゅう",
+   "kun": "ゆみ",
+   "radical": "弓",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05f13.php"
+  },
+  {
+   "char": "才",
+   "grade": 2,
+   "strokes": "3",
+   "on": "さい",
+   "kun": "なし",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0624d.php"
+  },
+  {
+   "char": "今",
+   "grade": 2,
+   "strokes": "4",
+   "on": "こん・きん",
+   "kun": "いま",
+   "radical": "人",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/04eca.php"
+  },
+  {
+   "char": "元",
+   "grade": 2,
+   "strokes": "4",
+   "on": "げん・がん",
+   "kun": "もと",
+   "radical": "儿",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05143.php"
+  },
+  {
+   "char": "公",
+   "grade": 2,
+   "strokes": "4",
+   "on": "こう",
+   "kun": "おおやけ",
+   "radical": "八",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0516c.php"
+  },
+  {
+   "char": "内",
+   "grade": 2,
+   "strokes": "4",
+   "on": "ない・だい",
+   "kun": "うち",
+   "radical": "冂",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05185.php"
+  },
+  {
+   "char": "分",
+   "grade": 2,
+   "strokes": "4",
+   "on": "ぶん・ふん・ぶ",
+   "kun": "わ（ける）・わ（かれる）・わ（かる）・わ（かつ）",
+   "radical": "刀",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05206.php"
+  },
+  {
+   "char": "切",
+   "grade": 2,
+   "strokes": "4",
+   "on": "せつ・さい",
+   "kun": "き（る）・き（れる）",
+   "radical": "刀",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05207.php"
+  },
+  {
+   "char": "午",
+   "grade": 2,
+   "strokes": "4",
+   "on": "ご",
+   "kun": "なし",
+   "radical": "十",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05348.php"
+  },
+  {
+   "char": "友",
+   "grade": 2,
+   "strokes": "4",
+   "on": "ゆう",
+   "kun": "とも",
+   "radical": "又",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/053cb.php"
+  },
+  {
+   "char": "太",
+   "grade": 2,
+   "strokes": "4",
+   "on": "たい・た",
+   "kun": "ふと（い）・ふと（る）",
+   "radical": "大",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0592a.php"
+  },
+  {
+   "char": "少",
+   "grade": 2,
+   "strokes": "4",
+   "on": "しょう",
+   "kun": "すく（ない）・すこ（し）",
+   "radical": "小",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05c11.php"
+  },
+  {
+   "char": "引",
+   "grade": 2,
+   "strokes": "4",
+   "on": "いん",
+   "kun": "ひ（く）・ひ（ける）",
+   "radical": "弓",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05f15.php"
+  },
+  {
+   "char": "心",
+   "grade": 2,
+   "strokes": "4",
+   "on": "しん",
+   "kun": "こころ",
+   "radical": "心",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05fc3.php"
+  },
+  {
+   "char": "戸",
+   "grade": 2,
+   "strokes": "4",
+   "on": "こ",
+   "kun": "と",
+   "radical": "戸",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/06238.php"
+  },
+  {
+   "char": "方",
+   "grade": 2,
+   "strokes": "4",
+   "on": "ほう",
+   "kun": "かた",
+   "radical": "方",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/065b9.php"
+  },
+  {
+   "char": "止",
+   "grade": 2,
+   "strokes": "4",
+   "on": "し",
+   "kun": "と（まる）・と（める）",
+   "radical": "止",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/06b62.php"
+  },
+  {
+   "char": "毛",
+   "grade": 2,
+   "strokes": "4",
+   "on": "もう",
+   "kun": "け",
+   "radical": "毛",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/06bdb.php"
+  },
+  {
+   "char": "父",
+   "grade": 2,
+   "strokes": "4",
+   "on": "ふ",
+   "kun": "ちち",
+   "radical": "父",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/07236.php"
+  },
+  {
+   "char": "牛",
+   "grade": 2,
+   "strokes": "4",
+   "on": "ぎゅう",
+   "kun": "うし",
+   "radical": "牛",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0725b.php"
+  },
+  {
+   "char": "兄",
+   "grade": 2,
+   "strokes": "5",
+   "on": "けい・きょう",
+   "kun": "あに",
+   "radical": "儿",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05144.php"
+  },
+  {
+   "char": "冬",
+   "grade": 2,
+   "strokes": "5",
+   "on": "とう",
+   "kun": "ふゆ",
+   "radical": "冫",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/051ac.php"
+  },
+  {
+   "char": "北",
+   "grade": 2,
+   "strokes": "5",
+   "on": "ほく",
+   "kun": "きた",
+   "radical": "匕",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05317.php"
+  },
+  {
+   "char": "半",
+   "grade": 2,
+   "strokes": "5",
+   "on": "はん",
+   "kun": "なか（ば）",
+   "radical": "十",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0534a.php"
+  },
+  {
+   "char": "古",
+   "grade": 2,
+   "strokes": "5",
+   "on": "こ",
+   "kun": "ふる（い）・ふる（す）",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/053e4.php"
+  },
+  {
+   "char": "台",
+   "grade": 2,
+   "strokes": "5",
+   "on": "だい・たい",
+   "kun": "なし",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/053f0.php"
+  },
+  {
+   "char": "外",
+   "grade": 2,
+   "strokes": "5",
+   "on": "がい・げ",
+   "kun": "そと・ほか・はず（す）・はず（れる）",
+   "radical": "夕",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05916.php"
+  },
+  {
+   "char": "市",
+   "grade": 2,
+   "strokes": "5",
+   "on": "し",
+   "kun": "いち",
+   "radical": "巾",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05e02.php"
+  },
+  {
+   "char": "広",
+   "grade": 2,
+   "strokes": "5",
+   "on": "こう",
+   "kun": "ひろ（い）・ひろ（まる）・ひろ（める）・ひろ（がる）・ひろ（げる）",
+   "radical": "广",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05e83.php"
+  },
+  {
+   "char": "母",
+   "grade": 2,
+   "strokes": "5",
+   "on": "ぼ",
+   "kun": "はは",
+   "radical": "毋",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/06bcd.php"
+  },
+  {
+   "char": "用",
+   "grade": 2,
+   "strokes": "5",
+   "on": "よう",
+   "kun": "もち（いる）",
+   "radical": "用",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/07528.php"
+  },
+  {
+   "char": "矢",
+   "grade": 2,
+   "strokes": "5",
+   "on": "し",
+   "kun": "や",
+   "radical": "矢",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/077e2.php"
+  },
+  {
+   "char": "交",
+   "grade": 2,
+   "strokes": "6",
+   "on": "こう",
+   "kun": "まじ（わる）・まじ（える）・ま（じる）・ま（ざる）・ま（ぜる）・か（う）・か（わす）",
+   "radical": "亠",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/04ea4.php"
+  },
+  {
+   "char": "会",
+   "grade": 2,
+   "strokes": "6",
+   "on": "かい・え",
+   "kun": "あ（う）",
+   "radical": "人",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/04f1a.php"
+  },
+  {
+   "char": "光",
+   "grade": 2,
+   "strokes": "6",
+   "on": "こう",
+   "kun": "ひか（る）・ひかり",
+   "radical": "儿",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05149.php"
+  },
+  {
+   "char": "合",
+   "grade": 2,
+   "strokes": "6",
+   "on": "ごう・がっ・かっ",
+   "kun": "あ（う）・あ（わす）・あ（わせる）",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05408.php"
+  },
+  {
+   "char": "同",
+   "grade": 2,
+   "strokes": "6",
+   "on": "どう",
+   "kun": "おな（じ）",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0540c.php"
+  },
+  {
+   "char": "回",
+   "grade": 2,
+   "strokes": "6",
+   "on": "かい・え",
+   "kun": "まわ（る）・まわ（す）",
+   "radical": "囗",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/056de.php"
+  },
+  {
+   "char": "地",
+   "grade": 2,
+   "strokes": "6",
+   "on": "ち・じ",
+   "kun": "なし",
+   "radical": "土",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05730.php"
+  },
+  {
+   "char": "多",
+   "grade": 2,
+   "strokes": "6",
+   "on": "た",
+   "kun": "おお（い）",
+   "radical": "夕",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0591a.php"
+  },
+  {
+   "char": "寺",
+   "grade": 2,
+   "strokes": "6",
+   "on": "じ",
+   "kun": "てら",
+   "radical": "寸",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05bfa.php"
+  },
+  {
+   "char": "当",
+   "grade": 2,
+   "strokes": "6",
+   "on": "とう",
+   "kun": "あ（たる）・あ（てる）",
+   "radical": "⺌",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05f53.php"
+  },
+  {
+   "char": "毎",
+   "grade": 2,
+   "strokes": "6",
+   "on": "まい",
+   "kun": "なし",
+   "radical": "毋",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/06bce.php"
+  },
+  {
+   "char": "池",
+   "grade": 2,
+   "strokes": "6",
+   "on": "ち",
+   "kun": "いけ",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/06c60.php"
+  },
+  {
+   "char": "米",
+   "grade": 2,
+   "strokes": "6",
+   "on": "べい・まい",
+   "kun": "こめ",
+   "radical": "米",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/07c73.php"
+  },
+  {
+   "char": "羽",
+   "grade": 2,
+   "strokes": "6",
+   "on": "う",
+   "kun": "は・はね",
+   "radical": "羽",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/07fbd.php"
+  },
+  {
+   "char": "考",
+   "grade": 2,
+   "strokes": "6",
+   "on": "こう",
+   "kun": "かんが（える）",
+   "radical": "耂",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/08003.php"
+  },
+  {
+   "char": "肉",
+   "grade": 2,
+   "strokes": "6",
+   "on": "にく",
+   "kun": "なし",
+   "radical": "肉",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/08089.php"
+  },
+  {
+   "char": "自",
+   "grade": 2,
+   "strokes": "6",
+   "on": "じ・し",
+   "kun": "みずか（ら）",
+   "radical": "自",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/081ea.php"
+  },
+  {
+   "char": "色",
+   "grade": 2,
+   "strokes": "6",
+   "on": "しょく・しき",
+   "kun": "いろ",
+   "radical": "色",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/08272.php"
+  },
+  {
+   "char": "行",
+   "grade": 2,
+   "strokes": "6",
+   "on": "こう・ぎょう・あん",
+   "kun": "い（く）・ゆ（く）・おこな（う）",
+   "radical": "行",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0884c.php"
+  },
+  {
+   "char": "西",
+   "grade": 2,
+   "strokes": "6",
+   "on": "せい・さい",
+   "kun": "にし",
+   "radical": "西",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0897f.php"
+  },
+  {
+   "char": "体",
+   "grade": 2,
+   "strokes": "7",
+   "on": "たい・てい",
+   "kun": "からだ",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/04f53.php"
+  },
+  {
+   "char": "何",
+   "grade": 2,
+   "strokes": "7",
+   "on": "か",
+   "kun": "なに・なん",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/04f55.php"
+  },
+  {
+   "char": "作",
+   "grade": 2,
+   "strokes": "7",
+   "on": "さく・さ",
+   "kun": "つく（る）",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/04f5c.php"
+  },
+  {
+   "char": "図",
+   "grade": 2,
+   "strokes": "7",
+   "on": "ず・と",
+   "kun": "はか（る）",
+   "radical": "囗",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/056f3.php"
+  },
+  {
+   "char": "声",
+   "grade": 2,
+   "strokes": "7",
+   "on": "せい・しょう",
+   "kun": "こえ・こわ",
+   "radical": "士",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/058f0.php"
+  },
+  {
+   "char": "売",
+   "grade": 2,
+   "strokes": "7",
+   "on": "ばい",
+   "kun": "う（る）・う（れる）",
+   "radical": "士",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/058f2.php"
+  },
+  {
+   "char": "弟",
+   "grade": 2,
+   "strokes": "7",
+   "on": "てい・だい・で",
+   "kun": "おとうと",
+   "radical": "弓",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05f1f.php"
+  },
+  {
+   "char": "形",
+   "grade": 2,
+   "strokes": "7",
+   "on": "けい・ぎょう",
+   "kun": "かた・かたち",
+   "radical": "彡",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05f62.php"
+  },
+  {
+   "char": "来",
+   "grade": 2,
+   "strokes": "7",
+   "on": "らい",
+   "kun": "く（る）・きた（る）・きた（す）",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/06765.php"
+  },
+  {
+   "char": "汽",
+   "grade": 2,
+   "strokes": "7",
+   "on": "き",
+   "kun": "なし",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/06c7d.php"
+  },
+  {
+   "char": "社",
+   "grade": 2,
+   "strokes": "7",
+   "on": "しゃ",
+   "kun": "やしろ",
+   "radical": "礻",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0793e.php"
+  },
+  {
+   "char": "角",
+   "grade": 2,
+   "strokes": "7",
+   "on": "かく",
+   "kun": "かど・つの",
+   "radical": "角",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/089d2.php"
+  },
+  {
+   "char": "言",
+   "grade": 2,
+   "strokes": "7",
+   "on": "げん・ごん",
+   "kun": "い（う）・こと",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/08a00.php"
+  },
+  {
+   "char": "谷",
+   "grade": 2,
+   "strokes": "7",
+   "on": "こく",
+   "kun": "たに",
+   "radical": "谷",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/08c37.php"
+  },
+  {
+   "char": "走",
+   "grade": 2,
+   "strokes": "7",
+   "on": "そう",
+   "kun": "はし（る）",
+   "radical": "走",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/08d70.php"
+  },
+  {
+   "char": "近",
+   "grade": 2,
+   "strokes": "7",
+   "on": "きん",
+   "kun": "ちか（い）",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/08fd1.php"
+  },
+  {
+   "char": "里",
+   "grade": 2,
+   "strokes": "7",
+   "on": "り",
+   "kun": "さと",
+   "radical": "里",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/091cc.php"
+  },
+  {
+   "char": "麦",
+   "grade": 2,
+   "strokes": "7",
+   "on": "ばく",
+   "kun": "むぎ",
+   "radical": "麦",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/09ea6.php"
+  },
+  {
+   "char": "京",
+   "grade": 2,
+   "strokes": "8",
+   "on": "きょう・けい",
+   "kun": "なし",
+   "radical": "亠",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/04eac.php"
+  },
+  {
+   "char": "国",
+   "grade": 2,
+   "strokes": "8",
+   "on": "こく",
+   "kun": "くに",
+   "radical": "囗",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/056fd.php"
+  },
+  {
+   "char": "夜",
+   "grade": 2,
+   "strokes": "8",
+   "on": "や",
+   "kun": "よ・よる",
+   "radical": "夕",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0591c.php"
+  },
+  {
+   "char": "妹",
+   "grade": 2,
+   "strokes": "8",
+   "on": "まい",
+   "kun": "いもうと",
+   "radical": "女",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/059b9.php"
+  },
+  {
+   "char": "姉",
+   "grade": 2,
+   "strokes": "8",
+   "on": "し",
+   "kun": "あね",
+   "radical": "女",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/059c9.php"
+  },
+  {
+   "char": "岩",
+   "grade": 2,
+   "strokes": "8",
+   "on": "がん",
+   "kun": "いわ",
+   "radical": "山",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05ca9.php"
+  },
+  {
+   "char": "店",
+   "grade": 2,
+   "strokes": "8",
+   "on": "てん",
+   "kun": "みせ",
+   "radical": "广",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05e97.php"
+  },
+  {
+   "char": "明",
+   "grade": 2,
+   "strokes": "8",
+   "on": "めい・みょう",
+   "kun": "あ（かり）・あか（るい）・あか（るむ）・あか（らむ）・あき（らか）・あ（ける）・あ（く）・あ（くる）・あ（かす）",
+   "radical": "日",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0660e.php"
+  },
+  {
+   "char": "東",
+   "grade": 2,
+   "strokes": "8",
+   "on": "とう",
+   "kun": "ひがし",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/06771.php"
+  },
+  {
+   "char": "歩",
+   "grade": 2,
+   "strokes": "8",
+   "on": "ほ・ぶ・ふ",
+   "kun": "ある（く）・あゆ（む）",
+   "radical": "止",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/06b69.php"
+  },
+  {
+   "char": "画",
+   "grade": 2,
+   "strokes": "8",
+   "on": "が・かく",
+   "kun": "なし",
+   "radical": "田",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0753b.php"
+  },
+  {
+   "char": "直",
+   "grade": 2,
+   "strokes": "8",
+   "on": "ちょく・じき",
+   "kun": "ただ（ちに）・なお（す）・なお（る）",
+   "radical": "目",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/076f4.php"
+  },
+  {
+   "char": "知",
+   "grade": 2,
+   "strokes": "8",
+   "on": "ち",
+   "kun": "し（る）",
+   "radical": "矢",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/077e5.php"
+  },
+  {
+   "char": "長",
+   "grade": 2,
+   "strokes": "8",
+   "on": "ちょう",
+   "kun": "なが（い）",
+   "radical": "長",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/09577.php"
+  },
+  {
+   "char": "門",
+   "grade": 2,
+   "strokes": "8",
+   "on": "もん",
+   "kun": "かど",
+   "radical": "門",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/09580.php"
+  },
+  {
+   "char": "前",
+   "grade": 2,
+   "strokes": "9",
+   "on": "ぜん",
+   "kun": "まえ",
+   "radical": "刂",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0524d.php"
+  },
+  {
+   "char": "南",
+   "grade": 2,
+   "strokes": "9",
+   "on": "なん・な",
+   "kun": "みなみ",
+   "radical": "十",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05357.php"
+  },
+  {
+   "char": "室",
+   "grade": 2,
+   "strokes": "9",
+   "on": "しつ",
+   "kun": "むろ",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05ba4.php"
+  },
+  {
+   "char": "後",
+   "grade": 2,
+   "strokes": "9",
+   "on": "ご・こう",
+   "kun": "のち・うし（ろ）・あと・おく（れる）",
+   "radical": "彳",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05f8c.php"
+  },
+  {
+   "char": "思",
+   "grade": 2,
+   "strokes": "9",
+   "on": "し",
+   "kun": "おも（う）",
+   "radical": "心",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0601d.php"
+  },
+  {
+   "char": "星",
+   "grade": 2,
+   "strokes": "9",
+   "on": "せい・しょう",
+   "kun": "ほし",
+   "radical": "日",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0661f.php"
+  },
+  {
+   "char": "春",
+   "grade": 2,
+   "strokes": "9",
+   "on": "しゅん",
+   "kun": "はる",
+   "radical": "日",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/06625.php"
+  },
+  {
+   "char": "昼",
+   "grade": 2,
+   "strokes": "9",
+   "on": "ちゅう",
+   "kun": "ひる",
+   "radical": "日",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0663c.php"
+  },
+  {
+   "char": "活",
+   "grade": 2,
+   "strokes": "9",
+   "on": "かつ",
+   "kun": "なし",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/06d3b.php"
+  },
+  {
+   "char": "海",
+   "grade": 2,
+   "strokes": "9",
+   "on": "かい",
+   "kun": "うみ",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/06d77.php"
+  },
+  {
+   "char": "点",
+   "grade": 2,
+   "strokes": "9",
+   "on": "てん",
+   "kun": "なし",
+   "radical": "灬",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/070b9.php"
+  },
+  {
+   "char": "秋",
+   "grade": 2,
+   "strokes": "9",
+   "on": "しゅう",
+   "kun": "あき",
+   "radical": "禾",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/079cb.php"
+  },
+  {
+   "char": "科",
+   "grade": 2,
+   "strokes": "9",
+   "on": "か",
+   "kun": "なし",
+   "radical": "禾",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/079d1.php"
+  },
+  {
+   "char": "茶",
+   "grade": 2,
+   "strokes": "9",
+   "on": "ちゃ・さ",
+   "kun": "なし",
+   "radical": "艹",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/08336.php"
+  },
+  {
+   "char": "計",
+   "grade": 2,
+   "strokes": "9",
+   "on": "けい",
+   "kun": "はか（る）・はか（らう）",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/08a08.php"
+  },
+  {
+   "char": "風",
+   "grade": 2,
+   "strokes": "9",
+   "on": "ふう・ふ",
+   "kun": "かぜ・かざ",
+   "radical": "風",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/098a8.php"
+  },
+  {
+   "char": "食",
+   "grade": 2,
+   "strokes": "9",
+   "on": "しょく・じき",
+   "kun": "く（う）・く（らう）・た（べる）",
+   "radical": "食",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/098df.php"
+  },
+  {
+   "char": "首",
+   "grade": 2,
+   "strokes": "9",
+   "on": "しゅ",
+   "kun": "くび",
+   "radical": "首",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/09996.php"
+  },
+  {
+   "char": "原",
+   "grade": 2,
+   "strokes": "10",
+   "on": "げん",
+   "kun": "はら",
+   "radical": "厂",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0539f.php"
+  },
+  {
+   "char": "夏",
+   "grade": 2,
+   "strokes": "10",
+   "on": "か・げ",
+   "kun": "なつ",
+   "radical": "夂",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0590f.php"
+  },
+  {
+   "char": "家",
+   "grade": 2,
+   "strokes": "10",
+   "on": "か・け",
+   "kun": "いえ・や",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05bb6.php"
+  },
+  {
+   "char": "帰",
+   "grade": 2,
+   "strokes": "10",
+   "on": "き",
+   "kun": "かえ（る）・かえ（す）",
+   "radical": "巾",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05e30.php"
+  },
+  {
+   "char": "弱",
+   "grade": 2,
+   "strokes": "10",
+   "on": "じゃく",
+   "kun": "よわ（い）・よわ（る）・よわ（まる）・よわ（める）",
+   "radical": "弓",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05f31.php"
+  },
+  {
+   "char": "時",
+   "grade": 2,
+   "strokes": "10",
+   "on": "じ",
+   "kun": "とき",
+   "radical": "日",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/06642.php"
+  },
+  {
+   "char": "書",
+   "grade": 2,
+   "strokes": "10",
+   "on": "しょ",
+   "kun": "か（く）",
+   "radical": "曰",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/066f8.php"
+  },
+  {
+   "char": "紙",
+   "grade": 2,
+   "strokes": "10",
+   "on": "し",
+   "kun": "かみ",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/07d19.php"
+  },
+  {
+   "char": "記",
+   "grade": 2,
+   "strokes": "10",
+   "on": "き",
+   "kun": "しる（す）",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/08a18.php"
+  },
+  {
+   "char": "通",
+   "grade": 2,
+   "strokes": "10",
+   "on": "つう・つ",
+   "kun": "とお（る）・とお（す）・かよ（う）",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0901a.php"
+  },
+  {
+   "char": "馬",
+   "grade": 2,
+   "strokes": "10",
+   "on": "ば",
+   "kun": "うま・ま",
+   "radical": "馬",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/099ac.php"
+  },
+  {
+   "char": "高",
+   "grade": 2,
+   "strokes": "10",
+   "on": "こう",
+   "kun": "たか（い）・たか・たか（まる）・たか（める）",
+   "radical": "高",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/09ad8.php"
+  },
+  {
+   "char": "強",
+   "grade": 2,
+   "strokes": "11",
+   "on": "きょう・ごう",
+   "kun": "つよ（い）・つよ（まる）・つよ（める）・し（いる）",
+   "radical": "弓",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05f37.php"
+  },
+  {
+   "char": "教",
+   "grade": 2,
+   "strokes": "11",
+   "on": "きょう",
+   "kun": "おし（える）・おそ（わる）",
+   "radical": "攵",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/06559.php"
+  },
+  {
+   "char": "理",
+   "grade": 2,
+   "strokes": "11",
+   "on": "り",
+   "kun": "なし",
+   "radical": "王",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/07406.php"
+  },
+  {
+   "char": "細",
+   "grade": 2,
+   "strokes": "11",
+   "on": "さい",
+   "kun": "ほそ（い）・ほそ（る）・こま（か）・こま（かい）",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/07d30.php"
+  },
+  {
+   "char": "組",
+   "grade": 2,
+   "strokes": "11",
+   "on": "そ",
+   "kun": "く（む）・くみ",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/07d44.php"
+  },
+  {
+   "char": "船",
+   "grade": 2,
+   "strokes": "11",
+   "on": "せん",
+   "kun": "ふね・ふな",
+   "radical": "舟",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/08239.php"
+  },
+  {
+   "char": "週",
+   "grade": 2,
+   "strokes": "11",
+   "on": "しゅう",
+   "kun": "なし",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/09031.php"
+  },
+  {
+   "char": "野",
+   "grade": 2,
+   "strokes": "11",
+   "on": "や",
+   "kun": "の",
+   "radical": "里",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/091ce.php"
+  },
+  {
+   "char": "雪",
+   "grade": 2,
+   "strokes": "11",
+   "on": "せつ",
+   "kun": "ゆき",
+   "radical": "雨",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/096ea.php"
+  },
+  {
+   "char": "魚",
+   "grade": 2,
+   "strokes": "11",
+   "on": "ぎょ",
+   "kun": "うお・さかな",
+   "radical": "魚",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/09b5a.php"
+  },
+  {
+   "char": "鳥",
+   "grade": 2,
+   "strokes": "11",
+   "on": "ちょう",
+   "kun": "とり",
+   "radical": "鳥",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/09ce5.php"
+  },
+  {
+   "char": "黄",
+   "grade": 2,
+   "strokes": "11",
+   "on": "こう・おう",
+   "kun": "き・こ",
+   "radical": "黄",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/09ec4.php"
+  },
+  {
+   "char": "黒",
+   "grade": 2,
+   "strokes": "11",
+   "on": "こく",
+   "kun": "くろ・くろ（い）",
+   "radical": "黒",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/09ed2.php"
+  },
+  {
+   "char": "場",
+   "grade": 2,
+   "strokes": "12",
+   "on": "じょう",
+   "kun": "ば",
+   "radical": "土",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05834.php"
+  },
+  {
+   "char": "晴",
+   "grade": 2,
+   "strokes": "12",
+   "on": "せい",
+   "kun": "は（れる）・は（らす）",
+   "radical": "日",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/06674.php"
+  },
+  {
+   "char": "朝",
+   "grade": 2,
+   "strokes": "12",
+   "on": "ちょう",
+   "kun": "あさ",
+   "radical": "月",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0671d.php"
+  },
+  {
+   "char": "番",
+   "grade": 2,
+   "strokes": "12",
+   "on": "ばん",
+   "kun": "なし",
+   "radical": "田",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0756a.php"
+  },
+  {
+   "char": "答",
+   "grade": 2,
+   "strokes": "12",
+   "on": "とう",
+   "kun": "こた（える）・こた（え）",
+   "radical": "竹",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/07b54.php"
+  },
+  {
+   "char": "絵",
+   "grade": 2,
+   "strokes": "12",
+   "on": "かい・え",
+   "kun": "なし",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/07d75.php"
+  },
+  {
+   "char": "買",
+   "grade": 2,
+   "strokes": "12",
+   "on": "ばい",
+   "kun": "か（う）",
+   "radical": "貝",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/08cb7.php"
+  },
+  {
+   "char": "道",
+   "grade": 2,
+   "strokes": "12",
+   "on": "どう・とう",
+   "kun": "みち",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/09053.php"
+  },
+  {
+   "char": "間",
+   "grade": 2,
+   "strokes": "12",
+   "on": "かん・けん",
+   "kun": "あいだ・ま",
+   "radical": "門",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/09593.php"
+  },
+  {
+   "char": "雲",
+   "grade": 2,
+   "strokes": "12",
+   "on": "うん",
+   "kun": "くも",
+   "radical": "雨",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/096f2.php"
+  },
+  {
+   "char": "園",
+   "grade": 2,
+   "strokes": "13",
+   "on": "えん",
+   "kun": "その",
+   "radical": "囗",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/05712.php"
+  },
+  {
+   "char": "数",
+   "grade": 2,
+   "strokes": "13",
+   "on": "すう・す",
+   "kun": "かず・かぞ（える）",
+   "radical": "攵",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/06570.php"
+  },
+  {
+   "char": "新",
+   "grade": 2,
+   "strokes": "13",
+   "on": "しん",
+   "kun": "あたら（しい）・あら（た）・にい",
+   "radical": "斤",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/065b0.php"
+  },
+  {
+   "char": "楽",
+   "grade": 2,
+   "strokes": "13",
+   "on": "がく・らく",
+   "kun": "たの（しい）・たの（しむ）",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0697d.php"
+  },
+  {
+   "char": "話",
+   "grade": 2,
+   "strokes": "13",
+   "on": "わ",
+   "kun": "はな（す）・はなし",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/08a71.php"
+  },
+  {
+   "char": "遠",
+   "grade": 2,
+   "strokes": "13",
+   "on": "えん・おん",
+   "kun": "とお（い）",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/09060.php"
+  },
+  {
+   "char": "電",
+   "grade": 2,
+   "strokes": "13",
+   "on": "でん",
+   "kun": "なし",
+   "radical": "雨",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/096fb.php"
+  },
+  {
+   "char": "歌",
+   "grade": 2,
+   "strokes": "14",
+   "on": "か",
+   "kun": "うた・うた（う）",
+   "radical": "欠",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/06b4c.php"
+  },
+  {
+   "char": "算",
+   "grade": 2,
+   "strokes": "14",
+   "on": "さん",
+   "kun": "なし",
+   "radical": "竹",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/07b97.php"
+  },
+  {
+   "char": "聞",
+   "grade": 2,
+   "strokes": "14",
+   "on": "ぶん・もん",
+   "kun": "き（く）・き（こえる）",
+   "radical": "耳",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0805e.php"
+  },
+  {
+   "char": "語",
+   "grade": 2,
+   "strokes": "14",
+   "on": "ご",
+   "kun": "かた（る）・かた（らう）",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/08a9e.php"
+  },
+  {
+   "char": "読",
+   "grade": 2,
+   "strokes": "14",
+   "on": "どく・とく・とう",
+   "kun": "よ（む）",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/08aad.php"
+  },
+  {
+   "char": "鳴",
+   "grade": 2,
+   "strokes": "14",
+   "on": "めい",
+   "kun": "な（く）・な（る）・な（らす）",
+   "radical": "鳥",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/09cf4.php"
+  },
+  {
+   "char": "線",
+   "grade": 2,
+   "strokes": "15",
+   "on": "せん",
+   "kun": "なし",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/07dda.php"
+  },
+  {
+   "char": "親",
+   "grade": 2,
+   "strokes": "16",
+   "on": "しん",
+   "kun": "おや・した（しい）・した（しむ）",
+   "radical": "見",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/089aa.php"
+  },
+  {
+   "char": "頭",
+   "grade": 2,
+   "strokes": "16",
+   "on": "とう・ず・と",
+   "kun": "あたま・かしら",
+   "radical": "頁",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/0982d.php"
+  },
+  {
+   "char": "曜",
+   "grade": 2,
+   "strokes": "18",
+   "on": "よう",
+   "kun": "なし",
+   "radical": "日",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/066dc.php"
+  },
+  {
+   "char": "顔",
+   "grade": 2,
+   "strokes": "18",
+   "on": "がん",
+   "kun": "かお",
+   "radical": "頁",
+   "url": "https://eleschool-compass.com/contents/kanji/g2/09854.php"
+  },
+  {
+   "char": "丁",
+   "grade": 3,
+   "strokes": "2",
+   "on": "ちょう・てい",
+   "kun": "なし",
+   "radical": "一",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/04e01.php"
+  },
+  {
+   "char": "予",
+   "grade": 3,
+   "strokes": "4",
+   "on": "よ",
+   "kun": "なし",
+   "radical": "亅",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/04e88.php"
+  },
+  {
+   "char": "化",
+   "grade": 3,
+   "strokes": "4",
+   "on": "か・け",
+   "kun": "ば（ける）・ば（かす）",
+   "radical": "匕",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05316.php"
+  },
+  {
+   "char": "区",
+   "grade": 3,
+   "strokes": "4",
+   "on": "く",
+   "kun": "なし",
+   "radical": "匸",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0533a.php"
+  },
+  {
+   "char": "反",
+   "grade": 3,
+   "strokes": "4",
+   "on": "はん・ほん・たん",
+   "kun": "そ（る）・そ（らす）",
+   "radical": "又",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/053cd.php"
+  },
+  {
+   "char": "世",
+   "grade": 3,
+   "strokes": "5",
+   "on": "せい・せ",
+   "kun": "よ",
+   "radical": "一",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/04e16.php"
+  },
+  {
+   "char": "主",
+   "grade": 3,
+   "strokes": "5",
+   "on": "しゅ・す",
+   "kun": "ぬし・おも",
+   "radical": "丶",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/04e3b.php"
+  },
+  {
+   "char": "仕",
+   "grade": 3,
+   "strokes": "5",
+   "on": "し・じ",
+   "kun": "つか（える）",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/04ed5.php"
+  },
+  {
+   "char": "他",
+   "grade": 3,
+   "strokes": "5",
+   "on": "た",
+   "kun": "ほか",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/04ed6.php"
+  },
+  {
+   "char": "代",
+   "grade": 3,
+   "strokes": "5",
+   "on": "だい・たい",
+   "kun": "か（わる）・か（える）・よ・しろ",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/04ee3.php"
+  },
+  {
+   "char": "写",
+   "grade": 3,
+   "strokes": "5",
+   "on": "しゃ",
+   "kun": "うつ（す）・うつ（る）",
+   "radical": "冖",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05199.php"
+  },
+  {
+   "char": "去",
+   "grade": 3,
+   "strokes": "5",
+   "on": "きょ・こ",
+   "kun": "さ（る）",
+   "radical": "厶",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/053bb.php"
+  },
+  {
+   "char": "号",
+   "grade": 3,
+   "strokes": "5",
+   "on": "ごう",
+   "kun": "なし",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/053f7.php"
+  },
+  {
+   "char": "央",
+   "grade": 3,
+   "strokes": "5",
+   "on": "おう",
+   "kun": "なし",
+   "radical": "大",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0592e.php"
+  },
+  {
+   "char": "平",
+   "grade": 3,
+   "strokes": "5",
+   "on": "へい・びょう",
+   "kun": "たい（ら）・ひら",
+   "radical": "干",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05e73.php"
+  },
+  {
+   "char": "打",
+   "grade": 3,
+   "strokes": "5",
+   "on": "だ",
+   "kun": "う（つ）",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06253.php"
+  },
+  {
+   "char": "氷",
+   "grade": 3,
+   "strokes": "5",
+   "on": "ひょう",
+   "kun": "こおり・ひ",
+   "radical": "水",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06c37.php"
+  },
+  {
+   "char": "由",
+   "grade": 3,
+   "strokes": "5",
+   "on": "ゆ・ゆう・ゆい",
+   "kun": "よし",
+   "radical": "田",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/07531.php"
+  },
+  {
+   "char": "申",
+   "grade": 3,
+   "strokes": "5",
+   "on": "しん",
+   "kun": "もう（す）",
+   "radical": "田",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/07533.php"
+  },
+  {
+   "char": "皮",
+   "grade": 3,
+   "strokes": "5",
+   "on": "ひ",
+   "kun": "かわ",
+   "radical": "皮",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/076ae.php"
+  },
+  {
+   "char": "皿",
+   "grade": 3,
+   "strokes": "5",
+   "on": "なし",
+   "kun": "さら",
+   "radical": "皿",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/076bf.php"
+  },
+  {
+   "char": "礼",
+   "grade": 3,
+   "strokes": "5",
+   "on": "れい・らい",
+   "kun": "なし",
+   "radical": "礻",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0793c.php"
+  },
+  {
+   "char": "両",
+   "grade": 3,
+   "strokes": "6",
+   "on": "りょう",
+   "kun": "なし",
+   "radical": "一",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/04e21.php"
+  },
+  {
+   "char": "全",
+   "grade": 3,
+   "strokes": "6",
+   "on": "ぜん",
+   "kun": "まった（く）・すべ（て）",
+   "radical": "入",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05168.php"
+  },
+  {
+   "char": "列",
+   "grade": 3,
+   "strokes": "6",
+   "on": "れつ",
+   "kun": "なし",
+   "radical": "刂",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05217.php"
+  },
+  {
+   "char": "向",
+   "grade": 3,
+   "strokes": "6",
+   "on": "こう",
+   "kun": "む（く）・む（ける）・む（かう）・む（こう）",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05411.php"
+  },
+  {
+   "char": "守",
+   "grade": 3,
+   "strokes": "6",
+   "on": "しゅ・す",
+   "kun": "まも（る）・もり",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05b88.php"
+  },
+  {
+   "char": "安",
+   "grade": 3,
+   "strokes": "6",
+   "on": "あん",
+   "kun": "やす（い）",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05b89.php"
+  },
+  {
+   "char": "州",
+   "grade": 3,
+   "strokes": "6",
+   "on": "しゅう",
+   "kun": "す",
+   "radical": "川",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05dde.php"
+  },
+  {
+   "char": "式",
+   "grade": 3,
+   "strokes": "6",
+   "on": "しき",
+   "kun": "なし",
+   "radical": "弋",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05f0f.php"
+  },
+  {
+   "char": "曲",
+   "grade": 3,
+   "strokes": "6",
+   "on": "きょく",
+   "kun": "ま（がる）・ま（げる）",
+   "radical": "曰",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/066f2.php"
+  },
+  {
+   "char": "有",
+   "grade": 3,
+   "strokes": "6",
+   "on": "ゆう・う",
+   "kun": "あ（る）",
+   "radical": "月",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06709.php"
+  },
+  {
+   "char": "次",
+   "grade": 3,
+   "strokes": "6",
+   "on": "じ・し",
+   "kun": "つ（ぐ）・つぎ",
+   "radical": "欠",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06b21.php"
+  },
+  {
+   "char": "死",
+   "grade": 3,
+   "strokes": "6",
+   "on": "し",
+   "kun": "し（ぬ）",
+   "radical": "歹",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06b7b.php"
+  },
+  {
+   "char": "羊",
+   "grade": 3,
+   "strokes": "6",
+   "on": "よう",
+   "kun": "ひつじ",
+   "radical": "羊",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/07f8a.php"
+  },
+  {
+   "char": "血",
+   "grade": 3,
+   "strokes": "6",
+   "on": "けつ",
+   "kun": "ち",
+   "radical": "血",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/08840.php"
+  },
+  {
+   "char": "住",
+   "grade": 3,
+   "strokes": "7",
+   "on": "じゅう",
+   "kun": "す（む）・す（まう）",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/04f4f.php"
+  },
+  {
+   "char": "助",
+   "grade": 3,
+   "strokes": "7",
+   "on": "じょ",
+   "kun": "たす（ける）・たす（かる）・すけ",
+   "radical": "力",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/052a9.php"
+  },
+  {
+   "char": "医",
+   "grade": 3,
+   "strokes": "7",
+   "on": "い",
+   "kun": "なし",
+   "radical": "匸",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0533b.php"
+  },
+  {
+   "char": "君",
+   "grade": 3,
+   "strokes": "7",
+   "on": "くん",
+   "kun": "きみ",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0541b.php"
+  },
+  {
+   "char": "坂",
+   "grade": 3,
+   "strokes": "7",
+   "on": "はん",
+   "kun": "さか",
+   "radical": "土",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05742.php"
+  },
+  {
+   "char": "対",
+   "grade": 3,
+   "strokes": "7",
+   "on": "たい・つい",
+   "kun": "なし",
+   "radical": "寸",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05bfe.php"
+  },
+  {
+   "char": "局",
+   "grade": 3,
+   "strokes": "7",
+   "on": "きょく",
+   "kun": "なし",
+   "radical": "尸",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05c40.php"
+  },
+  {
+   "char": "役",
+   "grade": 3,
+   "strokes": "7",
+   "on": "やく・えき",
+   "kun": "なし",
+   "radical": "彳",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05f79.php"
+  },
+  {
+   "char": "投",
+   "grade": 3,
+   "strokes": "7",
+   "on": "とう",
+   "kun": "な（げる）",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06295.php"
+  },
+  {
+   "char": "決",
+   "grade": 3,
+   "strokes": "7",
+   "on": "けつ",
+   "kun": "き（める）・き（まる）",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06c7a.php"
+  },
+  {
+   "char": "究",
+   "grade": 3,
+   "strokes": "7",
+   "on": "きゅう",
+   "kun": "きわ（める）",
+   "radical": "穴",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/07a76.php"
+  },
+  {
+   "char": "豆",
+   "grade": 3,
+   "strokes": "7",
+   "on": "とう・ず",
+   "kun": "まめ",
+   "radical": "豆",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/08c46.php"
+  },
+  {
+   "char": "身",
+   "grade": 3,
+   "strokes": "7",
+   "on": "しん",
+   "kun": "み",
+   "radical": "身",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/08eab.php"
+  },
+  {
+   "char": "返",
+   "grade": 3,
+   "strokes": "7",
+   "on": "へん",
+   "kun": "かえ（す）・かえ（る）",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/08fd4.php"
+  },
+  {
+   "char": "事",
+   "grade": 3,
+   "strokes": "8",
+   "on": "じ・ず",
+   "kun": "こと",
+   "radical": "亅",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/04e8b.php"
+  },
+  {
+   "char": "使",
+   "grade": 3,
+   "strokes": "8",
+   "on": "し",
+   "kun": "つか（う）",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/04f7f.php"
+  },
+  {
+   "char": "具",
+   "grade": 3,
+   "strokes": "8",
+   "on": "ぐ",
+   "kun": "なし",
+   "radical": "八",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05177.php"
+  },
+  {
+   "char": "取",
+   "grade": 3,
+   "strokes": "8",
+   "on": "しゅ",
+   "kun": "と（る）",
+   "radical": "又",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/053d6.php"
+  },
+  {
+   "char": "受",
+   "grade": 3,
+   "strokes": "8",
+   "on": "じゅ",
+   "kun": "う（ける）・う（かる）",
+   "radical": "又",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/053d7.php"
+  },
+  {
+   "char": "味",
+   "grade": 3,
+   "strokes": "8",
+   "on": "み",
+   "kun": "あじ・あじ（わう）",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05473.php"
+  },
+  {
+   "char": "命",
+   "grade": 3,
+   "strokes": "8",
+   "on": "めい・みょう",
+   "kun": "いのち",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0547d.php"
+  },
+  {
+   "char": "和",
+   "grade": 3,
+   "strokes": "8",
+   "on": "わ・お",
+   "kun": "やわ（らぐ）・やわ（らげる）・なご（む）・なご（やか）",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0548c.php"
+  },
+  {
+   "char": "始",
+   "grade": 3,
+   "strokes": "8",
+   "on": "し",
+   "kun": "はじ（める）・はじ（まる）",
+   "radical": "女",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/059cb.php"
+  },
+  {
+   "char": "委",
+   "grade": 3,
+   "strokes": "8",
+   "on": "い",
+   "kun": "ゆだ（ねる）",
+   "radical": "女",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/059d4.php"
+  },
+  {
+   "char": "定",
+   "grade": 3,
+   "strokes": "8",
+   "on": "てい・じょう",
+   "kun": "さだ（める）・さだ（まる）・さだ（か）",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05b9a.php"
+  },
+  {
+   "char": "実",
+   "grade": 3,
+   "strokes": "8",
+   "on": "じつ",
+   "kun": "み・みの（る）",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05b9f.php"
+  },
+  {
+   "char": "岸",
+   "grade": 3,
+   "strokes": "8",
+   "on": "がん",
+   "kun": "きし",
+   "radical": "山",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05cb8.php"
+  },
+  {
+   "char": "幸",
+   "grade": 3,
+   "strokes": "8",
+   "on": "こう",
+   "kun": "さいわ（い）・さち・しあわ（せ）",
+   "radical": "干",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05e78.php"
+  },
+  {
+   "char": "所",
+   "grade": 3,
+   "strokes": "8",
+   "on": "しょ",
+   "kun": "ところ",
+   "radical": "戸",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06240.php"
+  },
+  {
+   "char": "放",
+   "grade": 3,
+   "strokes": "8",
+   "on": "ほう",
+   "kun": "はな（す）・はな（つ）・はな（れる）・ほう（る）",
+   "radical": "攵",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0653e.php"
+  },
+  {
+   "char": "昔",
+   "grade": 3,
+   "strokes": "8",
+   "on": "せき・しゃく",
+   "kun": "むかし",
+   "radical": "日",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06614.php"
+  },
+  {
+   "char": "服",
+   "grade": 3,
+   "strokes": "8",
+   "on": "ふく",
+   "kun": "なし",
+   "radical": "月",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0670d.php"
+  },
+  {
+   "char": "板",
+   "grade": 3,
+   "strokes": "8",
+   "on": "はん・ばん",
+   "kun": "いた",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0677f.php"
+  },
+  {
+   "char": "油",
+   "grade": 3,
+   "strokes": "8",
+   "on": "ゆ",
+   "kun": "あぶら",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06cb9.php"
+  },
+  {
+   "char": "波",
+   "grade": 3,
+   "strokes": "8",
+   "on": "は",
+   "kun": "なみ",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06ce2.php"
+  },
+  {
+   "char": "注",
+   "grade": 3,
+   "strokes": "8",
+   "on": "ちゅう",
+   "kun": "そそ（ぐ）",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06ce8.php"
+  },
+  {
+   "char": "泳",
+   "grade": 3,
+   "strokes": "8",
+   "on": "えい",
+   "kun": "およ（ぐ）",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06cf3.php"
+  },
+  {
+   "char": "物",
+   "grade": 3,
+   "strokes": "8",
+   "on": "ぶつ・もつ",
+   "kun": "もの",
+   "radical": "牛",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/07269.php"
+  },
+  {
+   "char": "者",
+   "grade": 3,
+   "strokes": "8",
+   "on": "しゃ",
+   "kun": "もの",
+   "radical": "耂",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/08005.php"
+  },
+  {
+   "char": "育",
+   "grade": 3,
+   "strokes": "8",
+   "on": "いく",
+   "kun": "そだ（つ）・そだ（てる）・はぐく（む）",
+   "radical": "月",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/080b2.php"
+  },
+  {
+   "char": "苦",
+   "grade": 3,
+   "strokes": "8",
+   "on": "く",
+   "kun": "くる（しい）・くる（しむ）・くる（しめる）・にが（い）・にが（る）",
+   "radical": "艹",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/082e6.php"
+  },
+  {
+   "char": "表",
+   "grade": 3,
+   "strokes": "8",
+   "on": "ひょう",
+   "kun": "おもて・あらわ（す）・あらわ（れる）",
+   "radical": "衣",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/08868.php"
+  },
+  {
+   "char": "乗",
+   "grade": 3,
+   "strokes": "9",
+   "on": "じょう",
+   "kun": "の（る）・の（せる）",
+   "radical": "丿",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/04e57.php"
+  },
+  {
+   "char": "係",
+   "grade": 3,
+   "strokes": "9",
+   "on": "けい",
+   "kun": "かか（る）・かかり",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/04fc2.php"
+  },
+  {
+   "char": "品",
+   "grade": 3,
+   "strokes": "9",
+   "on": "ひん",
+   "kun": "しな",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/054c1.php"
+  },
+  {
+   "char": "客",
+   "grade": 3,
+   "strokes": "9",
+   "on": "きゃく・かく",
+   "kun": "なし",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05ba2.php"
+  },
+  {
+   "char": "屋",
+   "grade": 3,
+   "strokes": "9",
+   "on": "おく",
+   "kun": "や",
+   "radical": "尸",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05c4b.php"
+  },
+  {
+   "char": "度",
+   "grade": 3,
+   "strokes": "9",
+   "on": "ど・と・たく",
+   "kun": "たび",
+   "radical": "广",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05ea6.php"
+  },
+  {
+   "char": "待",
+   "grade": 3,
+   "strokes": "9",
+   "on": "たい",
+   "kun": "ま（つ）",
+   "radical": "彳",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05f85.php"
+  },
+  {
+   "char": "急",
+   "grade": 3,
+   "strokes": "9",
+   "on": "きゅう",
+   "kun": "いそ（ぐ）",
+   "radical": "心",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06025.php"
+  },
+  {
+   "char": "拾",
+   "grade": 3,
+   "strokes": "9",
+   "on": "しゅう・じゅう",
+   "kun": "ひろ（う）",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/062fe.php"
+  },
+  {
+   "char": "持",
+   "grade": 3,
+   "strokes": "9",
+   "on": "じ",
+   "kun": "も（つ）",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06301.php"
+  },
+  {
+   "char": "指",
+   "grade": 3,
+   "strokes": "9",
+   "on": "し",
+   "kun": "ゆび・さ（す）",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06307.php"
+  },
+  {
+   "char": "昭",
+   "grade": 3,
+   "strokes": "9",
+   "on": "しょう",
+   "kun": "なし",
+   "radical": "日",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0662d.php"
+  },
+  {
+   "char": "柱",
+   "grade": 3,
+   "strokes": "9",
+   "on": "ちゅう",
+   "kun": "はしら",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/067f1.php"
+  },
+  {
+   "char": "洋",
+   "grade": 3,
+   "strokes": "9",
+   "on": "よう",
+   "kun": "なし",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06d0b.php"
+  },
+  {
+   "char": "炭",
+   "grade": 3,
+   "strokes": "9",
+   "on": "たん",
+   "kun": "すみ",
+   "radical": "火",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/070ad.php"
+  },
+  {
+   "char": "界",
+   "grade": 3,
+   "strokes": "9",
+   "on": "かい",
+   "kun": "なし",
+   "radical": "田",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0754c.php"
+  },
+  {
+   "char": "畑",
+   "grade": 3,
+   "strokes": "9",
+   "on": "なし",
+   "kun": "はた・はたけ",
+   "radical": "田",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/07551.php"
+  },
+  {
+   "char": "発",
+   "grade": 3,
+   "strokes": "9",
+   "on": "はつ・ほつ",
+   "kun": "なし",
+   "radical": "癶",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0767a.php"
+  },
+  {
+   "char": "相",
+   "grade": 3,
+   "strokes": "9",
+   "on": "そう・しょう",
+   "kun": "あい",
+   "radical": "目",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/076f8.php"
+  },
+  {
+   "char": "県",
+   "grade": 3,
+   "strokes": "9",
+   "on": "けん",
+   "kun": "なし",
+   "radical": "目",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0770c.php"
+  },
+  {
+   "char": "研",
+   "grade": 3,
+   "strokes": "9",
+   "on": "けん",
+   "kun": "と（ぐ）",
+   "radical": "石",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/07814.php"
+  },
+  {
+   "char": "神",
+   "grade": 3,
+   "strokes": "9",
+   "on": "しん・じん",
+   "kun": "かみ・かん・こう",
+   "radical": "礻",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0795e.php"
+  },
+  {
+   "char": "秒",
+   "grade": 3,
+   "strokes": "9",
+   "on": "びょう",
+   "kun": "なし",
+   "radical": "禾",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/079d2.php"
+  },
+  {
+   "char": "級",
+   "grade": 3,
+   "strokes": "9",
+   "on": "きゅう",
+   "kun": "なし",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/07d1a.php"
+  },
+  {
+   "char": "美",
+   "grade": 3,
+   "strokes": "9",
+   "on": "び",
+   "kun": "うつく（しい）",
+   "radical": "羊",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/07f8e.php"
+  },
+  {
+   "char": "負",
+   "grade": 3,
+   "strokes": "9",
+   "on": "ふ",
+   "kun": "ま（ける）・ま（かす）・お（う）",
+   "radical": "貝",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/08ca0.php"
+  },
+  {
+   "char": "追",
+   "grade": 3,
+   "strokes": "9",
+   "on": "つい",
+   "kun": "お（う）",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/08ffd.php"
+  },
+  {
+   "char": "送",
+   "grade": 3,
+   "strokes": "9",
+   "on": "そう",
+   "kun": "おく（る）",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/09001.php"
+  },
+  {
+   "char": "重",
+   "grade": 3,
+   "strokes": "9",
+   "on": "じゅう・ちょう",
+   "kun": "え・おも（い）・かさ（ねる）・かさ（なる）",
+   "radical": "里",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/091cd.php"
+  },
+  {
+   "char": "面",
+   "grade": 3,
+   "strokes": "9",
+   "on": "めん",
+   "kun": "おも・おもて・つら",
+   "radical": "面",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/09762.php"
+  },
+  {
+   "char": "倍",
+   "grade": 3,
+   "strokes": "10",
+   "on": "ばい",
+   "kun": "なし",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0500d.php"
+  },
+  {
+   "char": "勉",
+   "grade": 3,
+   "strokes": "10",
+   "on": "べん",
+   "kun": "なし",
+   "radical": "力",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/052c9.php"
+  },
+  {
+   "char": "員",
+   "grade": 3,
+   "strokes": "10",
+   "on": "いん",
+   "kun": "なし",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/054e1.php"
+  },
+  {
+   "char": "宮",
+   "grade": 3,
+   "strokes": "10",
+   "on": "きゅう・ぐう・く",
+   "kun": "みや",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05bae.php"
+  },
+  {
+   "char": "島",
+   "grade": 3,
+   "strokes": "10",
+   "on": "とう",
+   "kun": "しま",
+   "radical": "山",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05cf6.php"
+  },
+  {
+   "char": "庫",
+   "grade": 3,
+   "strokes": "10",
+   "on": "こ・く",
+   "kun": "なし",
+   "radical": "广",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05eab.php"
+  },
+  {
+   "char": "庭",
+   "grade": 3,
+   "strokes": "10",
+   "on": "てい",
+   "kun": "にわ",
+   "radical": "广",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05ead.php"
+  },
+  {
+   "char": "息",
+   "grade": 3,
+   "strokes": "10",
+   "on": "そく",
+   "kun": "いき",
+   "radical": "心",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0606f.php"
+  },
+  {
+   "char": "旅",
+   "grade": 3,
+   "strokes": "10",
+   "on": "りょ",
+   "kun": "たび",
+   "radical": "方",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/065c5.php"
+  },
+  {
+   "char": "根",
+   "grade": 3,
+   "strokes": "10",
+   "on": "こん",
+   "kun": "ね",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06839.php"
+  },
+  {
+   "char": "流",
+   "grade": 3,
+   "strokes": "10",
+   "on": "りゅう・る",
+   "kun": "なが（れる）・なが（す）",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06d41.php"
+  },
+  {
+   "char": "消",
+   "grade": 3,
+   "strokes": "10",
+   "on": "しょう",
+   "kun": "き（える）・け（す）",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06d88.php"
+  },
+  {
+   "char": "病",
+   "grade": 3,
+   "strokes": "10",
+   "on": "びょう・へい",
+   "kun": "や（む）・やまい",
+   "radical": "疒",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/075c5.php"
+  },
+  {
+   "char": "真",
+   "grade": 3,
+   "strokes": "10",
+   "on": "しん",
+   "kun": "ま",
+   "radical": "目",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0771f.php"
+  },
+  {
+   "char": "荷",
+   "grade": 3,
+   "strokes": "10",
+   "on": "か",
+   "kun": "に",
+   "radical": "艹",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/08377.php"
+  },
+  {
+   "char": "起",
+   "grade": 3,
+   "strokes": "10",
+   "on": "き",
+   "kun": "お（きる）・お（こる）・お（こす）",
+   "radical": "走",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/08d77.php"
+  },
+  {
+   "char": "速",
+   "grade": 3,
+   "strokes": "10",
+   "on": "そく",
+   "kun": "はや（い）・はや（める）・はや（まる）・すみ（やか）",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0901f.php"
+  },
+  {
+   "char": "配",
+   "grade": 3,
+   "strokes": "10",
+   "on": "はい",
+   "kun": "くば（る）",
+   "radical": "酉",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0914d.php"
+  },
+  {
+   "char": "酒",
+   "grade": 3,
+   "strokes": "10",
+   "on": "しゅ",
+   "kun": "さけ・さか",
+   "radical": "酉",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/09152.php"
+  },
+  {
+   "char": "院",
+   "grade": 3,
+   "strokes": "10",
+   "on": "いん",
+   "kun": "なし",
+   "radical": "⻖",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/09662.php"
+  },
+  {
+   "char": "動",
+   "grade": 3,
+   "strokes": "11",
+   "on": "どう",
+   "kun": "うご（く）・うご（かす）",
+   "radical": "力",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/052d5.php"
+  },
+  {
+   "char": "商",
+   "grade": 3,
+   "strokes": "11",
+   "on": "しょう",
+   "kun": "あきな（う）",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05546.php"
+  },
+  {
+   "char": "問",
+   "grade": 3,
+   "strokes": "11",
+   "on": "もん",
+   "kun": "と（う）・と（い）・とん",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0554f.php"
+  },
+  {
+   "char": "宿",
+   "grade": 3,
+   "strokes": "11",
+   "on": "しゅく",
+   "kun": "やど・やど（る）・やど（す）",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05bbf.php"
+  },
+  {
+   "char": "帳",
+   "grade": 3,
+   "strokes": "11",
+   "on": "ちょう",
+   "kun": "なし",
+   "radical": "巾",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05e33.php"
+  },
+  {
+   "char": "悪",
+   "grade": 3,
+   "strokes": "11",
+   "on": "あく・お",
+   "kun": "わる（い）",
+   "radical": "心",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/060aa.php"
+  },
+  {
+   "char": "族",
+   "grade": 3,
+   "strokes": "11",
+   "on": "ぞく",
+   "kun": "なし",
+   "radical": "方",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/065cf.php"
+  },
+  {
+   "char": "深",
+   "grade": 3,
+   "strokes": "11",
+   "on": "しん",
+   "kun": "ふか（い）・ふか（まる）・ふか（める）",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06df1.php"
+  },
+  {
+   "char": "球",
+   "grade": 3,
+   "strokes": "11",
+   "on": "きゅう",
+   "kun": "たま",
+   "radical": "王",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/07403.php"
+  },
+  {
+   "char": "祭",
+   "grade": 3,
+   "strokes": "11",
+   "on": "さい",
+   "kun": "まつ（る）・まつ（り）",
+   "radical": "示",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0796d.php"
+  },
+  {
+   "char": "章",
+   "grade": 3,
+   "strokes": "11",
+   "on": "しょう",
+   "kun": "なし",
+   "radical": "立",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/07ae0.php"
+  },
+  {
+   "char": "笛",
+   "grade": 3,
+   "strokes": "11",
+   "on": "てき",
+   "kun": "ふえ",
+   "radical": "竹",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/07b1b.php"
+  },
+  {
+   "char": "第",
+   "grade": 3,
+   "strokes": "11",
+   "on": "だい",
+   "kun": "なし",
+   "radical": "竹",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/07b2c.php"
+  },
+  {
+   "char": "終",
+   "grade": 3,
+   "strokes": "11",
+   "on": "しゅう",
+   "kun": "お（わる）・お（える）",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/07d42.php"
+  },
+  {
+   "char": "習",
+   "grade": 3,
+   "strokes": "11",
+   "on": "しゅう",
+   "kun": "なら（う）",
+   "radical": "羽",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/07fd2.php"
+  },
+  {
+   "char": "転",
+   "grade": 3,
+   "strokes": "11",
+   "on": "てん",
+   "kun": "ころ（がる）・ころ（げる）・ころ（がす）・ころ（ぶ）",
+   "radical": "車",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/08ee2.php"
+  },
+  {
+   "char": "進",
+   "grade": 3,
+   "strokes": "11",
+   "on": "しん",
+   "kun": "すす（む）・すす（める）",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/09032.php"
+  },
+  {
+   "char": "部",
+   "grade": 3,
+   "strokes": "11",
+   "on": "ぶ",
+   "kun": "なし",
+   "radical": "⻏",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/090e8.php"
+  },
+  {
+   "char": "都",
+   "grade": 3,
+   "strokes": "11",
+   "on": "と・つ",
+   "kun": "みやこ",
+   "radical": "⻏",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/090fd.php"
+  },
+  {
+   "char": "勝",
+   "grade": 3,
+   "strokes": "12",
+   "on": "しょう",
+   "kun": "か（つ）・まさ（る）",
+   "radical": "力",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/052dd.php"
+  },
+  {
+   "char": "寒",
+   "grade": 3,
+   "strokes": "12",
+   "on": "かん",
+   "kun": "さむ（い）",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/05bd2.php"
+  },
+  {
+   "char": "悲",
+   "grade": 3,
+   "strokes": "12",
+   "on": "ひ",
+   "kun": "かな（しい）・かな（しむ）",
+   "radical": "心",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/060b2.php"
+  },
+  {
+   "char": "暑",
+   "grade": 3,
+   "strokes": "12",
+   "on": "しょ",
+   "kun": "あつ（い）",
+   "radical": "日",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06691.php"
+  },
+  {
+   "char": "期",
+   "grade": 3,
+   "strokes": "12",
+   "on": "き・ご",
+   "kun": "なし",
+   "radical": "月",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0671f.php"
+  },
+  {
+   "char": "植",
+   "grade": 3,
+   "strokes": "12",
+   "on": "しょく",
+   "kun": "う（える）・う（わる）",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0690d.php"
+  },
+  {
+   "char": "歯",
+   "grade": 3,
+   "strokes": "12",
+   "on": "し",
+   "kun": "は",
+   "radical": "歯",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06b6f.php"
+  },
+  {
+   "char": "温",
+   "grade": 3,
+   "strokes": "12",
+   "on": "おん",
+   "kun": "あたた（か）・あたた（かい）・あたた（まる）・あたた（める）",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06e29.php"
+  },
+  {
+   "char": "港",
+   "grade": 3,
+   "strokes": "12",
+   "on": "こう",
+   "kun": "みなと",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06e2f.php"
+  },
+  {
+   "char": "湖",
+   "grade": 3,
+   "strokes": "12",
+   "on": "こ",
+   "kun": "みずうみ",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06e56.php"
+  },
+  {
+   "char": "湯",
+   "grade": 3,
+   "strokes": "12",
+   "on": "とう",
+   "kun": "ゆ",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06e6f.php"
+  },
+  {
+   "char": "登",
+   "grade": 3,
+   "strokes": "12",
+   "on": "とう・と",
+   "kun": "のぼ（る）",
+   "radical": "癶",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0767b.php"
+  },
+  {
+   "char": "着",
+   "grade": 3,
+   "strokes": "12",
+   "on": "ちゃく・じゃく",
+   "kun": "き（る）・き（せる）・つ（く）・つ（ける）",
+   "radical": "目",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/07740.php"
+  },
+  {
+   "char": "短",
+   "grade": 3,
+   "strokes": "12",
+   "on": "たん",
+   "kun": "みじか（い）",
+   "radical": "矢",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/077ed.php"
+  },
+  {
+   "char": "童",
+   "grade": 3,
+   "strokes": "12",
+   "on": "どう",
+   "kun": "わらべ",
+   "radical": "立",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/07ae5.php"
+  },
+  {
+   "char": "筆",
+   "grade": 3,
+   "strokes": "12",
+   "on": "ひつ",
+   "kun": "ふで",
+   "radical": "竹",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/07b46.php"
+  },
+  {
+   "char": "等",
+   "grade": 3,
+   "strokes": "12",
+   "on": "とう",
+   "kun": "ひと（しい）",
+   "radical": "竹",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/07b49.php"
+  },
+  {
+   "char": "落",
+   "grade": 3,
+   "strokes": "12",
+   "on": "らく",
+   "kun": "お（ちる）・お（とす）",
+   "radical": "艹",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0843d.php"
+  },
+  {
+   "char": "葉",
+   "grade": 3,
+   "strokes": "12",
+   "on": "よう",
+   "kun": "は",
+   "radical": "艹",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/08449.php"
+  },
+  {
+   "char": "軽",
+   "grade": 3,
+   "strokes": "12",
+   "on": "けい",
+   "kun": "かる（い）・かろ（やか）",
+   "radical": "車",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/08efd.php"
+  },
+  {
+   "char": "遊",
+   "grade": 3,
+   "strokes": "12",
+   "on": "ゆう・ゆ",
+   "kun": "あそ（ぶ）",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0904a.php"
+  },
+  {
+   "char": "運",
+   "grade": 3,
+   "strokes": "12",
+   "on": "うん",
+   "kun": "はこ（ぶ）",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0904b.php"
+  },
+  {
+   "char": "開",
+   "grade": 3,
+   "strokes": "12",
+   "on": "かい",
+   "kun": "ひら（く）・ひら（ける）・あ（く）・あ（ける）",
+   "radical": "門",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0958b.php"
+  },
+  {
+   "char": "陽",
+   "grade": 3,
+   "strokes": "12",
+   "on": "よう",
+   "kun": "なし",
+   "radical": "⻖",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0967d.php"
+  },
+  {
+   "char": "階",
+   "grade": 3,
+   "strokes": "12",
+   "on": "かい",
+   "kun": "なし",
+   "radical": "⻖",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0968e.php"
+  },
+  {
+   "char": "集",
+   "grade": 3,
+   "strokes": "12",
+   "on": "しゅう",
+   "kun": "あつ（まる）・あつ（める）・つど（う）",
+   "radical": "隹",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/096c6.php"
+  },
+  {
+   "char": "飲",
+   "grade": 3,
+   "strokes": "12",
+   "on": "いん",
+   "kun": "の（む）",
+   "radical": "飠",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/098f2.php"
+  },
+  {
+   "char": "想",
+   "grade": 3,
+   "strokes": "13",
+   "on": "そう・そ",
+   "kun": "なし",
+   "radical": "心",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/060f3.php"
+  },
+  {
+   "char": "意",
+   "grade": 3,
+   "strokes": "13",
+   "on": "い",
+   "kun": "なし",
+   "radical": "心",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0610f.php"
+  },
+  {
+   "char": "感",
+   "grade": 3,
+   "strokes": "13",
+   "on": "かん",
+   "kun": "なし",
+   "radical": "心",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0611f.php"
+  },
+  {
+   "char": "暗",
+   "grade": 3,
+   "strokes": "13",
+   "on": "あん",
+   "kun": "くら（い）",
+   "radical": "日",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06697.php"
+  },
+  {
+   "char": "業",
+   "grade": 3,
+   "strokes": "13",
+   "on": "ぎょう・ごう",
+   "kun": "わざ",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0696d.php"
+  },
+  {
+   "char": "漢",
+   "grade": 3,
+   "strokes": "13",
+   "on": "かん",
+   "kun": "なし",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06f22.php"
+  },
+  {
+   "char": "福",
+   "grade": 3,
+   "strokes": "13",
+   "on": "ふく",
+   "kun": "なし",
+   "radical": "礻",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0798f.php"
+  },
+  {
+   "char": "詩",
+   "grade": 3,
+   "strokes": "13",
+   "on": "し",
+   "kun": "なし",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/08a69.php"
+  },
+  {
+   "char": "路",
+   "grade": 3,
+   "strokes": "13",
+   "on": "ろ",
+   "kun": "じ",
+   "radical": "足",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/08def.php"
+  },
+  {
+   "char": "農",
+   "grade": 3,
+   "strokes": "13",
+   "on": "のう",
+   "kun": "なし",
+   "radical": "辰",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/08fb2.php"
+  },
+  {
+   "char": "鉄",
+   "grade": 3,
+   "strokes": "13",
+   "on": "てつ",
+   "kun": "なし",
+   "radical": "金",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/09244.php"
+  },
+  {
+   "char": "様",
+   "grade": 3,
+   "strokes": "14",
+   "on": "よう",
+   "kun": "さま",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/069d8.php"
+  },
+  {
+   "char": "緑",
+   "grade": 3,
+   "strokes": "14",
+   "on": "りょく・ろく",
+   "kun": "みどり",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/07dd1.php"
+  },
+  {
+   "char": "練",
+   "grade": 3,
+   "strokes": "14",
+   "on": "れん",
+   "kun": "ね（る）",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/07df4.php"
+  },
+  {
+   "char": "銀",
+   "grade": 3,
+   "strokes": "14",
+   "on": "ぎん",
+   "kun": "なし",
+   "radical": "金",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/09280.php"
+  },
+  {
+   "char": "駅",
+   "grade": 3,
+   "strokes": "14",
+   "on": "えき",
+   "kun": "なし",
+   "radical": "馬",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/099c5.php"
+  },
+  {
+   "char": "鼻",
+   "grade": 3,
+   "strokes": "14",
+   "on": "び",
+   "kun": "はな",
+   "radical": "鼻",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/09f3b.php"
+  },
+  {
+   "char": "横",
+   "grade": 3,
+   "strokes": "15",
+   "on": "おう",
+   "kun": "よこ",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06a2a.php"
+  },
+  {
+   "char": "箱",
+   "grade": 3,
+   "strokes": "15",
+   "on": "なし",
+   "kun": "はこ",
+   "radical": "竹",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/07bb1.php"
+  },
+  {
+   "char": "調",
+   "grade": 3,
+   "strokes": "15",
+   "on": "ちょう",
+   "kun": "しら（べる）・ととの（う）・ととの（える）",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/08abf.php"
+  },
+  {
+   "char": "談",
+   "grade": 3,
+   "strokes": "15",
+   "on": "だん",
+   "kun": "なし",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/08ac7.php"
+  },
+  {
+   "char": "整",
+   "grade": 3,
+   "strokes": "16",
+   "on": "せい",
+   "kun": "ととの（える）・ととの（う）",
+   "radical": "攵",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06574.php"
+  },
+  {
+   "char": "橋",
+   "grade": 3,
+   "strokes": "16",
+   "on": "きょう",
+   "kun": "はし",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/06a4b.php"
+  },
+  {
+   "char": "薬",
+   "grade": 3,
+   "strokes": "16",
+   "on": "やく",
+   "kun": "くすり",
+   "radical": "艹",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/085ac.php"
+  },
+  {
+   "char": "館",
+   "grade": 3,
+   "strokes": "16",
+   "on": "かん",
+   "kun": "やかた",
+   "radical": "飠",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/09928.php"
+  },
+  {
+   "char": "題",
+   "grade": 3,
+   "strokes": "18",
+   "on": "だい",
+   "kun": "なし",
+   "radical": "頁",
+   "url": "https://eleschool-compass.com/contents/kanji/g3/0984c.php"
+  },
+  {
+   "char": "不",
+   "grade": 4,
+   "strokes": "4",
+   "on": "ふ・ぶ",
+   "kun": "なし",
+   "radical": "一",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/04e0d.php"
+  },
+  {
+   "char": "井",
+   "grade": 4,
+   "strokes": "4",
+   "on": "せい・しょう",
+   "kun": "い",
+   "radical": "二",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/04e95.php"
+  },
+  {
+   "char": "夫",
+   "grade": 4,
+   "strokes": "4",
+   "on": "ふ・ふう",
+   "kun": "おっと",
+   "radical": "大",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0592b.php"
+  },
+  {
+   "char": "欠",
+   "grade": 4,
+   "strokes": "4",
+   "on": "けつ",
+   "kun": "か（ける）・か（く）",
+   "radical": "欠",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06b20.php"
+  },
+  {
+   "char": "氏",
+   "grade": 4,
+   "strokes": "4",
+   "on": "し",
+   "kun": "うじ",
+   "radical": "氏",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06c0f.php"
+  },
+  {
+   "char": "付",
+   "grade": 4,
+   "strokes": "5",
+   "on": "ふ",
+   "kun": "つ（ける）・つ（く）",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/04ed8.php"
+  },
+  {
+   "char": "令",
+   "grade": 4,
+   "strokes": "5",
+   "on": "れい",
+   "kun": "なし",
+   "radical": "人",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/04ee4.php"
+  },
+  {
+   "char": "以",
+   "grade": 4,
+   "strokes": "5",
+   "on": "い",
+   "kun": "なし",
+   "radical": "人",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/04ee5.php"
+  },
+  {
+   "char": "功",
+   "grade": 4,
+   "strokes": "5",
+   "on": "こう・く",
+   "kun": "なし",
+   "radical": "工",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0529f.php"
+  },
+  {
+   "char": "加",
+   "grade": 4,
+   "strokes": "5",
+   "on": "か",
+   "kun": "くわ（える）・くわ（わる）",
+   "radical": "力",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/052a0.php"
+  },
+  {
+   "char": "包",
+   "grade": 4,
+   "strokes": "5",
+   "on": "ほう",
+   "kun": "つつ（む）",
+   "radical": "勹",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05305.php"
+  },
+  {
+   "char": "司",
+   "grade": 4,
+   "strokes": "5",
+   "on": "し",
+   "kun": "なし",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/053f8.php"
+  },
+  {
+   "char": "失",
+   "grade": 4,
+   "strokes": "5",
+   "on": "しつ",
+   "kun": "うしな（う）",
+   "radical": "大",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05931.php"
+  },
+  {
+   "char": "必",
+   "grade": 4,
+   "strokes": "5",
+   "on": "ひつ",
+   "kun": "かなら（ず）",
+   "radical": "心",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05fc5.php"
+  },
+  {
+   "char": "未",
+   "grade": 4,
+   "strokes": "5",
+   "on": "み",
+   "kun": "なし",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0672a.php"
+  },
+  {
+   "char": "末",
+   "grade": 4,
+   "strokes": "5",
+   "on": "まつ・ばつ",
+   "kun": "すえ",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0672b.php"
+  },
+  {
+   "char": "札",
+   "grade": 4,
+   "strokes": "5",
+   "on": "さつ",
+   "kun": "ふだ",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0672d.php"
+  },
+  {
+   "char": "民",
+   "grade": 4,
+   "strokes": "5",
+   "on": "みん",
+   "kun": "たみ",
+   "radical": "氏",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06c11.php"
+  },
+  {
+   "char": "辺",
+   "grade": 4,
+   "strokes": "5",
+   "on": "へん",
+   "kun": "あた（り）・べ",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/08fba.php"
+  },
+  {
+   "char": "争",
+   "grade": 4,
+   "strokes": "6",
+   "on": "そう",
+   "kun": "あらそ（う）",
+   "radical": "亅",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/04e89.php"
+  },
+  {
+   "char": "仲",
+   "grade": 4,
+   "strokes": "6",
+   "on": "ちゅう",
+   "kun": "なか",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/04ef2.php"
+  },
+  {
+   "char": "伝",
+   "grade": 4,
+   "strokes": "6",
+   "on": "でん",
+   "kun": "つた（わる）・つた（える）・つた（う）",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/04f1d.php"
+  },
+  {
+   "char": "兆",
+   "grade": 4,
+   "strokes": "6",
+   "on": "ちょう",
+   "kun": "きざ（す）・きざ（し）",
+   "radical": "儿",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05146.php"
+  },
+  {
+   "char": "共",
+   "grade": 4,
+   "strokes": "6",
+   "on": "きょう",
+   "kun": "とも",
+   "radical": "八",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05171.php"
+  },
+  {
+   "char": "印",
+   "grade": 4,
+   "strokes": "6",
+   "on": "いん",
+   "kun": "しるし",
+   "radical": "卩",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05370.php"
+  },
+  {
+   "char": "各",
+   "grade": 4,
+   "strokes": "6",
+   "on": "かく",
+   "kun": "おのおの",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05404.php"
+  },
+  {
+   "char": "好",
+   "grade": 4,
+   "strokes": "6",
+   "on": "こう",
+   "kun": "この（む）・す（く）",
+   "radical": "女",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0597d.php"
+  },
+  {
+   "char": "成",
+   "grade": 4,
+   "strokes": "6",
+   "on": "せい・じょう",
+   "kun": "な（る）・な（す）",
+   "radical": "戈",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06210.php"
+  },
+  {
+   "char": "灯",
+   "grade": 4,
+   "strokes": "6",
+   "on": "とう",
+   "kun": "ひ",
+   "radical": "火",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0706f.php"
+  },
+  {
+   "char": "老",
+   "grade": 4,
+   "strokes": "6",
+   "on": "ろう",
+   "kun": "お（いる）・ふ（ける）",
+   "radical": "老",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/08001.php"
+  },
+  {
+   "char": "衣",
+   "grade": 4,
+   "strokes": "6",
+   "on": "い",
+   "kun": "ころも",
+   "radical": "衣",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/08863.php"
+  },
+  {
+   "char": "位",
+   "grade": 4,
+   "strokes": "7",
+   "on": "い",
+   "kun": "くらい",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/04f4d.php"
+  },
+  {
+   "char": "低",
+   "grade": 4,
+   "strokes": "7",
+   "on": "てい",
+   "kun": "ひく（い）・ひく（める）・ひく（まる）",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/04f4e.php"
+  },
+  {
+   "char": "佐",
+   "grade": 4,
+   "strokes": "7",
+   "on": "さ",
+   "kun": "なし",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/04f50.php"
+  },
+  {
+   "char": "児",
+   "grade": 4,
+   "strokes": "7",
+   "on": "じ・に",
+   "kun": "なし",
+   "radical": "儿",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05150.php"
+  },
+  {
+   "char": "兵",
+   "grade": 4,
+   "strokes": "7",
+   "on": "へい・ひょう",
+   "kun": "なし",
+   "radical": "八",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05175.php"
+  },
+  {
+   "char": "冷",
+   "grade": 4,
+   "strokes": "7",
+   "on": "れい",
+   "kun": "つめ（たい）・ひ（える）・ひ（や）・ひ（やす）・ひ（やかす）・さ（める）・さ（ます）",
+   "radical": "冫",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/051b7.php"
+  },
+  {
+   "char": "初",
+   "grade": 4,
+   "strokes": "7",
+   "on": "しょ",
+   "kun": "はじ（め）・はじ（めて）・はつ・うい・そ（める）",
+   "radical": "刀",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0521d.php"
+  },
+  {
+   "char": "別",
+   "grade": 4,
+   "strokes": "7",
+   "on": "べつ",
+   "kun": "わか（れる）",
+   "radical": "刂",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05225.php"
+  },
+  {
+   "char": "利",
+   "grade": 4,
+   "strokes": "7",
+   "on": "り",
+   "kun": "き（く）",
+   "radical": "刂",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05229.php"
+  },
+  {
+   "char": "努",
+   "grade": 4,
+   "strokes": "7",
+   "on": "ど",
+   "kun": "つと（める）",
+   "radical": "力",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/052aa.php"
+  },
+  {
+   "char": "労",
+   "grade": 4,
+   "strokes": "7",
+   "on": "ろう",
+   "kun": "なし",
+   "radical": "力",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/052b4.php"
+  },
+  {
+   "char": "完",
+   "grade": 4,
+   "strokes": "7",
+   "on": "かん",
+   "kun": "なし",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05b8c.php"
+  },
+  {
+   "char": "岐",
+   "grade": 4,
+   "strokes": "7",
+   "on": "き",
+   "kun": "なし",
+   "radical": "山",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05c90.php"
+  },
+  {
+   "char": "希",
+   "grade": 4,
+   "strokes": "7",
+   "on": "き",
+   "kun": "なし",
+   "radical": "巾",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05e0c.php"
+  },
+  {
+   "char": "折",
+   "grade": 4,
+   "strokes": "7",
+   "on": "せつ",
+   "kun": "お（る）・おり・お（れる）",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06298.php"
+  },
+  {
+   "char": "改",
+   "grade": 4,
+   "strokes": "7",
+   "on": "かい",
+   "kun": "あらた（める）・あらた（まる）",
+   "radical": "攵",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06539.php"
+  },
+  {
+   "char": "材",
+   "grade": 4,
+   "strokes": "7",
+   "on": "ざい",
+   "kun": "なし",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06750.php"
+  },
+  {
+   "char": "束",
+   "grade": 4,
+   "strokes": "7",
+   "on": "そく",
+   "kun": "たば",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0675f.php"
+  },
+  {
+   "char": "求",
+   "grade": 4,
+   "strokes": "7",
+   "on": "きゅう",
+   "kun": "もと（める）",
+   "radical": "氺",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06c42.php"
+  },
+  {
+   "char": "沖",
+   "grade": 4,
+   "strokes": "7",
+   "on": "ちゅう",
+   "kun": "おき",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06c96.php"
+  },
+  {
+   "char": "臣",
+   "grade": 4,
+   "strokes": "7",
+   "on": "しん・じん",
+   "kun": "なし",
+   "radical": "臣",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/081e3.php"
+  },
+  {
+   "char": "良",
+   "grade": 4,
+   "strokes": "7",
+   "on": "りょう",
+   "kun": "よ（い）",
+   "radical": "艮",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0826f.php"
+  },
+  {
+   "char": "芸",
+   "grade": 4,
+   "strokes": "7",
+   "on": "げい",
+   "kun": "なし",
+   "radical": "艹",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/082b8.php"
+  },
+  {
+   "char": "阪",
+   "grade": 4,
+   "strokes": "7",
+   "on": "はん",
+   "kun": "なし",
+   "radical": "⻖",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0962a.php"
+  },
+  {
+   "char": "例",
+   "grade": 4,
+   "strokes": "8",
+   "on": "れい",
+   "kun": "たと（える）",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/04f8b.php"
+  },
+  {
+   "char": "典",
+   "grade": 4,
+   "strokes": "8",
+   "on": "てん",
+   "kun": "なし",
+   "radical": "八",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05178.php"
+  },
+  {
+   "char": "刷",
+   "grade": 4,
+   "strokes": "8",
+   "on": "さつ",
+   "kun": "す（る）",
+   "radical": "刂",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05237.php"
+  },
+  {
+   "char": "卒",
+   "grade": 4,
+   "strokes": "8",
+   "on": "そつ",
+   "kun": "なし",
+   "radical": "十",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05352.php"
+  },
+  {
+   "char": "協",
+   "grade": 4,
+   "strokes": "8",
+   "on": "きょう",
+   "kun": "なし",
+   "radical": "十",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05354.php"
+  },
+  {
+   "char": "参",
+   "grade": 4,
+   "strokes": "8",
+   "on": "さん",
+   "kun": "まい（る）",
+   "radical": "厶",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/053c2.php"
+  },
+  {
+   "char": "周",
+   "grade": 4,
+   "strokes": "8",
+   "on": "しゅう",
+   "kun": "まわ（り）",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05468.php"
+  },
+  {
+   "char": "固",
+   "grade": 4,
+   "strokes": "8",
+   "on": "こ",
+   "kun": "かた（める）・かた（まる）・かた（い）",
+   "radical": "囗",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/056fa.php"
+  },
+  {
+   "char": "奈",
+   "grade": 4,
+   "strokes": "8",
+   "on": "な",
+   "kun": "なし",
+   "radical": "大",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05948.php"
+  },
+  {
+   "char": "季",
+   "grade": 4,
+   "strokes": "8",
+   "on": "き",
+   "kun": "なし",
+   "radical": "子",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05b63.php"
+  },
+  {
+   "char": "官",
+   "grade": 4,
+   "strokes": "8",
+   "on": "かん",
+   "kun": "なし",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05b98.php"
+  },
+  {
+   "char": "岡",
+   "grade": 4,
+   "strokes": "8",
+   "on": "なし",
+   "kun": "おか",
+   "radical": "山",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05ca1.php"
+  },
+  {
+   "char": "底",
+   "grade": 4,
+   "strokes": "8",
+   "on": "てい",
+   "kun": "そこ",
+   "radical": "广",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05e95.php"
+  },
+  {
+   "char": "府",
+   "grade": 4,
+   "strokes": "8",
+   "on": "ふ",
+   "kun": "なし",
+   "radical": "广",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05e9c.php"
+  },
+  {
+   "char": "径",
+   "grade": 4,
+   "strokes": "8",
+   "on": "けい",
+   "kun": "なし",
+   "radical": "彳",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05f84.php"
+  },
+  {
+   "char": "念",
+   "grade": 4,
+   "strokes": "8",
+   "on": "ねん",
+   "kun": "なし",
+   "radical": "心",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05ff5.php"
+  },
+  {
+   "char": "松",
+   "grade": 4,
+   "strokes": "8",
+   "on": "しょう",
+   "kun": "まつ",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0677e.php"
+  },
+  {
+   "char": "果",
+   "grade": 4,
+   "strokes": "8",
+   "on": "か",
+   "kun": "は（たす）・は（てる）・は（て）",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0679c.php"
+  },
+  {
+   "char": "治",
+   "grade": 4,
+   "strokes": "8",
+   "on": "じ・ち",
+   "kun": "おさ（める）・おさ（まる）・なお（る）・なお（す）",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06cbb.php"
+  },
+  {
+   "char": "法",
+   "grade": 4,
+   "strokes": "8",
+   "on": "ほう・はっ・ほっ",
+   "kun": "なし",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06cd5.php"
+  },
+  {
+   "char": "泣",
+   "grade": 4,
+   "strokes": "8",
+   "on": "きゅう",
+   "kun": "な（く）",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06ce3.php"
+  },
+  {
+   "char": "牧",
+   "grade": 4,
+   "strokes": "8",
+   "on": "ぼく",
+   "kun": "まき",
+   "radical": "牛",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/07267.php"
+  },
+  {
+   "char": "的",
+   "grade": 4,
+   "strokes": "8",
+   "on": "てき",
+   "kun": "まと",
+   "radical": "白",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/07684.php"
+  },
+  {
+   "char": "芽",
+   "grade": 4,
+   "strokes": "8",
+   "on": "が",
+   "kun": "め",
+   "radical": "艹",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/082bd.php"
+  },
+  {
+   "char": "英",
+   "grade": 4,
+   "strokes": "8",
+   "on": "えい",
+   "kun": "なし",
+   "radical": "艹",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/082f1.php"
+  },
+  {
+   "char": "阜",
+   "grade": 4,
+   "strokes": "8",
+   "on": "ふ",
+   "kun": "なし",
+   "radical": "阜",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0961c.php"
+  },
+  {
+   "char": "便",
+   "grade": 4,
+   "strokes": "9",
+   "on": "べん・びん",
+   "kun": "たよ（り）",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/04fbf.php"
+  },
+  {
+   "char": "信",
+   "grade": 4,
+   "strokes": "9",
+   "on": "しん",
+   "kun": "なし",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/04fe1.php"
+  },
+  {
+   "char": "勇",
+   "grade": 4,
+   "strokes": "9",
+   "on": "ゆう",
+   "kun": "いさ（む）",
+   "radical": "力",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/052c7.php"
+  },
+  {
+   "char": "単",
+   "grade": 4,
+   "strokes": "9",
+   "on": "たん",
+   "kun": "なし",
+   "radical": "十",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05358.php"
+  },
+  {
+   "char": "城",
+   "grade": 4,
+   "strokes": "9",
+   "on": "じょう",
+   "kun": "しろ",
+   "radical": "土",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/057ce.php"
+  },
+  {
+   "char": "変",
+   "grade": 4,
+   "strokes": "9",
+   "on": "へん",
+   "kun": "か（わる）・か（える）",
+   "radical": "夂",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05909.php"
+  },
+  {
+   "char": "建",
+   "grade": 4,
+   "strokes": "9",
+   "on": "けん・こん",
+   "kun": "た（てる）・た（つ）",
+   "radical": "廴",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05efa.php"
+  },
+  {
+   "char": "昨",
+   "grade": 4,
+   "strokes": "9",
+   "on": "さく",
+   "kun": "なし",
+   "radical": "日",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06628.php"
+  },
+  {
+   "char": "栃",
+   "grade": 4,
+   "strokes": "9",
+   "on": "なし",
+   "kun": "とち",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06803.php"
+  },
+  {
+   "char": "栄",
+   "grade": 4,
+   "strokes": "9",
+   "on": "えい",
+   "kun": "さか（える）・は（え）・は（える）",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06804.php"
+  },
+  {
+   "char": "浅",
+   "grade": 4,
+   "strokes": "9",
+   "on": "せん",
+   "kun": "あさ（い）",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06d45.php"
+  },
+  {
+   "char": "省",
+   "grade": 4,
+   "strokes": "9",
+   "on": "せい・しょう",
+   "kun": "かえり（みる）・はぶ（く）",
+   "radical": "目",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/07701.php"
+  },
+  {
+   "char": "祝",
+   "grade": 4,
+   "strokes": "9",
+   "on": "しゅく・しゅう",
+   "kun": "いわ（う）",
+   "radical": "礻",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0795d.php"
+  },
+  {
+   "char": "約",
+   "grade": 4,
+   "strokes": "9",
+   "on": "やく",
+   "kun": "なし",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/07d04.php"
+  },
+  {
+   "char": "茨",
+   "grade": 4,
+   "strokes": "9",
+   "on": "なし",
+   "kun": "いばら",
+   "radical": "艹",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/08328.php"
+  },
+  {
+   "char": "要",
+   "grade": 4,
+   "strokes": "9",
+   "on": "よう",
+   "kun": "かなめ・い（る）",
+   "radical": "覀",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/08981.php"
+  },
+  {
+   "char": "軍",
+   "grade": 4,
+   "strokes": "9",
+   "on": "ぐん",
+   "kun": "なし",
+   "radical": "車",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/08ecd.php"
+  },
+  {
+   "char": "飛",
+   "grade": 4,
+   "strokes": "9",
+   "on": "ひ",
+   "kun": "と（ぶ）・と（ばす）",
+   "radical": "飛",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/098db.php"
+  },
+  {
+   "char": "香",
+   "grade": 4,
+   "strokes": "9",
+   "on": "こう・きょう",
+   "kun": "か・かお（り）・かお（る）",
+   "radical": "香",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/09999.php"
+  },
+  {
+   "char": "倉",
+   "grade": 4,
+   "strokes": "10",
+   "on": "そう",
+   "kun": "くら",
+   "radical": "人",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05009.php"
+  },
+  {
+   "char": "候",
+   "grade": 4,
+   "strokes": "10",
+   "on": "こう",
+   "kun": "そうろう",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05019.php"
+  },
+  {
+   "char": "借",
+   "grade": 4,
+   "strokes": "10",
+   "on": "しゃく",
+   "kun": "か（りる）",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0501f.php"
+  },
+  {
+   "char": "孫",
+   "grade": 4,
+   "strokes": "10",
+   "on": "そん",
+   "kun": "まご",
+   "radical": "子",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05b6b.php"
+  },
+  {
+   "char": "害",
+   "grade": 4,
+   "strokes": "10",
+   "on": "がい",
+   "kun": "なし",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05bb3.php"
+  },
+  {
+   "char": "差",
+   "grade": 4,
+   "strokes": "10",
+   "on": "さ",
+   "kun": "さ（す）",
+   "radical": "工",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05dee.php"
+  },
+  {
+   "char": "席",
+   "grade": 4,
+   "strokes": "10",
+   "on": "せき",
+   "kun": "なし",
+   "radical": "巾",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05e2d.php"
+  },
+  {
+   "char": "帯",
+   "grade": 4,
+   "strokes": "10",
+   "on": "たい",
+   "kun": "お（びる）・おび",
+   "radical": "巾",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05e2f.php"
+  },
+  {
+   "char": "徒",
+   "grade": 4,
+   "strokes": "10",
+   "on": "と",
+   "kun": "なし",
+   "radical": "彳",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05f92.php"
+  },
+  {
+   "char": "挙",
+   "grade": 4,
+   "strokes": "10",
+   "on": "きょ",
+   "kun": "あ（げる）・あ（がる）",
+   "radical": "手",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06319.php"
+  },
+  {
+   "char": "料",
+   "grade": 4,
+   "strokes": "10",
+   "on": "りょう",
+   "kun": "なし",
+   "radical": "斗",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06599.php"
+  },
+  {
+   "char": "案",
+   "grade": 4,
+   "strokes": "10",
+   "on": "あん",
+   "kun": "なし",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06848.php"
+  },
+  {
+   "char": "梅",
+   "grade": 4,
+   "strokes": "10",
+   "on": "ばい",
+   "kun": "うめ",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06885.php"
+  },
+  {
+   "char": "残",
+   "grade": 4,
+   "strokes": "10",
+   "on": "ざん",
+   "kun": "のこ（る）・のこ（す）",
+   "radical": "歹",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06b8b.php"
+  },
+  {
+   "char": "浴",
+   "grade": 4,
+   "strokes": "10",
+   "on": "よく",
+   "kun": "あ（びる）・あ（びせる）",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06d74.php"
+  },
+  {
+   "char": "特",
+   "grade": 4,
+   "strokes": "10",
+   "on": "とく",
+   "kun": "なし",
+   "radical": "牛",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/07279.php"
+  },
+  {
+   "char": "笑",
+   "grade": 4,
+   "strokes": "10",
+   "on": "しょう",
+   "kun": "わら（う）・え（む）",
+   "radical": "竹",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/07b11.php"
+  },
+  {
+   "char": "訓",
+   "grade": 4,
+   "strokes": "10",
+   "on": "くん",
+   "kun": "なし",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/08a13.php"
+  },
+  {
+   "char": "連",
+   "grade": 4,
+   "strokes": "10",
+   "on": "れん",
+   "kun": "つら（なる）・つら（ねる）・つ（れる）",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/09023.php"
+  },
+  {
+   "char": "郡",
+   "grade": 4,
+   "strokes": "10",
+   "on": "ぐん",
+   "kun": "なし",
+   "radical": "⻏",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/090e1.php"
+  },
+  {
+   "char": "健",
+   "grade": 4,
+   "strokes": "11",
+   "on": "けん",
+   "kun": "すこ（やか）",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05065.php"
+  },
+  {
+   "char": "側",
+   "grade": 4,
+   "strokes": "11",
+   "on": "そく",
+   "kun": "がわ",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05074.php"
+  },
+  {
+   "char": "副",
+   "grade": 4,
+   "strokes": "11",
+   "on": "ふく",
+   "kun": "なし",
+   "radical": "刂",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0526f.php"
+  },
+  {
+   "char": "唱",
+   "grade": 4,
+   "strokes": "11",
+   "on": "しょう",
+   "kun": "とな（える）",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05531.php"
+  },
+  {
+   "char": "埼",
+   "grade": 4,
+   "strokes": "11",
+   "on": "なし",
+   "kun": "さい",
+   "radical": "土",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/057fc.php"
+  },
+  {
+   "char": "崎",
+   "grade": 4,
+   "strokes": "11",
+   "on": "なし",
+   "kun": "さき",
+   "radical": "山",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05d0e.php"
+  },
+  {
+   "char": "巣",
+   "grade": 4,
+   "strokes": "11",
+   "on": "そう",
+   "kun": "す",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05de3.php"
+  },
+  {
+   "char": "康",
+   "grade": 4,
+   "strokes": "11",
+   "on": "こう",
+   "kun": "なし",
+   "radical": "广",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05eb7.php"
+  },
+  {
+   "char": "敗",
+   "grade": 4,
+   "strokes": "11",
+   "on": "はい",
+   "kun": "やぶ（れる）",
+   "radical": "攵",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06557.php"
+  },
+  {
+   "char": "望",
+   "grade": 4,
+   "strokes": "11",
+   "on": "ぼう・もう",
+   "kun": "のぞ（む）",
+   "radical": "月",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0671b.php"
+  },
+  {
+   "char": "梨",
+   "grade": 4,
+   "strokes": "11",
+   "on": "なし",
+   "kun": "なし",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/068a8.php"
+  },
+  {
+   "char": "械",
+   "grade": 4,
+   "strokes": "11",
+   "on": "かい",
+   "kun": "なし",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/068b0.php"
+  },
+  {
+   "char": "清",
+   "grade": 4,
+   "strokes": "11",
+   "on": "せい・しょう",
+   "kun": "きよ（い）・きよ（まる）・きよ（める）",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06e05.php"
+  },
+  {
+   "char": "産",
+   "grade": 4,
+   "strokes": "11",
+   "on": "さん",
+   "kun": "う（む）・う（まれる）・うぶ",
+   "radical": "生",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/07523.php"
+  },
+  {
+   "char": "票",
+   "grade": 4,
+   "strokes": "11",
+   "on": "ひょう",
+   "kun": "なし",
+   "radical": "示",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/07968.php"
+  },
+  {
+   "char": "菜",
+   "grade": 4,
+   "strokes": "11",
+   "on": "さい",
+   "kun": "な",
+   "radical": "艹",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/083dc.php"
+  },
+  {
+   "char": "貨",
+   "grade": 4,
+   "strokes": "11",
+   "on": "か",
+   "kun": "なし",
+   "radical": "貝",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/08ca8.php"
+  },
+  {
+   "char": "陸",
+   "grade": 4,
+   "strokes": "11",
+   "on": "りく",
+   "kun": "なし",
+   "radical": "⻖",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/09678.php"
+  },
+  {
+   "char": "鹿",
+   "grade": 4,
+   "strokes": "11",
+   "on": "なし",
+   "kun": "しか・か",
+   "radical": "鹿",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/09e7f.php"
+  },
+  {
+   "char": "博",
+   "grade": 4,
+   "strokes": "12",
+   "on": "はく・ばく",
+   "kun": "なし",
+   "radical": "十",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0535a.php"
+  },
+  {
+   "char": "媛",
+   "grade": 4,
+   "strokes": "12",
+   "on": "えん",
+   "kun": "なし",
+   "radical": "女",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05a9b.php"
+  },
+  {
+   "char": "富",
+   "grade": 4,
+   "strokes": "12",
+   "on": "ふ・ふう",
+   "kun": "と（む）・とみ",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05bcc.php"
+  },
+  {
+   "char": "散",
+   "grade": 4,
+   "strokes": "12",
+   "on": "さん",
+   "kun": "ち（る）・ち（らす）・ち（らかす）・ち（らかる）",
+   "radical": "攵",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06563.php"
+  },
+  {
+   "char": "景",
+   "grade": 4,
+   "strokes": "12",
+   "on": "けい",
+   "kun": "なし",
+   "radical": "日",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0666f.php"
+  },
+  {
+   "char": "最",
+   "grade": 4,
+   "strokes": "12",
+   "on": "さい",
+   "kun": "もっと（も）",
+   "radical": "曰",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06700.php"
+  },
+  {
+   "char": "極",
+   "grade": 4,
+   "strokes": "12",
+   "on": "きょく・ごく",
+   "kun": "きわ（める）・きわ（まる）・きわ（み）",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06975.php"
+  },
+  {
+   "char": "満",
+   "grade": 4,
+   "strokes": "12",
+   "on": "まん",
+   "kun": "み（ちる）・み（たす）",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06e80.php"
+  },
+  {
+   "char": "滋",
+   "grade": 4,
+   "strokes": "12",
+   "on": "じ",
+   "kun": "なし",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06ecb.php"
+  },
+  {
+   "char": "無",
+   "grade": 4,
+   "strokes": "12",
+   "on": "む・ぶ",
+   "kun": "な（い）",
+   "radical": "灬",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/07121.php"
+  },
+  {
+   "char": "然",
+   "grade": 4,
+   "strokes": "12",
+   "on": "ぜん・ねん",
+   "kun": "なし",
+   "radical": "灬",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/07136.php"
+  },
+  {
+   "char": "焼",
+   "grade": 4,
+   "strokes": "12",
+   "on": "しょう",
+   "kun": "や（く）・や（ける）",
+   "radical": "火",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0713c.php"
+  },
+  {
+   "char": "結",
+   "grade": 4,
+   "strokes": "12",
+   "on": "けつ",
+   "kun": "むす（ぶ）・ゆ（う）・ゆ（わえる）",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/07d50.php"
+  },
+  {
+   "char": "給",
+   "grade": 4,
+   "strokes": "12",
+   "on": "きゅう",
+   "kun": "なし",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/07d66.php"
+  },
+  {
+   "char": "街",
+   "grade": 4,
+   "strokes": "12",
+   "on": "がい・かい",
+   "kun": "まち",
+   "radical": "行",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/08857.php"
+  },
+  {
+   "char": "覚",
+   "grade": 4,
+   "strokes": "12",
+   "on": "かく",
+   "kun": "おぼ（える）・さ（ます）・さ（める）",
+   "radical": "見",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0899a.php"
+  },
+  {
+   "char": "賀",
+   "grade": 4,
+   "strokes": "12",
+   "on": "が",
+   "kun": "なし",
+   "radical": "貝",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/08cc0.php"
+  },
+  {
+   "char": "達",
+   "grade": 4,
+   "strokes": "12",
+   "on": "たつ",
+   "kun": "なし",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/09054.php"
+  },
+  {
+   "char": "量",
+   "grade": 4,
+   "strokes": "12",
+   "on": "りょう",
+   "kun": "はか（る）",
+   "radical": "里",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/091cf.php"
+  },
+  {
+   "char": "隊",
+   "grade": 4,
+   "strokes": "12",
+   "on": "たい",
+   "kun": "なし",
+   "radical": "⻖",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0968a.php"
+  },
+  {
+   "char": "順",
+   "grade": 4,
+   "strokes": "12",
+   "on": "じゅん",
+   "kun": "なし",
+   "radical": "頁",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/09806.php"
+  },
+  {
+   "char": "飯",
+   "grade": 4,
+   "strokes": "12",
+   "on": "はん",
+   "kun": "めし",
+   "radical": "飠",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/098ef.php"
+  },
+  {
+   "char": "働",
+   "grade": 4,
+   "strokes": "13",
+   "on": "どう",
+   "kun": "はたら（く）",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/050cd.php"
+  },
+  {
+   "char": "塩",
+   "grade": 4,
+   "strokes": "13",
+   "on": "えん",
+   "kun": "しお",
+   "radical": "土",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05869.php"
+  },
+  {
+   "char": "愛",
+   "grade": 4,
+   "strokes": "13",
+   "on": "あい",
+   "kun": "なし",
+   "radical": "心",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0611b.php"
+  },
+  {
+   "char": "戦",
+   "grade": 4,
+   "strokes": "13",
+   "on": "せん",
+   "kun": "いくさ・たたか（う）",
+   "radical": "戈",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06226.php"
+  },
+  {
+   "char": "照",
+   "grade": 4,
+   "strokes": "13",
+   "on": "しょう",
+   "kun": "て（る）・て（らす）・て（れる）",
+   "radical": "灬",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/07167.php"
+  },
+  {
+   "char": "節",
+   "grade": 4,
+   "strokes": "13",
+   "on": "せつ・せち",
+   "kun": "ふし",
+   "radical": "竹",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/07bc0.php"
+  },
+  {
+   "char": "続",
+   "grade": 4,
+   "strokes": "13",
+   "on": "ぞく",
+   "kun": "つづ（く）・つづ（ける）",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/07d9a.php"
+  },
+  {
+   "char": "置",
+   "grade": 4,
+   "strokes": "13",
+   "on": "ち",
+   "kun": "お（く）",
+   "radical": "罒",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/07f6e.php"
+  },
+  {
+   "char": "群",
+   "grade": 4,
+   "strokes": "13",
+   "on": "ぐん",
+   "kun": "む（れる）・む（れ）・むら",
+   "radical": "羊",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/07fa4.php"
+  },
+  {
+   "char": "試",
+   "grade": 4,
+   "strokes": "13",
+   "on": "し",
+   "kun": "こころ（みる）・ため（す）",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/08a66.php"
+  },
+  {
+   "char": "辞",
+   "grade": 4,
+   "strokes": "13",
+   "on": "じ",
+   "kun": "や（める）",
+   "radical": "辛",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/08f9e.php"
+  },
+  {
+   "char": "察",
+   "grade": 4,
+   "strokes": "14",
+   "on": "さつ",
+   "kun": "なし",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05bdf.php"
+  },
+  {
+   "char": "徳",
+   "grade": 4,
+   "strokes": "14",
+   "on": "とく",
+   "kun": "なし",
+   "radical": "彳",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05fb3.php"
+  },
+  {
+   "char": "旗",
+   "grade": 4,
+   "strokes": "14",
+   "on": "き",
+   "kun": "はた",
+   "radical": "方",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/065d7.php"
+  },
+  {
+   "char": "漁",
+   "grade": 4,
+   "strokes": "14",
+   "on": "ぎょ・りょう",
+   "kun": "なし",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06f01.php"
+  },
+  {
+   "char": "熊",
+   "grade": 4,
+   "strokes": "14",
+   "on": "なし",
+   "kun": "くま",
+   "radical": "灬",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0718a.php"
+  },
+  {
+   "char": "種",
+   "grade": 4,
+   "strokes": "14",
+   "on": "しゅ",
+   "kun": "たね",
+   "radical": "禾",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/07a2e.php"
+  },
+  {
+   "char": "管",
+   "grade": 4,
+   "strokes": "14",
+   "on": "かん",
+   "kun": "くだ",
+   "radical": "竹",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/07ba1.php"
+  },
+  {
+   "char": "説",
+   "grade": 4,
+   "strokes": "14",
+   "on": "せつ・ぜい",
+   "kun": "と（く）",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/08aac.php"
+  },
+  {
+   "char": "関",
+   "grade": 4,
+   "strokes": "14",
+   "on": "かん",
+   "kun": "せき・かか（わる）",
+   "radical": "門",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/095a2.php"
+  },
+  {
+   "char": "静",
+   "grade": 4,
+   "strokes": "14",
+   "on": "せい・じょう",
+   "kun": "しず・しず（か）・しず（まる）・しず（める）",
+   "radical": "青",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/09759.php"
+  },
+  {
+   "char": "億",
+   "grade": 4,
+   "strokes": "15",
+   "on": "おく",
+   "kun": "なし",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05104.php"
+  },
+  {
+   "char": "器",
+   "grade": 4,
+   "strokes": "15",
+   "on": "き",
+   "kun": "うつわ",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/05668.php"
+  },
+  {
+   "char": "標",
+   "grade": 4,
+   "strokes": "15",
+   "on": "ひょう",
+   "kun": "なし",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06a19.php"
+  },
+  {
+   "char": "潟",
+   "grade": 4,
+   "strokes": "15",
+   "on": "なし",
+   "kun": "かた",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06f5f.php"
+  },
+  {
+   "char": "熱",
+   "grade": 4,
+   "strokes": "15",
+   "on": "ねつ",
+   "kun": "あつ（い）",
+   "radical": "灬",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/071b1.php"
+  },
+  {
+   "char": "縄",
+   "grade": 4,
+   "strokes": "15",
+   "on": "じょう",
+   "kun": "なわ",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/07e04.php"
+  },
+  {
+   "char": "課",
+   "grade": 4,
+   "strokes": "15",
+   "on": "か",
+   "kun": "なし",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/08ab2.php"
+  },
+  {
+   "char": "輪",
+   "grade": 4,
+   "strokes": "15",
+   "on": "りん",
+   "kun": "わ",
+   "radical": "車",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/08f2a.php"
+  },
+  {
+   "char": "選",
+   "grade": 4,
+   "strokes": "15",
+   "on": "せん",
+   "kun": "えら（ぶ）",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/09078.php"
+  },
+  {
+   "char": "養",
+   "grade": 4,
+   "strokes": "15",
+   "on": "よう",
+   "kun": "やしな（う）",
+   "radical": "食",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0990a.php"
+  },
+  {
+   "char": "機",
+   "grade": 4,
+   "strokes": "16",
+   "on": "き",
+   "kun": "はた",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/06a5f.php"
+  },
+  {
+   "char": "積",
+   "grade": 4,
+   "strokes": "16",
+   "on": "せき",
+   "kun": "つ（む）・つ（もる）",
+   "radical": "禾",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/07a4d.php"
+  },
+  {
+   "char": "録",
+   "grade": 4,
+   "strokes": "16",
+   "on": "ろく",
+   "kun": "なし",
+   "radical": "金",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/09332.php"
+  },
+  {
+   "char": "観",
+   "grade": 4,
+   "strokes": "18",
+   "on": "かん",
+   "kun": "なし",
+   "radical": "見",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/089b3.php"
+  },
+  {
+   "char": "類",
+   "grade": 4,
+   "strokes": "18",
+   "on": "るい",
+   "kun": "たぐ（い）",
+   "radical": "頁",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/0985e.php"
+  },
+  {
+   "char": "験",
+   "grade": 4,
+   "strokes": "18",
+   "on": "けん・げん",
+   "kun": "なし",
+   "radical": "馬",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/09a13.php"
+  },
+  {
+   "char": "鏡",
+   "grade": 4,
+   "strokes": "19",
+   "on": "きょう",
+   "kun": "かがみ",
+   "radical": "金",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/093e1.php"
+  },
+  {
+   "char": "願",
+   "grade": 4,
+   "strokes": "19",
+   "on": "がん",
+   "kun": "ねが（う）",
+   "radical": "頁",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/09858.php"
+  },
+  {
+   "char": "競",
+   "grade": 4,
+   "strokes": "20",
+   "on": "きょう・けい",
+   "kun": "きそ（う）・せ（る）",
+   "radical": "立",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/07af6.php"
+  },
+  {
+   "char": "議",
+   "grade": 4,
+   "strokes": "20",
+   "on": "ぎ",
+   "kun": "なし",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g4/08b70.php"
+  },
+  {
+   "char": "久",
+   "grade": 5,
+   "strokes": "3",
+   "on": "きゅう・く",
+   "kun": "ひさ（しい）",
+   "radical": "丿",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/04e45.php"
+  },
+  {
+   "char": "士",
+   "grade": 5,
+   "strokes": "3",
+   "on": "し",
+   "kun": "なし",
+   "radical": "士",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/058eb.php"
+  },
+  {
+   "char": "仏",
+   "grade": 5,
+   "strokes": "4",
+   "on": "ぶつ",
+   "kun": "ほとけ",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/04ecf.php"
+  },
+  {
+   "char": "支",
+   "grade": 5,
+   "strokes": "4",
+   "on": "し",
+   "kun": "ささ（える）",
+   "radical": "支",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0652f.php"
+  },
+  {
+   "char": "比",
+   "grade": 5,
+   "strokes": "4",
+   "on": "ひ",
+   "kun": "くら（べる）",
+   "radical": "比",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/06bd4.php"
+  },
+  {
+   "char": "刊",
+   "grade": 5,
+   "strokes": "5",
+   "on": "かん",
+   "kun": "なし",
+   "radical": "刂",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0520a.php"
+  },
+  {
+   "char": "句",
+   "grade": 5,
+   "strokes": "5",
+   "on": "く",
+   "kun": "なし",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/053e5.php"
+  },
+  {
+   "char": "可",
+   "grade": 5,
+   "strokes": "5",
+   "on": "か",
+   "kun": "なし",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/053ef.php"
+  },
+  {
+   "char": "史",
+   "grade": 5,
+   "strokes": "5",
+   "on": "し",
+   "kun": "なし",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/053f2.php"
+  },
+  {
+   "char": "圧",
+   "grade": 5,
+   "strokes": "5",
+   "on": "あつ",
+   "kun": "なし",
+   "radical": "土",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05727.php"
+  },
+  {
+   "char": "布",
+   "grade": 5,
+   "strokes": "5",
+   "on": "ふ",
+   "kun": "ぬの",
+   "radical": "巾",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05e03.php"
+  },
+  {
+   "char": "弁",
+   "grade": 5,
+   "strokes": "5",
+   "on": "べん",
+   "kun": "なし",
+   "radical": "廾",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05f01.php"
+  },
+  {
+   "char": "旧",
+   "grade": 5,
+   "strokes": "5",
+   "on": "きゅう",
+   "kun": "なし",
+   "radical": "日",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/065e7.php"
+  },
+  {
+   "char": "永",
+   "grade": 5,
+   "strokes": "5",
+   "on": "えい",
+   "kun": "なが（い）",
+   "radical": "水",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/06c38.php"
+  },
+  {
+   "char": "犯",
+   "grade": 5,
+   "strokes": "5",
+   "on": "はん",
+   "kun": "おか（す）",
+   "radical": "⺨",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/072af.php"
+  },
+  {
+   "char": "示",
+   "grade": 5,
+   "strokes": "5",
+   "on": "じ・し",
+   "kun": "しめ（す）",
+   "radical": "示",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0793a.php"
+  },
+  {
+   "char": "仮",
+   "grade": 5,
+   "strokes": "6",
+   "on": "か・け",
+   "kun": "かり",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/04eee.php"
+  },
+  {
+   "char": "件",
+   "grade": 5,
+   "strokes": "6",
+   "on": "けん",
+   "kun": "なし",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/04ef6.php"
+  },
+  {
+   "char": "任",
+   "grade": 5,
+   "strokes": "6",
+   "on": "にん",
+   "kun": "まか（せる）・まか（す）",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/04efb.php"
+  },
+  {
+   "char": "再",
+   "grade": 5,
+   "strokes": "6",
+   "on": "さい・さ",
+   "kun": "ふたた（び）",
+   "radical": "冂",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0518d.php"
+  },
+  {
+   "char": "因",
+   "grade": 5,
+   "strokes": "6",
+   "on": "いん",
+   "kun": "よ（る）",
+   "radical": "囗",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/056e0.php"
+  },
+  {
+   "char": "団",
+   "grade": 5,
+   "strokes": "6",
+   "on": "だん・とん",
+   "kun": "なし",
+   "radical": "囗",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/056e3.php"
+  },
+  {
+   "char": "在",
+   "grade": 5,
+   "strokes": "6",
+   "on": "ざい",
+   "kun": "あ（る）",
+   "radical": "土",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05728.php"
+  },
+  {
+   "char": "似",
+   "grade": 5,
+   "strokes": "7",
+   "on": "じ",
+   "kun": "に（る）",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/04f3c.php"
+  },
+  {
+   "char": "余",
+   "grade": 5,
+   "strokes": "7",
+   "on": "よ",
+   "kun": "あま（る）・あま（す）",
+   "radical": "人",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/04f59.php"
+  },
+  {
+   "char": "判",
+   "grade": 5,
+   "strokes": "7",
+   "on": "はん・ばん",
+   "kun": "なし",
+   "radical": "刂",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05224.php"
+  },
+  {
+   "char": "告",
+   "grade": 5,
+   "strokes": "7",
+   "on": "こく",
+   "kun": "つ（げる）",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0544a.php"
+  },
+  {
+   "char": "囲",
+   "grade": 5,
+   "strokes": "7",
+   "on": "い",
+   "kun": "かこ（む）・かこ（う）",
+   "radical": "囗",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/056f2.php"
+  },
+  {
+   "char": "均",
+   "grade": 5,
+   "strokes": "7",
+   "on": "きん",
+   "kun": "なし",
+   "radical": "土",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05747.php"
+  },
+  {
+   "char": "序",
+   "grade": 5,
+   "strokes": "7",
+   "on": "じょ",
+   "kun": "なし",
+   "radical": "广",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05e8f.php"
+  },
+  {
+   "char": "志",
+   "grade": 5,
+   "strokes": "7",
+   "on": "し",
+   "kun": "こころざ（す）・こころざし",
+   "radical": "心",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05fd7.php"
+  },
+  {
+   "char": "応",
+   "grade": 5,
+   "strokes": "7",
+   "on": "おう",
+   "kun": "こた（える）",
+   "radical": "心",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05fdc.php"
+  },
+  {
+   "char": "快",
+   "grade": 5,
+   "strokes": "7",
+   "on": "かい",
+   "kun": "こころよ（い）",
+   "radical": "忄",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05feb.php"
+  },
+  {
+   "char": "技",
+   "grade": 5,
+   "strokes": "7",
+   "on": "ぎ",
+   "kun": "わざ",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/06280.php"
+  },
+  {
+   "char": "条",
+   "grade": 5,
+   "strokes": "7",
+   "on": "じょう",
+   "kun": "なし",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/06761.php"
+  },
+  {
+   "char": "災",
+   "grade": 5,
+   "strokes": "7",
+   "on": "さい",
+   "kun": "わざわ（い）",
+   "radical": "火",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0707d.php"
+  },
+  {
+   "char": "状",
+   "grade": 5,
+   "strokes": "7",
+   "on": "じょう",
+   "kun": "なし",
+   "radical": "犬",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/072b6.php"
+  },
+  {
+   "char": "防",
+   "grade": 5,
+   "strokes": "7",
+   "on": "ぼう",
+   "kun": "ふせ（ぐ）",
+   "radical": "⻖",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/09632.php"
+  },
+  {
+   "char": "価",
+   "grade": 5,
+   "strokes": "8",
+   "on": "か",
+   "kun": "あたい",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/04fa1.php"
+  },
+  {
+   "char": "制",
+   "grade": 5,
+   "strokes": "8",
+   "on": "せい",
+   "kun": "なし",
+   "radical": "刂",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05236.php"
+  },
+  {
+   "char": "効",
+   "grade": 5,
+   "strokes": "8",
+   "on": "こう",
+   "kun": "き（く）",
+   "radical": "力",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/052b9.php"
+  },
+  {
+   "char": "妻",
+   "grade": 5,
+   "strokes": "8",
+   "on": "さい",
+   "kun": "つま",
+   "radical": "女",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/059bb.php"
+  },
+  {
+   "char": "居",
+   "grade": 5,
+   "strokes": "8",
+   "on": "きょ",
+   "kun": "い（る）",
+   "radical": "尸",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05c45.php"
+  },
+  {
+   "char": "往",
+   "grade": 5,
+   "strokes": "8",
+   "on": "おう",
+   "kun": "なし",
+   "radical": "彳",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05f80.php"
+  },
+  {
+   "char": "性",
+   "grade": 5,
+   "strokes": "8",
+   "on": "せい・しょう",
+   "kun": "なし",
+   "radical": "忄",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/06027.php"
+  },
+  {
+   "char": "招",
+   "grade": 5,
+   "strokes": "8",
+   "on": "しょう",
+   "kun": "まね（く）",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/062db.php"
+  },
+  {
+   "char": "易",
+   "grade": 5,
+   "strokes": "8",
+   "on": "えき・い",
+   "kun": "やさ（しい）",
+   "radical": "日",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/06613.php"
+  },
+  {
+   "char": "枝",
+   "grade": 5,
+   "strokes": "8",
+   "on": "し",
+   "kun": "えだ",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0679d.php"
+  },
+  {
+   "char": "武",
+   "grade": 5,
+   "strokes": "8",
+   "on": "ぶ・む",
+   "kun": "なし",
+   "radical": "止",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/06b66.php"
+  },
+  {
+   "char": "毒",
+   "grade": 5,
+   "strokes": "8",
+   "on": "どく",
+   "kun": "なし",
+   "radical": "毋",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/06bd2.php"
+  },
+  {
+   "char": "河",
+   "grade": 5,
+   "strokes": "8",
+   "on": "か",
+   "kun": "かわ",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/06cb3.php"
+  },
+  {
+   "char": "版",
+   "grade": 5,
+   "strokes": "8",
+   "on": "はん",
+   "kun": "なし",
+   "radical": "片",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07248.php"
+  },
+  {
+   "char": "肥",
+   "grade": 5,
+   "strokes": "8",
+   "on": "ひ",
+   "kun": "こ（える）・こえ・こ（やす）・こ（やし）",
+   "radical": "月",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/080a5.php"
+  },
+  {
+   "char": "舎",
+   "grade": 5,
+   "strokes": "8",
+   "on": "しゃ",
+   "kun": "なし",
+   "radical": "人",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0820e.php"
+  },
+  {
+   "char": "述",
+   "grade": 5,
+   "strokes": "8",
+   "on": "じゅつ",
+   "kun": "の（べる）",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08ff0.php"
+  },
+  {
+   "char": "非",
+   "grade": 5,
+   "strokes": "8",
+   "on": "ひ",
+   "kun": "なし",
+   "radical": "非",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0975e.php"
+  },
+  {
+   "char": "保",
+   "grade": 5,
+   "strokes": "9",
+   "on": "ほ",
+   "kun": "たも（つ）",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/04fdd.php"
+  },
+  {
+   "char": "則",
+   "grade": 5,
+   "strokes": "9",
+   "on": "そく",
+   "kun": "なし",
+   "radical": "刂",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05247.php"
+  },
+  {
+   "char": "厚",
+   "grade": 5,
+   "strokes": "9",
+   "on": "こう",
+   "kun": "あつ（い）",
+   "radical": "厂",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0539a.php"
+  },
+  {
+   "char": "型",
+   "grade": 5,
+   "strokes": "9",
+   "on": "けい",
+   "kun": "かた",
+   "radical": "土",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0578b.php"
+  },
+  {
+   "char": "政",
+   "grade": 5,
+   "strokes": "9",
+   "on": "せい・しょう",
+   "kun": "まつりごと",
+   "radical": "攵",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0653f.php"
+  },
+  {
+   "char": "故",
+   "grade": 5,
+   "strokes": "9",
+   "on": "こ",
+   "kun": "ゆえ",
+   "radical": "攵",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/06545.php"
+  },
+  {
+   "char": "査",
+   "grade": 5,
+   "strokes": "9",
+   "on": "さ",
+   "kun": "なし",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/067fb.php"
+  },
+  {
+   "char": "独",
+   "grade": 5,
+   "strokes": "9",
+   "on": "どく",
+   "kun": "ひと（り）",
+   "radical": "⺨",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/072ec.php"
+  },
+  {
+   "char": "祖",
+   "grade": 5,
+   "strokes": "9",
+   "on": "そ",
+   "kun": "なし",
+   "radical": "礻",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07956.php"
+  },
+  {
+   "char": "紀",
+   "grade": 5,
+   "strokes": "9",
+   "on": "き",
+   "kun": "なし",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07d00.php"
+  },
+  {
+   "char": "迷",
+   "grade": 5,
+   "strokes": "9",
+   "on": "めい",
+   "kun": "まよ（う）",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08ff7.php"
+  },
+  {
+   "char": "逆",
+   "grade": 5,
+   "strokes": "9",
+   "on": "ぎゃく",
+   "kun": "さか・さか（らう）",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/09006.php"
+  },
+  {
+   "char": "限",
+   "grade": 5,
+   "strokes": "9",
+   "on": "げん",
+   "kun": "かぎ（る）",
+   "radical": "⻖",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/09650.php"
+  },
+  {
+   "char": "修",
+   "grade": 5,
+   "strokes": "10",
+   "on": "しゅう・しゅ",
+   "kun": "おさ（める）・おさ（まる）",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/04fee.php"
+  },
+  {
+   "char": "個",
+   "grade": 5,
+   "strokes": "10",
+   "on": "こ",
+   "kun": "なし",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0500b.php"
+  },
+  {
+   "char": "容",
+   "grade": 5,
+   "strokes": "10",
+   "on": "よう",
+   "kun": "なし",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05bb9.php"
+  },
+  {
+   "char": "師",
+   "grade": 5,
+   "strokes": "10",
+   "on": "し",
+   "kun": "なし",
+   "radical": "巾",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05e2b.php"
+  },
+  {
+   "char": "格",
+   "grade": 5,
+   "strokes": "10",
+   "on": "かく・こう",
+   "kun": "なし",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0683c.php"
+  },
+  {
+   "char": "桜",
+   "grade": 5,
+   "strokes": "10",
+   "on": "おう",
+   "kun": "さくら",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0685c.php"
+  },
+  {
+   "char": "殺",
+   "grade": 5,
+   "strokes": "10",
+   "on": "さつ・さい・せつ",
+   "kun": "ころ（す）",
+   "radical": "殳",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/06bba.php"
+  },
+  {
+   "char": "留",
+   "grade": 5,
+   "strokes": "10",
+   "on": "りゅう・る",
+   "kun": "と（める）・と（まる）",
+   "radical": "田",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07559.php"
+  },
+  {
+   "char": "益",
+   "grade": 5,
+   "strokes": "10",
+   "on": "えき・やく",
+   "kun": "なし",
+   "radical": "皿",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/076ca.php"
+  },
+  {
+   "char": "破",
+   "grade": 5,
+   "strokes": "10",
+   "on": "は",
+   "kun": "やぶ（る）・やぶ（れる）",
+   "radical": "石",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07834.php"
+  },
+  {
+   "char": "粉",
+   "grade": 5,
+   "strokes": "10",
+   "on": "ふん",
+   "kun": "こ・こな",
+   "radical": "米",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07c89.php"
+  },
+  {
+   "char": "素",
+   "grade": 5,
+   "strokes": "10",
+   "on": "そ・す",
+   "kun": "なし",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07d20.php"
+  },
+  {
+   "char": "耕",
+   "grade": 5,
+   "strokes": "10",
+   "on": "こう",
+   "kun": "たがや（す）",
+   "radical": "耒",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08015.php"
+  },
+  {
+   "char": "能",
+   "grade": 5,
+   "strokes": "10",
+   "on": "のう",
+   "kun": "なし",
+   "radical": "月",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/080fd.php"
+  },
+  {
+   "char": "脈",
+   "grade": 5,
+   "strokes": "10",
+   "on": "みゃく",
+   "kun": "なし",
+   "radical": "月",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08108.php"
+  },
+  {
+   "char": "航",
+   "grade": 5,
+   "strokes": "10",
+   "on": "こう",
+   "kun": "なし",
+   "radical": "舟",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0822a.php"
+  },
+  {
+   "char": "財",
+   "grade": 5,
+   "strokes": "10",
+   "on": "ざい・さい",
+   "kun": "なし",
+   "radical": "貝",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08ca1.php"
+  },
+  {
+   "char": "造",
+   "grade": 5,
+   "strokes": "10",
+   "on": "ぞう",
+   "kun": "つく（る）",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/09020.php"
+  },
+  {
+   "char": "停",
+   "grade": 5,
+   "strokes": "11",
+   "on": "てい",
+   "kun": "なし",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0505c.php"
+  },
+  {
+   "char": "務",
+   "grade": 5,
+   "strokes": "11",
+   "on": "む",
+   "kun": "つと（める）・つと（まる）",
+   "radical": "力",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/052d9.php"
+  },
+  {
+   "char": "基",
+   "grade": 5,
+   "strokes": "11",
+   "on": "き",
+   "kun": "もと・もとい",
+   "radical": "土",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/057fa.php"
+  },
+  {
+   "char": "堂",
+   "grade": 5,
+   "strokes": "11",
+   "on": "どう",
+   "kun": "なし",
+   "radical": "土",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05802.php"
+  },
+  {
+   "char": "婦",
+   "grade": 5,
+   "strokes": "11",
+   "on": "ふ",
+   "kun": "なし",
+   "radical": "女",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05a66.php"
+  },
+  {
+   "char": "寄",
+   "grade": 5,
+   "strokes": "11",
+   "on": "き",
+   "kun": "よ（る）・よ（せる）",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05bc4.php"
+  },
+  {
+   "char": "常",
+   "grade": 5,
+   "strokes": "11",
+   "on": "じょう",
+   "kun": "つね・とこ",
+   "radical": "巾",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05e38.php"
+  },
+  {
+   "char": "張",
+   "grade": 5,
+   "strokes": "11",
+   "on": "ちょう",
+   "kun": "は（る）",
+   "radical": "弓",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05f35.php"
+  },
+  {
+   "char": "得",
+   "grade": 5,
+   "strokes": "11",
+   "on": "とく",
+   "kun": "え（る）・う（る）",
+   "radical": "彳",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05f97.php"
+  },
+  {
+   "char": "情",
+   "grade": 5,
+   "strokes": "11",
+   "on": "じょう・せい",
+   "kun": "なさ（け）",
+   "radical": "忄",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/060c5.php"
+  },
+  {
+   "char": "授",
+   "grade": 5,
+   "strokes": "11",
+   "on": "じゅ",
+   "kun": "さず（ける）・さず（かる）",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/06388.php"
+  },
+  {
+   "char": "採",
+   "grade": 5,
+   "strokes": "11",
+   "on": "さい",
+   "kun": "と（る）",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/063a1.php"
+  },
+  {
+   "char": "接",
+   "grade": 5,
+   "strokes": "11",
+   "on": "せつ",
+   "kun": "つ（ぐ）",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/063a5.php"
+  },
+  {
+   "char": "救",
+   "grade": 5,
+   "strokes": "11",
+   "on": "きゅう",
+   "kun": "すく（う）",
+   "radical": "攵",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/06551.php"
+  },
+  {
+   "char": "断",
+   "grade": 5,
+   "strokes": "11",
+   "on": "だん",
+   "kun": "た（つ）・ことわ（る）",
+   "radical": "斤",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/065ad.php"
+  },
+  {
+   "char": "液",
+   "grade": 5,
+   "strokes": "11",
+   "on": "えき",
+   "kun": "なし",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/06db2.php"
+  },
+  {
+   "char": "混",
+   "grade": 5,
+   "strokes": "11",
+   "on": "こん",
+   "kun": "ま（じる）・ま（ざる）・ま（ぜる）・こ（む）",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/06df7.php"
+  },
+  {
+   "char": "率",
+   "grade": 5,
+   "strokes": "11",
+   "on": "そつ・りつ",
+   "kun": "ひき（いる）",
+   "radical": "玄",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07387.php"
+  },
+  {
+   "char": "現",
+   "grade": 5,
+   "strokes": "11",
+   "on": "げん",
+   "kun": "あらわ（れる）・あらわ（す）",
+   "radical": "王",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/073fe.php"
+  },
+  {
+   "char": "略",
+   "grade": 5,
+   "strokes": "11",
+   "on": "りゃく",
+   "kun": "なし",
+   "radical": "田",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07565.php"
+  },
+  {
+   "char": "眼",
+   "grade": 5,
+   "strokes": "11",
+   "on": "がん・げん",
+   "kun": "まなこ",
+   "radical": "目",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0773c.php"
+  },
+  {
+   "char": "移",
+   "grade": 5,
+   "strokes": "11",
+   "on": "い",
+   "kun": "うつ（る）・うつ（す）",
+   "radical": "禾",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/079fb.php"
+  },
+  {
+   "char": "経",
+   "grade": 5,
+   "strokes": "11",
+   "on": "けい・きょう",
+   "kun": "へ（る）",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07d4c.php"
+  },
+  {
+   "char": "術",
+   "grade": 5,
+   "strokes": "11",
+   "on": "じゅつ",
+   "kun": "なし",
+   "radical": "行",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08853.php"
+  },
+  {
+   "char": "規",
+   "grade": 5,
+   "strokes": "11",
+   "on": "き",
+   "kun": "なし",
+   "radical": "見",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0898f.php"
+  },
+  {
+   "char": "設",
+   "grade": 5,
+   "strokes": "11",
+   "on": "せつ",
+   "kun": "もう（ける）",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08a2d.php"
+  },
+  {
+   "char": "許",
+   "grade": 5,
+   "strokes": "11",
+   "on": "きょ",
+   "kun": "ゆる（す）",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08a31.php"
+  },
+  {
+   "char": "貧",
+   "grade": 5,
+   "strokes": "11",
+   "on": "ひん・びん",
+   "kun": "まず（しい）",
+   "radical": "貝",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08ca7.php"
+  },
+  {
+   "char": "責",
+   "grade": 5,
+   "strokes": "11",
+   "on": "せき",
+   "kun": "せ（める）",
+   "radical": "貝",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08cac.php"
+  },
+  {
+   "char": "険",
+   "grade": 5,
+   "strokes": "11",
+   "on": "けん",
+   "kun": "けわ（しい）",
+   "radical": "⻖",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0967a.php"
+  },
+  {
+   "char": "備",
+   "grade": 5,
+   "strokes": "12",
+   "on": "び",
+   "kun": "そな（える）・そな（わる）",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05099.php"
+  },
+  {
+   "char": "喜",
+   "grade": 5,
+   "strokes": "12",
+   "on": "き",
+   "kun": "よろこ（ぶ）",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0559c.php"
+  },
+  {
+   "char": "営",
+   "grade": 5,
+   "strokes": "12",
+   "on": "えい",
+   "kun": "いとな（む）",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/055b6.php"
+  },
+  {
+   "char": "報",
+   "grade": 5,
+   "strokes": "12",
+   "on": "ほう",
+   "kun": "むく（いる）",
+   "radical": "土",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05831.php"
+  },
+  {
+   "char": "属",
+   "grade": 5,
+   "strokes": "12",
+   "on": "ぞく",
+   "kun": "なし",
+   "radical": "尸",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05c5e.php"
+  },
+  {
+   "char": "復",
+   "grade": 5,
+   "strokes": "12",
+   "on": "ふく",
+   "kun": "なし",
+   "radical": "彳",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05fa9.php"
+  },
+  {
+   "char": "提",
+   "grade": 5,
+   "strokes": "12",
+   "on": "てい",
+   "kun": "さ（げる）",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/063d0.php"
+  },
+  {
+   "char": "検",
+   "grade": 5,
+   "strokes": "12",
+   "on": "けん",
+   "kun": "なし",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0691c.php"
+  },
+  {
+   "char": "減",
+   "grade": 5,
+   "strokes": "12",
+   "on": "げん",
+   "kun": "へ（る）・へ（らす）",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/06e1b.php"
+  },
+  {
+   "char": "測",
+   "grade": 5,
+   "strokes": "12",
+   "on": "そく",
+   "kun": "はか（る）",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/06e2c.php"
+  },
+  {
+   "char": "程",
+   "grade": 5,
+   "strokes": "12",
+   "on": "てい",
+   "kun": "ほど",
+   "radical": "禾",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07a0b.php"
+  },
+  {
+   "char": "税",
+   "grade": 5,
+   "strokes": "12",
+   "on": "ぜい",
+   "kun": "なし",
+   "radical": "禾",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07a0e.php"
+  },
+  {
+   "char": "統",
+   "grade": 5,
+   "strokes": "12",
+   "on": "とう",
+   "kun": "す（べる）",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07d71.php"
+  },
+  {
+   "char": "絶",
+   "grade": 5,
+   "strokes": "12",
+   "on": "ぜつ",
+   "kun": "た（える）・た（やす）・た（つ）",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07d76.php"
+  },
+  {
+   "char": "証",
+   "grade": 5,
+   "strokes": "12",
+   "on": "しょう",
+   "kun": "なし",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08a3c.php"
+  },
+  {
+   "char": "評",
+   "grade": 5,
+   "strokes": "12",
+   "on": "ひょう",
+   "kun": "なし",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08a55.php"
+  },
+  {
+   "char": "象",
+   "grade": 5,
+   "strokes": "12",
+   "on": "しょう・ぞう",
+   "kun": "なし",
+   "radical": "豕",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08c61.php"
+  },
+  {
+   "char": "貯",
+   "grade": 5,
+   "strokes": "12",
+   "on": "ちょ",
+   "kun": "なし",
+   "radical": "貝",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08caf.php"
+  },
+  {
+   "char": "貸",
+   "grade": 5,
+   "strokes": "12",
+   "on": "たい",
+   "kun": "か（す）",
+   "radical": "貝",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08cb8.php"
+  },
+  {
+   "char": "費",
+   "grade": 5,
+   "strokes": "12",
+   "on": "ひ",
+   "kun": "つい（やす）・つい（える）",
+   "radical": "貝",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08cbb.php"
+  },
+  {
+   "char": "貿",
+   "grade": 5,
+   "strokes": "12",
+   "on": "ぼう",
+   "kun": "なし",
+   "radical": "貝",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08cbf.php"
+  },
+  {
+   "char": "過",
+   "grade": 5,
+   "strokes": "12",
+   "on": "か",
+   "kun": "す（ぎる）・す（ごす）・あやま（つ）・あやま（ち）",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0904e.php"
+  },
+  {
+   "char": "勢",
+   "grade": 5,
+   "strokes": "13",
+   "on": "せい",
+   "kun": "いきお（い）",
+   "radical": "力",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/052e2.php"
+  },
+  {
+   "char": "墓",
+   "grade": 5,
+   "strokes": "13",
+   "on": "ぼ",
+   "kun": "はか",
+   "radical": "土",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05893.php"
+  },
+  {
+   "char": "夢",
+   "grade": 5,
+   "strokes": "13",
+   "on": "む",
+   "kun": "ゆめ",
+   "radical": "夕",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05922.php"
+  },
+  {
+   "char": "幹",
+   "grade": 5,
+   "strokes": "13",
+   "on": "かん",
+   "kun": "みき",
+   "radical": "干",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05e79.php"
+  },
+  {
+   "char": "損",
+   "grade": 5,
+   "strokes": "13",
+   "on": "そん",
+   "kun": "そこ（なう）・そこ（ねる）",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0640d.php"
+  },
+  {
+   "char": "準",
+   "grade": 5,
+   "strokes": "13",
+   "on": "じゅん",
+   "kun": "なし",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/06e96.php"
+  },
+  {
+   "char": "禁",
+   "grade": 5,
+   "strokes": "13",
+   "on": "きん",
+   "kun": "なし",
+   "radical": "示",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07981.php"
+  },
+  {
+   "char": "罪",
+   "grade": 5,
+   "strokes": "13",
+   "on": "ざい",
+   "kun": "つみ",
+   "radical": "罒",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07f6a.php"
+  },
+  {
+   "char": "義",
+   "grade": 5,
+   "strokes": "13",
+   "on": "ぎ",
+   "kun": "なし",
+   "radical": "羊",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07fa9.php"
+  },
+  {
+   "char": "解",
+   "grade": 5,
+   "strokes": "13",
+   "on": "かい・げ",
+   "kun": "と（く）・と（かす）・と（ける）",
+   "radical": "角",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/089e3.php"
+  },
+  {
+   "char": "豊",
+   "grade": 5,
+   "strokes": "13",
+   "on": "ほう",
+   "kun": "ゆた（か）",
+   "radical": "豆",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08c4a.php"
+  },
+  {
+   "char": "資",
+   "grade": 5,
+   "strokes": "13",
+   "on": "し",
+   "kun": "なし",
+   "radical": "貝",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08cc7.php"
+  },
+  {
+   "char": "鉱",
+   "grade": 5,
+   "strokes": "13",
+   "on": "こう",
+   "kun": "なし",
+   "radical": "金",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/09271.php"
+  },
+  {
+   "char": "飼",
+   "grade": 5,
+   "strokes": "13",
+   "on": "し",
+   "kun": "か（う）",
+   "radical": "飠",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/098fc.php"
+  },
+  {
+   "char": "像",
+   "grade": 5,
+   "strokes": "14",
+   "on": "ぞう",
+   "kun": "なし",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/050cf.php"
+  },
+  {
+   "char": "境",
+   "grade": 5,
+   "strokes": "14",
+   "on": "きょう・けい",
+   "kun": "さかい",
+   "radical": "土",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05883.php"
+  },
+  {
+   "char": "増",
+   "grade": 5,
+   "strokes": "14",
+   "on": "ぞう",
+   "kun": "ま（す）・ふ（える）・ふ（やす）",
+   "radical": "土",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05897.php"
+  },
+  {
+   "char": "態",
+   "grade": 5,
+   "strokes": "14",
+   "on": "たい",
+   "kun": "なし",
+   "radical": "心",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0614b.php"
+  },
+  {
+   "char": "慣",
+   "grade": 5,
+   "strokes": "14",
+   "on": "かん",
+   "kun": "な（れる）・な（らす）",
+   "radical": "忄",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/06163.php"
+  },
+  {
+   "char": "構",
+   "grade": 5,
+   "strokes": "14",
+   "on": "こう",
+   "kun": "かま（える）・かま（う）",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/069cb.php"
+  },
+  {
+   "char": "歴",
+   "grade": 5,
+   "strokes": "14",
+   "on": "れき",
+   "kun": "なし",
+   "radical": "止",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/06b74.php"
+  },
+  {
+   "char": "演",
+   "grade": 5,
+   "strokes": "14",
+   "on": "えん",
+   "kun": "なし",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/06f14.php"
+  },
+  {
+   "char": "精",
+   "grade": 5,
+   "strokes": "14",
+   "on": "せい・しょう",
+   "kun": "なし",
+   "radical": "米",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07cbe.php"
+  },
+  {
+   "char": "綿",
+   "grade": 5,
+   "strokes": "14",
+   "on": "めん",
+   "kun": "わた",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07dbf.php"
+  },
+  {
+   "char": "総",
+   "grade": 5,
+   "strokes": "14",
+   "on": "そう",
+   "kun": "なし",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07dcf.php"
+  },
+  {
+   "char": "製",
+   "grade": 5,
+   "strokes": "14",
+   "on": "せい",
+   "kun": "なし",
+   "radical": "衣",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/088fd.php"
+  },
+  {
+   "char": "複",
+   "grade": 5,
+   "strokes": "14",
+   "on": "ふく",
+   "kun": "なし",
+   "radical": "衤",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08907.php"
+  },
+  {
+   "char": "適",
+   "grade": 5,
+   "strokes": "14",
+   "on": "てき",
+   "kun": "なし",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/09069.php"
+  },
+  {
+   "char": "酸",
+   "grade": 5,
+   "strokes": "14",
+   "on": "さん",
+   "kun": "す（い）",
+   "radical": "酉",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/09178.php"
+  },
+  {
+   "char": "銅",
+   "grade": 5,
+   "strokes": "14",
+   "on": "どう",
+   "kun": "なし",
+   "radical": "金",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/09285.php"
+  },
+  {
+   "char": "際",
+   "grade": 5,
+   "strokes": "14",
+   "on": "さい",
+   "kun": "きわ",
+   "radical": "⻖",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0969b.php"
+  },
+  {
+   "char": "雑",
+   "grade": 5,
+   "strokes": "14",
+   "on": "ざつ・ぞう",
+   "kun": "なし",
+   "radical": "隹",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/096d1.php"
+  },
+  {
+   "char": "領",
+   "grade": 5,
+   "strokes": "14",
+   "on": "りょう",
+   "kun": "なし",
+   "radical": "頁",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/09818.php"
+  },
+  {
+   "char": "導",
+   "grade": 5,
+   "strokes": "15",
+   "on": "どう",
+   "kun": "みちび（く）",
+   "radical": "寸",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/05c0e.php"
+  },
+  {
+   "char": "暴",
+   "grade": 5,
+   "strokes": "15",
+   "on": "ぼう・ばく",
+   "kun": "あば（く）・あば（れる）",
+   "radical": "日",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/066b4.php"
+  },
+  {
+   "char": "潔",
+   "grade": 5,
+   "strokes": "15",
+   "on": "けつ",
+   "kun": "いさぎよ（い）",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/06f54.php"
+  },
+  {
+   "char": "確",
+   "grade": 5,
+   "strokes": "15",
+   "on": "かく",
+   "kun": "たし（か）・たし（かめる）",
+   "radical": "石",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/078ba.php"
+  },
+  {
+   "char": "編",
+   "grade": 5,
+   "strokes": "15",
+   "on": "へん",
+   "kun": "あ（む）",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07de8.php"
+  },
+  {
+   "char": "賛",
+   "grade": 5,
+   "strokes": "15",
+   "on": "さん",
+   "kun": "なし",
+   "radical": "貝",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08cdb.php"
+  },
+  {
+   "char": "賞",
+   "grade": 5,
+   "strokes": "15",
+   "on": "しょう",
+   "kun": "なし",
+   "radical": "貝",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08cde.php"
+  },
+  {
+   "char": "質",
+   "grade": 5,
+   "strokes": "15",
+   "on": "しつ・しち・ち",
+   "kun": "なし",
+   "radical": "貝",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08cea.php"
+  },
+  {
+   "char": "燃",
+   "grade": 5,
+   "strokes": "16",
+   "on": "ねん",
+   "kun": "も（える）・も（やす）・も（す）",
+   "radical": "火",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/071c3.php"
+  },
+  {
+   "char": "築",
+   "grade": 5,
+   "strokes": "16",
+   "on": "ちく",
+   "kun": "きず（く）",
+   "radical": "竹",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07bc9.php"
+  },
+  {
+   "char": "興",
+   "grade": 5,
+   "strokes": "16",
+   "on": "こう・きょう",
+   "kun": "おこ（る）・おこ（す）",
+   "radical": "臼",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08208.php"
+  },
+  {
+   "char": "衛",
+   "grade": 5,
+   "strokes": "16",
+   "on": "えい",
+   "kun": "なし",
+   "radical": "行",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0885b.php"
+  },
+  {
+   "char": "輸",
+   "grade": 5,
+   "strokes": "16",
+   "on": "ゆ",
+   "kun": "なし",
+   "radical": "車",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08f38.php"
+  },
+  {
+   "char": "績",
+   "grade": 5,
+   "strokes": "17",
+   "on": "せき",
+   "kun": "なし",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07e3e.php"
+  },
+  {
+   "char": "講",
+   "grade": 5,
+   "strokes": "17",
+   "on": "こう",
+   "kun": "なし",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08b1b.php"
+  },
+  {
+   "char": "謝",
+   "grade": 5,
+   "strokes": "17",
+   "on": "しゃ",
+   "kun": "あやま（る）",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08b1d.php"
+  },
+  {
+   "char": "織",
+   "grade": 5,
+   "strokes": "18",
+   "on": "しょく・しき",
+   "kun": "お（る）",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/07e54.php"
+  },
+  {
+   "char": "職",
+   "grade": 5,
+   "strokes": "18",
+   "on": "しょく",
+   "kun": "なし",
+   "radical": "耳",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08077.php"
+  },
+  {
+   "char": "額",
+   "grade": 5,
+   "strokes": "18",
+   "on": "がく",
+   "kun": "ひたい",
+   "radical": "頁",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/0984d.php"
+  },
+  {
+   "char": "識",
+   "grade": 5,
+   "strokes": "19",
+   "on": "しき",
+   "kun": "なし",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08b58.php"
+  },
+  {
+   "char": "護",
+   "grade": 5,
+   "strokes": "20",
+   "on": "ご",
+   "kun": "なし",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g5/08b77.php"
+  },
+  {
+   "char": "亡",
+   "grade": 6,
+   "strokes": "3",
+   "on": "ぼう・もう",
+   "kun": "な（い）",
+   "radical": "亠",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/04ea1.php"
+  },
+  {
+   "char": "寸",
+   "grade": 6,
+   "strokes": "3",
+   "on": "すん",
+   "kun": "なし",
+   "radical": "寸",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05bf8.php"
+  },
+  {
+   "char": "己",
+   "grade": 6,
+   "strokes": "3",
+   "on": "こ・き",
+   "kun": "おのれ",
+   "radical": "己",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05df1.php"
+  },
+  {
+   "char": "干",
+   "grade": 6,
+   "strokes": "3",
+   "on": "かん",
+   "kun": "ほ（す）・ひ（る）",
+   "radical": "干",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05e72.php"
+  },
+  {
+   "char": "仁",
+   "grade": 6,
+   "strokes": "4",
+   "on": "じん・に",
+   "kun": "なし",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/04ec1.php"
+  },
+  {
+   "char": "収",
+   "grade": 6,
+   "strokes": "4",
+   "on": "しゅう",
+   "kun": "おさ（める）・おさ（まる）",
+   "radical": "又",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/053ce.php"
+  },
+  {
+   "char": "尺",
+   "grade": 6,
+   "strokes": "4",
+   "on": "しゃく",
+   "kun": "なし",
+   "radical": "尸",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05c3a.php"
+  },
+  {
+   "char": "片",
+   "grade": 6,
+   "strokes": "4",
+   "on": "へん",
+   "kun": "かた",
+   "radical": "片",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/07247.php"
+  },
+  {
+   "char": "冊",
+   "grade": 6,
+   "strokes": "5",
+   "on": "さつ・さく",
+   "kun": "なし",
+   "radical": "冂",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/0518a.php"
+  },
+  {
+   "char": "処",
+   "grade": 6,
+   "strokes": "5",
+   "on": "しょ",
+   "kun": "なし",
+   "radical": "几",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/051e6.php"
+  },
+  {
+   "char": "幼",
+   "grade": 6,
+   "strokes": "5",
+   "on": "よう",
+   "kun": "おさな（い）",
+   "radical": "幺",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05e7c.php"
+  },
+  {
+   "char": "庁",
+   "grade": 6,
+   "strokes": "5",
+   "on": "ちょう",
+   "kun": "なし",
+   "radical": "广",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05e81.php"
+  },
+  {
+   "char": "穴",
+   "grade": 6,
+   "strokes": "5",
+   "on": "けつ",
+   "kun": "あな",
+   "radical": "穴",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/07a74.php"
+  },
+  {
+   "char": "危",
+   "grade": 6,
+   "strokes": "6",
+   "on": "き",
+   "kun": "あぶ（ない）・あや（うい）・あや（ぶむ）",
+   "radical": "卩",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05371.php"
+  },
+  {
+   "char": "后",
+   "grade": 6,
+   "strokes": "6",
+   "on": "こう",
+   "kun": "なし",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/0540e.php"
+  },
+  {
+   "char": "吸",
+   "grade": 6,
+   "strokes": "6",
+   "on": "きゅう",
+   "kun": "す（う）",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05438.php"
+  },
+  {
+   "char": "存",
+   "grade": 6,
+   "strokes": "6",
+   "on": "そん・ぞん",
+   "kun": "なし",
+   "radical": "子",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05b58.php"
+  },
+  {
+   "char": "宅",
+   "grade": 6,
+   "strokes": "6",
+   "on": "たく",
+   "kun": "なし",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05b85.php"
+  },
+  {
+   "char": "宇",
+   "grade": 6,
+   "strokes": "6",
+   "on": "う",
+   "kun": "なし",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05b87.php"
+  },
+  {
+   "char": "机",
+   "grade": 6,
+   "strokes": "6",
+   "on": "き",
+   "kun": "つくえ",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/0673a.php"
+  },
+  {
+   "char": "灰",
+   "grade": 6,
+   "strokes": "6",
+   "on": "かい",
+   "kun": "はい",
+   "radical": "火",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/07070.php"
+  },
+  {
+   "char": "至",
+   "grade": 6,
+   "strokes": "6",
+   "on": "し",
+   "kun": "いた（る）",
+   "radical": "至",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/081f3.php"
+  },
+  {
+   "char": "舌",
+   "grade": 6,
+   "strokes": "6",
+   "on": "ぜつ",
+   "kun": "した",
+   "radical": "舌",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/0820c.php"
+  },
+  {
+   "char": "乱",
+   "grade": 6,
+   "strokes": "7",
+   "on": "らん",
+   "kun": "みだ（れる）・みだ（す）",
+   "radical": "乙",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/04e71.php"
+  },
+  {
+   "char": "卵",
+   "grade": 6,
+   "strokes": "7",
+   "on": "らん",
+   "kun": "たまご",
+   "radical": "卩",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05375.php"
+  },
+  {
+   "char": "否",
+   "grade": 6,
+   "strokes": "7",
+   "on": "ひ",
+   "kun": "いな",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05426.php"
+  },
+  {
+   "char": "困",
+   "grade": 6,
+   "strokes": "7",
+   "on": "こん",
+   "kun": "こま（る）",
+   "radical": "囗",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/056f0.php"
+  },
+  {
+   "char": "孝",
+   "grade": 6,
+   "strokes": "7",
+   "on": "こう",
+   "kun": "なし",
+   "radical": "子",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05b5d.php"
+  },
+  {
+   "char": "忘",
+   "grade": 6,
+   "strokes": "7",
+   "on": "ぼう",
+   "kun": "わす（れる）",
+   "radical": "心",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05fd8.php"
+  },
+  {
+   "char": "我",
+   "grade": 6,
+   "strokes": "7",
+   "on": "が",
+   "kun": "われ・わ",
+   "radical": "戈",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/06211.php"
+  },
+  {
+   "char": "批",
+   "grade": 6,
+   "strokes": "7",
+   "on": "ひ",
+   "kun": "なし",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/06279.php"
+  },
+  {
+   "char": "私",
+   "grade": 6,
+   "strokes": "7",
+   "on": "し",
+   "kun": "わたくし・わたし",
+   "radical": "禾",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/079c1.php"
+  },
+  {
+   "char": "系",
+   "grade": 6,
+   "strokes": "7",
+   "on": "けい",
+   "kun": "なし",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/07cfb.php"
+  },
+  {
+   "char": "並",
+   "grade": 6,
+   "strokes": "8",
+   "on": "へい",
+   "kun": "なみ・なら（べる）・なら（ぶ）・なら（びに）",
+   "radical": "一",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/04e26.php"
+  },
+  {
+   "char": "乳",
+   "grade": 6,
+   "strokes": "8",
+   "on": "にゅう",
+   "kun": "ちち・ち",
+   "radical": "乙",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/04e73.php"
+  },
+  {
+   "char": "供",
+   "grade": 6,
+   "strokes": "8",
+   "on": "きょう・く",
+   "kun": "そな（える）・とも",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/04f9b.php"
+  },
+  {
+   "char": "券",
+   "grade": 6,
+   "strokes": "8",
+   "on": "けん",
+   "kun": "なし",
+   "radical": "刀",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05238.php"
+  },
+  {
+   "char": "刻",
+   "grade": 6,
+   "strokes": "8",
+   "on": "こく",
+   "kun": "きざ（む）",
+   "radical": "刂",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/0523b.php"
+  },
+  {
+   "char": "呼",
+   "grade": 6,
+   "strokes": "8",
+   "on": "こ",
+   "kun": "よ（ぶ）",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/0547c.php"
+  },
+  {
+   "char": "垂",
+   "grade": 6,
+   "strokes": "8",
+   "on": "すい",
+   "kun": "た（れる）・た（らす）",
+   "radical": "土",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05782.php"
+  },
+  {
+   "char": "宗",
+   "grade": 6,
+   "strokes": "8",
+   "on": "しゅう・そう",
+   "kun": "なし",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05b97.php"
+  },
+  {
+   "char": "宙",
+   "grade": 6,
+   "strokes": "8",
+   "on": "ちゅう",
+   "kun": "なし",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05b99.php"
+  },
+  {
+   "char": "宝",
+   "grade": 6,
+   "strokes": "8",
+   "on": "ほう",
+   "kun": "たから",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05b9d.php"
+  },
+  {
+   "char": "届",
+   "grade": 6,
+   "strokes": "8",
+   "on": "なし",
+   "kun": "とど（ける）・とど（く）",
+   "radical": "尸",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05c4a.php"
+  },
+  {
+   "char": "延",
+   "grade": 6,
+   "strokes": "8",
+   "on": "えん",
+   "kun": "の（びる）・の（べる）・の（ばす）",
+   "radical": "廴",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05ef6.php"
+  },
+  {
+   "char": "忠",
+   "grade": 6,
+   "strokes": "8",
+   "on": "ちゅう",
+   "kun": "なし",
+   "radical": "心",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05fe0.php"
+  },
+  {
+   "char": "承",
+   "grade": 6,
+   "strokes": "8",
+   "on": "しょう",
+   "kun": "うけたまわ（る）",
+   "radical": "手",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/0627f.php"
+  },
+  {
+   "char": "担",
+   "grade": 6,
+   "strokes": "8",
+   "on": "たん",
+   "kun": "かつ（ぐ）・にな（う）",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/062c5.php"
+  },
+  {
+   "char": "拝",
+   "grade": 6,
+   "strokes": "8",
+   "on": "はい",
+   "kun": "おが（む）",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/062dd.php"
+  },
+  {
+   "char": "拡",
+   "grade": 6,
+   "strokes": "8",
+   "on": "かく",
+   "kun": "なし",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/062e1.php"
+  },
+  {
+   "char": "枚",
+   "grade": 6,
+   "strokes": "8",
+   "on": "まい",
+   "kun": "なし",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/0679a.php"
+  },
+  {
+   "char": "沿",
+   "grade": 6,
+   "strokes": "8",
+   "on": "えん",
+   "kun": "そ（う）",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/06cbf.php"
+  },
+  {
+   "char": "若",
+   "grade": 6,
+   "strokes": "8",
+   "on": "じゃく・にゃく",
+   "kun": "わか（い）・も（しくは）",
+   "radical": "艹",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/082e5.php"
+  },
+  {
+   "char": "奏",
+   "grade": 6,
+   "strokes": "9",
+   "on": "そう",
+   "kun": "かな（でる）",
+   "radical": "大",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/0594f.php"
+  },
+  {
+   "char": "姿",
+   "grade": 6,
+   "strokes": "9",
+   "on": "し",
+   "kun": "すがた",
+   "radical": "女",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/059ff.php"
+  },
+  {
+   "char": "宣",
+   "grade": 6,
+   "strokes": "9",
+   "on": "せん",
+   "kun": "なし",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05ba3.php"
+  },
+  {
+   "char": "専",
+   "grade": 6,
+   "strokes": "9",
+   "on": "せん",
+   "kun": "もっぱ（ら）",
+   "radical": "寸",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05c02.php"
+  },
+  {
+   "char": "巻",
+   "grade": 6,
+   "strokes": "9",
+   "on": "かん",
+   "kun": "ま（く）・まき",
+   "radical": "己",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05dfb.php"
+  },
+  {
+   "char": "律",
+   "grade": 6,
+   "strokes": "9",
+   "on": "りつ・りち",
+   "kun": "なし",
+   "radical": "彳",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05f8b.php"
+  },
+  {
+   "char": "映",
+   "grade": 6,
+   "strokes": "9",
+   "on": "えい",
+   "kun": "うつ（る）・うつ（す）・は（える）",
+   "radical": "日",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/06620.php"
+  },
+  {
+   "char": "染",
+   "grade": 6,
+   "strokes": "9",
+   "on": "せん",
+   "kun": "そ（める）・そ（まる）・し（みる）・し（み）",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/067d3.php"
+  },
+  {
+   "char": "段",
+   "grade": 6,
+   "strokes": "9",
+   "on": "だん",
+   "kun": "なし",
+   "radical": "殳",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/06bb5.php"
+  },
+  {
+   "char": "泉",
+   "grade": 6,
+   "strokes": "9",
+   "on": "せん",
+   "kun": "いずみ",
+   "radical": "水",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/06cc9.php"
+  },
+  {
+   "char": "洗",
+   "grade": 6,
+   "strokes": "9",
+   "on": "せん",
+   "kun": "あら（う）",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/06d17.php"
+  },
+  {
+   "char": "派",
+   "grade": 6,
+   "strokes": "9",
+   "on": "は",
+   "kun": "なし",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/06d3e.php"
+  },
+  {
+   "char": "皇",
+   "grade": 6,
+   "strokes": "9",
+   "on": "こう・おう",
+   "kun": "なし",
+   "radical": "白",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/07687.php"
+  },
+  {
+   "char": "看",
+   "grade": 6,
+   "strokes": "9",
+   "on": "かん",
+   "kun": "なし",
+   "radical": "目",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/0770b.php"
+  },
+  {
+   "char": "砂",
+   "grade": 6,
+   "strokes": "9",
+   "on": "さ・しゃ",
+   "kun": "すな",
+   "radical": "石",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/07802.php"
+  },
+  {
+   "char": "紅",
+   "grade": 6,
+   "strokes": "9",
+   "on": "こう・く",
+   "kun": "べに・くれない",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/07d05.php"
+  },
+  {
+   "char": "肺",
+   "grade": 6,
+   "strokes": "9",
+   "on": "はい",
+   "kun": "なし",
+   "radical": "月",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/080ba.php"
+  },
+  {
+   "char": "胃",
+   "grade": 6,
+   "strokes": "9",
+   "on": "い",
+   "kun": "なし",
+   "radical": "月",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/080c3.php"
+  },
+  {
+   "char": "背",
+   "grade": 6,
+   "strokes": "9",
+   "on": "はい",
+   "kun": "せ・せい・そむ（く）・そむ（ける）",
+   "radical": "月",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/080cc.php"
+  },
+  {
+   "char": "退",
+   "grade": 6,
+   "strokes": "9",
+   "on": "たい",
+   "kun": "しりぞ（く）・しりぞ（ける）",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/09000.php"
+  },
+  {
+   "char": "革",
+   "grade": 6,
+   "strokes": "9",
+   "on": "かく",
+   "kun": "かわ",
+   "radical": "革",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/09769.php"
+  },
+  {
+   "char": "俳",
+   "grade": 6,
+   "strokes": "10",
+   "on": "はい",
+   "kun": "なし",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/04ff3.php"
+  },
+  {
+   "char": "俵",
+   "grade": 6,
+   "strokes": "10",
+   "on": "ひょう",
+   "kun": "たわら",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/04ff5.php"
+  },
+  {
+   "char": "値",
+   "grade": 6,
+   "strokes": "10",
+   "on": "ち",
+   "kun": "ね・あたい",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05024.php"
+  },
+  {
+   "char": "党",
+   "grade": 6,
+   "strokes": "10",
+   "on": "とう",
+   "kun": "なし",
+   "radical": "儿",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/0515a.php"
+  },
+  {
+   "char": "射",
+   "grade": 6,
+   "strokes": "10",
+   "on": "しゃ",
+   "kun": "い（る）",
+   "radical": "寸",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05c04.php"
+  },
+  {
+   "char": "将",
+   "grade": 6,
+   "strokes": "10",
+   "on": "しょう",
+   "kun": "なし",
+   "radical": "寸",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05c06.php"
+  },
+  {
+   "char": "展",
+   "grade": 6,
+   "strokes": "10",
+   "on": "てん",
+   "kun": "なし",
+   "radical": "尸",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05c55.php"
+  },
+  {
+   "char": "座",
+   "grade": 6,
+   "strokes": "10",
+   "on": "ざ",
+   "kun": "すわ（る）",
+   "radical": "广",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05ea7.php"
+  },
+  {
+   "char": "従",
+   "grade": 6,
+   "strokes": "10",
+   "on": "じゅう・しょう・じゅ",
+   "kun": "したが（う）・したが（える）",
+   "radical": "彳",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05f93.php"
+  },
+  {
+   "char": "恩",
+   "grade": 6,
+   "strokes": "10",
+   "on": "おん",
+   "kun": "なし",
+   "radical": "心",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/06069.php"
+  },
+  {
+   "char": "朗",
+   "grade": 6,
+   "strokes": "10",
+   "on": "ろう",
+   "kun": "ほが（らか）",
+   "radical": "月",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/06717.php"
+  },
+  {
+   "char": "株",
+   "grade": 6,
+   "strokes": "10",
+   "on": "なし",
+   "kun": "かぶ",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/0682a.php"
+  },
+  {
+   "char": "班",
+   "grade": 6,
+   "strokes": "10",
+   "on": "はん",
+   "kun": "なし",
+   "radical": "王",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/073ed.php"
+  },
+  {
+   "char": "秘",
+   "grade": 6,
+   "strokes": "10",
+   "on": "ひ",
+   "kun": "ひ（める）",
+   "radical": "禾",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/079d8.php"
+  },
+  {
+   "char": "納",
+   "grade": 6,
+   "strokes": "10",
+   "on": "のう・なっ・な・なん・とう",
+   "kun": "おさ（める）・おさ（まる）",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/07d0d.php"
+  },
+  {
+   "char": "純",
+   "grade": 6,
+   "strokes": "10",
+   "on": "じゅん",
+   "kun": "なし",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/07d14.php"
+  },
+  {
+   "char": "胸",
+   "grade": 6,
+   "strokes": "10",
+   "on": "きょう",
+   "kun": "むね・むな",
+   "radical": "月",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/080f8.php"
+  },
+  {
+   "char": "蚕",
+   "grade": 6,
+   "strokes": "10",
+   "on": "さん",
+   "kun": "かいこ",
+   "radical": "虫",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08695.php"
+  },
+  {
+   "char": "討",
+   "grade": 6,
+   "strokes": "10",
+   "on": "とう",
+   "kun": "う（つ）",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08a0e.php"
+  },
+  {
+   "char": "針",
+   "grade": 6,
+   "strokes": "10",
+   "on": "しん",
+   "kun": "はり",
+   "radical": "金",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/091dd.php"
+  },
+  {
+   "char": "降",
+   "grade": 6,
+   "strokes": "10",
+   "on": "こう",
+   "kun": "お（りる）・お（ろす）・ふ（る）",
+   "radical": "⻖",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/0964d.php"
+  },
+  {
+   "char": "陛",
+   "grade": 6,
+   "strokes": "10",
+   "on": "へい",
+   "kun": "なし",
+   "radical": "⻖",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/0965b.php"
+  },
+  {
+   "char": "除",
+   "grade": 6,
+   "strokes": "10",
+   "on": "じょ・じ",
+   "kun": "のぞ（く）",
+   "radical": "⻖",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/09664.php"
+  },
+  {
+   "char": "骨",
+   "grade": 6,
+   "strokes": "10",
+   "on": "こつ",
+   "kun": "ほね",
+   "radical": "骨",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/09aa8.php"
+  },
+  {
+   "char": "域",
+   "grade": 6,
+   "strokes": "11",
+   "on": "いき",
+   "kun": "なし",
+   "radical": "土",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/057df.php"
+  },
+  {
+   "char": "密",
+   "grade": 6,
+   "strokes": "11",
+   "on": "みつ",
+   "kun": "なし",
+   "radical": "宀",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05bc6.php"
+  },
+  {
+   "char": "捨",
+   "grade": 6,
+   "strokes": "11",
+   "on": "しゃ",
+   "kun": "す（てる）",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/06368.php"
+  },
+  {
+   "char": "探",
+   "grade": 6,
+   "strokes": "11",
+   "on": "たん",
+   "kun": "さぐ（る）・さが（す）",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/063a2.php"
+  },
+  {
+   "char": "推",
+   "grade": 6,
+   "strokes": "11",
+   "on": "すい",
+   "kun": "お（す）",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/063a8.php"
+  },
+  {
+   "char": "欲",
+   "grade": 6,
+   "strokes": "11",
+   "on": "よく",
+   "kun": "ほっ（する）・ほ（しい）",
+   "radical": "欠",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/06b32.php"
+  },
+  {
+   "char": "済",
+   "grade": 6,
+   "strokes": "11",
+   "on": "さい",
+   "kun": "す（む）・す（ます）",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/06e08.php"
+  },
+  {
+   "char": "異",
+   "grade": 6,
+   "strokes": "11",
+   "on": "い",
+   "kun": "こと",
+   "radical": "田",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/07570.php"
+  },
+  {
+   "char": "盛",
+   "grade": 6,
+   "strokes": "11",
+   "on": "せい・じょう",
+   "kun": "も（る）・さか（る）・さか（ん）",
+   "radical": "皿",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/076db.php"
+  },
+  {
+   "char": "窓",
+   "grade": 6,
+   "strokes": "11",
+   "on": "そう",
+   "kun": "まど",
+   "radical": "穴",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/07a93.php"
+  },
+  {
+   "char": "翌",
+   "grade": 6,
+   "strokes": "11",
+   "on": "よく",
+   "kun": "なし",
+   "radical": "羽",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/07fcc.php"
+  },
+  {
+   "char": "脳",
+   "grade": 6,
+   "strokes": "11",
+   "on": "のう",
+   "kun": "なし",
+   "radical": "月",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08133.php"
+  },
+  {
+   "char": "著",
+   "grade": 6,
+   "strokes": "11",
+   "on": "ちょ",
+   "kun": "あらわ（す）・いちじる（しい）",
+   "radical": "艹",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08457.php"
+  },
+  {
+   "char": "視",
+   "grade": 6,
+   "strokes": "11",
+   "on": "し",
+   "kun": "なし",
+   "radical": "見",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08996.php"
+  },
+  {
+   "char": "訪",
+   "grade": 6,
+   "strokes": "11",
+   "on": "ほう",
+   "kun": "おとず（れる）・たず（ねる）",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08a2a.php"
+  },
+  {
+   "char": "訳",
+   "grade": 6,
+   "strokes": "11",
+   "on": "やく",
+   "kun": "わけ",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08a33.php"
+  },
+  {
+   "char": "郵",
+   "grade": 6,
+   "strokes": "11",
+   "on": "ゆう",
+   "kun": "なし",
+   "radical": "⻏",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/090f5.php"
+  },
+  {
+   "char": "郷",
+   "grade": 6,
+   "strokes": "11",
+   "on": "きょう・ごう",
+   "kun": "なし",
+   "radical": "⻏",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/090f7.php"
+  },
+  {
+   "char": "閉",
+   "grade": 6,
+   "strokes": "11",
+   "on": "へい",
+   "kun": "と（じる）・と（ざす）・し（める）・し（まる）",
+   "radical": "門",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/09589.php"
+  },
+  {
+   "char": "頂",
+   "grade": 6,
+   "strokes": "11",
+   "on": "ちょう",
+   "kun": "いただ（く）・いただき",
+   "radical": "頁",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/09802.php"
+  },
+  {
+   "char": "割",
+   "grade": 6,
+   "strokes": "12",
+   "on": "かつ",
+   "kun": "わ（る）・わり・わ（れる）・さ（く）",
+   "radical": "刂",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05272.php"
+  },
+  {
+   "char": "創",
+   "grade": 6,
+   "strokes": "12",
+   "on": "そう",
+   "kun": "つく（る）",
+   "radical": "刂",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05275.php"
+  },
+  {
+   "char": "勤",
+   "grade": 6,
+   "strokes": "12",
+   "on": "きん・ごん",
+   "kun": "つと（める）・つと（まる）",
+   "radical": "力",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/052e4.php"
+  },
+  {
+   "char": "善",
+   "grade": 6,
+   "strokes": "12",
+   "on": "ぜん",
+   "kun": "よ（い）",
+   "radical": "口",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05584.php"
+  },
+  {
+   "char": "尊",
+   "grade": 6,
+   "strokes": "12",
+   "on": "そん",
+   "kun": "たっと（い）・とうと（い）・たっと（ぶ）・とうと（ぶ）",
+   "radical": "寸",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05c0a.php"
+  },
+  {
+   "char": "就",
+   "grade": 6,
+   "strokes": "12",
+   "on": "しゅう・じゅ",
+   "kun": "つ（く）・つ（ける）",
+   "radical": "尢",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05c31.php"
+  },
+  {
+   "char": "揮",
+   "grade": 6,
+   "strokes": "12",
+   "on": "き",
+   "kun": "なし",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/063ee.php"
+  },
+  {
+   "char": "敬",
+   "grade": 6,
+   "strokes": "12",
+   "on": "けい",
+   "kun": "うやま（う）",
+   "radical": "攵",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/0656c.php"
+  },
+  {
+   "char": "晩",
+   "grade": 6,
+   "strokes": "12",
+   "on": "ばん",
+   "kun": "なし",
+   "radical": "日",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/06669.php"
+  },
+  {
+   "char": "棒",
+   "grade": 6,
+   "strokes": "12",
+   "on": "ぼう",
+   "kun": "なし",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/068d2.php"
+  },
+  {
+   "char": "痛",
+   "grade": 6,
+   "strokes": "12",
+   "on": "つう",
+   "kun": "いた（い）・いた（む）・いた（める）",
+   "radical": "疒",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/075db.php"
+  },
+  {
+   "char": "筋",
+   "grade": 6,
+   "strokes": "12",
+   "on": "きん",
+   "kun": "すじ",
+   "radical": "竹",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/07b4b.php"
+  },
+  {
+   "char": "策",
+   "grade": 6,
+   "strokes": "12",
+   "on": "さく",
+   "kun": "なし",
+   "radical": "竹",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/07b56.php"
+  },
+  {
+   "char": "衆",
+   "grade": 6,
+   "strokes": "12",
+   "on": "しゅう・しゅ",
+   "kun": "なし",
+   "radical": "血",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08846.php"
+  },
+  {
+   "char": "裁",
+   "grade": 6,
+   "strokes": "12",
+   "on": "さい",
+   "kun": "た（つ）・さば（く）",
+   "radical": "衣",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/088c1.php"
+  },
+  {
+   "char": "装",
+   "grade": 6,
+   "strokes": "12",
+   "on": "そう・しょう",
+   "kun": "よそお（う）",
+   "radical": "衣",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/088c5.php"
+  },
+  {
+   "char": "補",
+   "grade": 6,
+   "strokes": "12",
+   "on": "ほ",
+   "kun": "おぎな（う）",
+   "radical": "衤",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/088dc.php"
+  },
+  {
+   "char": "詞",
+   "grade": 6,
+   "strokes": "12",
+   "on": "し",
+   "kun": "なし",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08a5e.php"
+  },
+  {
+   "char": "貴",
+   "grade": 6,
+   "strokes": "12",
+   "on": "き",
+   "kun": "たっと（い）・とうと（い）・たっと（ぶ）・とうと（ぶ）",
+   "radical": "貝",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08cb4.php"
+  },
+  {
+   "char": "傷",
+   "grade": 6,
+   "strokes": "13",
+   "on": "しょう",
+   "kun": "きず・いた（む）・いた（める）",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/050b7.php"
+  },
+  {
+   "char": "幕",
+   "grade": 6,
+   "strokes": "13",
+   "on": "まく・ばく",
+   "kun": "なし",
+   "radical": "巾",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05e55.php"
+  },
+  {
+   "char": "暖",
+   "grade": 6,
+   "strokes": "13",
+   "on": "だん",
+   "kun": "あたた（か）・あたた（かい）・あたた（まる）・あたた（める）",
+   "radical": "日",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/06696.php"
+  },
+  {
+   "char": "源",
+   "grade": 6,
+   "strokes": "13",
+   "on": "げん",
+   "kun": "みなもと",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/06e90.php"
+  },
+  {
+   "char": "盟",
+   "grade": 6,
+   "strokes": "13",
+   "on": "めい",
+   "kun": "なし",
+   "radical": "皿",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/076df.php"
+  },
+  {
+   "char": "絹",
+   "grade": 6,
+   "strokes": "13",
+   "on": "けん",
+   "kun": "きぬ",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/07d79.php"
+  },
+  {
+   "char": "署",
+   "grade": 6,
+   "strokes": "13",
+   "on": "しょ",
+   "kun": "なし",
+   "radical": "罒",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/07f72.php"
+  },
+  {
+   "char": "聖",
+   "grade": 6,
+   "strokes": "13",
+   "on": "せい",
+   "kun": "なし",
+   "radical": "耳",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08056.php"
+  },
+  {
+   "char": "腸",
+   "grade": 6,
+   "strokes": "13",
+   "on": "ちょう",
+   "kun": "なし",
+   "radical": "月",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08178.php"
+  },
+  {
+   "char": "腹",
+   "grade": 6,
+   "strokes": "13",
+   "on": "ふく",
+   "kun": "はら",
+   "radical": "月",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08179.php"
+  },
+  {
+   "char": "蒸",
+   "grade": 6,
+   "strokes": "13",
+   "on": "じょう",
+   "kun": "む（す）・む（れる）・む（らす）",
+   "radical": "艹",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/084b8.php"
+  },
+  {
+   "char": "裏",
+   "grade": 6,
+   "strokes": "13",
+   "on": "り",
+   "kun": "うら",
+   "radical": "衣",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/088cf.php"
+  },
+  {
+   "char": "誠",
+   "grade": 6,
+   "strokes": "13",
+   "on": "せい",
+   "kun": "まこと",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08aa0.php"
+  },
+  {
+   "char": "賃",
+   "grade": 6,
+   "strokes": "13",
+   "on": "ちん",
+   "kun": "なし",
+   "radical": "貝",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08cc3.php"
+  },
+  {
+   "char": "預",
+   "grade": 6,
+   "strokes": "13",
+   "on": "よ",
+   "kun": "あず（ける）・あず（かる）",
+   "radical": "頁",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/09810.php"
+  },
+  {
+   "char": "層",
+   "grade": 6,
+   "strokes": "14",
+   "on": "そう",
+   "kun": "なし",
+   "radical": "尸",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05c64.php"
+  },
+  {
+   "char": "暮",
+   "grade": 6,
+   "strokes": "14",
+   "on": "ぼ",
+   "kun": "く（れる）・く（らす）",
+   "radical": "日",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/066ae.php"
+  },
+  {
+   "char": "模",
+   "grade": 6,
+   "strokes": "14",
+   "on": "も・ぼ",
+   "kun": "なし",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/06a21.php"
+  },
+  {
+   "char": "疑",
+   "grade": 6,
+   "strokes": "14",
+   "on": "ぎ",
+   "kun": "うたが（う）",
+   "radical": "疋",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/07591.php"
+  },
+  {
+   "char": "磁",
+   "grade": 6,
+   "strokes": "14",
+   "on": "じ",
+   "kun": "なし",
+   "radical": "石",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/078c1.php"
+  },
+  {
+   "char": "穀",
+   "grade": 6,
+   "strokes": "14",
+   "on": "こく",
+   "kun": "なし",
+   "radical": "禾",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/07a40.php"
+  },
+  {
+   "char": "誌",
+   "grade": 6,
+   "strokes": "14",
+   "on": "し",
+   "kun": "なし",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08a8c.php"
+  },
+  {
+   "char": "認",
+   "grade": 6,
+   "strokes": "14",
+   "on": "にん",
+   "kun": "みと（める）",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08a8d.php"
+  },
+  {
+   "char": "誤",
+   "grade": 6,
+   "strokes": "14",
+   "on": "ご",
+   "kun": "あやま（る）",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08aa4.php"
+  },
+  {
+   "char": "銭",
+   "grade": 6,
+   "strokes": "14",
+   "on": "せん",
+   "kun": "ぜに",
+   "radical": "金",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/092ad.php"
+  },
+  {
+   "char": "閣",
+   "grade": 6,
+   "strokes": "14",
+   "on": "かく",
+   "kun": "なし",
+   "radical": "門",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/095a3.php"
+  },
+  {
+   "char": "障",
+   "grade": 6,
+   "strokes": "14",
+   "on": "しょう",
+   "kun": "さわ（る）",
+   "radical": "⻖",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/0969c.php"
+  },
+  {
+   "char": "劇",
+   "grade": 6,
+   "strokes": "15",
+   "on": "げき",
+   "kun": "なし",
+   "radical": "刂",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/05287.php"
+  },
+  {
+   "char": "敵",
+   "grade": 6,
+   "strokes": "15",
+   "on": "てき",
+   "kun": "かたき",
+   "radical": "攵",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/06575.php"
+  },
+  {
+   "char": "権",
+   "grade": 6,
+   "strokes": "15",
+   "on": "けん・ごん",
+   "kun": "なし",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/06a29.php"
+  },
+  {
+   "char": "潮",
+   "grade": 6,
+   "strokes": "15",
+   "on": "ちょう",
+   "kun": "しお",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/06f6e.php"
+  },
+  {
+   "char": "熟",
+   "grade": 6,
+   "strokes": "15",
+   "on": "じゅく",
+   "kun": "う（れる）",
+   "radical": "灬",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/0719f.php"
+  },
+  {
+   "char": "蔵",
+   "grade": 6,
+   "strokes": "15",
+   "on": "ぞう",
+   "kun": "くら",
+   "radical": "艹",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08535.php"
+  },
+  {
+   "char": "誕",
+   "grade": 6,
+   "strokes": "15",
+   "on": "たん",
+   "kun": "なし",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08a95.php"
+  },
+  {
+   "char": "論",
+   "grade": 6,
+   "strokes": "15",
+   "on": "ろん",
+   "kun": "なし",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08ad6.php"
+  },
+  {
+   "char": "諸",
+   "grade": 6,
+   "strokes": "15",
+   "on": "しょ",
+   "kun": "なし",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08af8.php"
+  },
+  {
+   "char": "遺",
+   "grade": 6,
+   "strokes": "15",
+   "on": "い・ゆい",
+   "kun": "なし",
+   "radical": "⻌",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/0907a.php"
+  },
+  {
+   "char": "奮",
+   "grade": 6,
+   "strokes": "16",
+   "on": "ふん",
+   "kun": "ふる（う）",
+   "radical": "大",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/0596e.php"
+  },
+  {
+   "char": "憲",
+   "grade": 6,
+   "strokes": "16",
+   "on": "けん",
+   "kun": "なし",
+   "radical": "心",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/061b2.php"
+  },
+  {
+   "char": "操",
+   "grade": 6,
+   "strokes": "16",
+   "on": "そう",
+   "kun": "みさお・あやつ（る）",
+   "radical": "扌",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/064cd.php"
+  },
+  {
+   "char": "樹",
+   "grade": 6,
+   "strokes": "16",
+   "on": "じゅ",
+   "kun": "なし",
+   "radical": "木",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/06a39.php"
+  },
+  {
+   "char": "激",
+   "grade": 6,
+   "strokes": "16",
+   "on": "げき",
+   "kun": "はげ（しい）",
+   "radical": "氵",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/06fc0.php"
+  },
+  {
+   "char": "糖",
+   "grade": 6,
+   "strokes": "16",
+   "on": "とう",
+   "kun": "なし",
+   "radical": "米",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/07cd6.php"
+  },
+  {
+   "char": "縦",
+   "grade": 6,
+   "strokes": "16",
+   "on": "じゅう",
+   "kun": "たて",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/07e26.php"
+  },
+  {
+   "char": "鋼",
+   "grade": 6,
+   "strokes": "16",
+   "on": "こう",
+   "kun": "はがね",
+   "radical": "金",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/092fc.php"
+  },
+  {
+   "char": "優",
+   "grade": 6,
+   "strokes": "17",
+   "on": "ゆう",
+   "kun": "やさ（しい）・すぐ（れる）",
+   "radical": "亻",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/0512a.php"
+  },
+  {
+   "char": "厳",
+   "grade": 6,
+   "strokes": "17",
+   "on": "げん・ごん",
+   "kun": "おごそ（か）・きび（しい）",
+   "radical": "厂",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/053b3.php"
+  },
+  {
+   "char": "縮",
+   "grade": 6,
+   "strokes": "17",
+   "on": "しゅく",
+   "kun": "ちぢ（む）・ちぢ（まる）・ちぢ（める）・ちぢ（れる）・ちぢ（らす）",
+   "radical": "糸",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/07e2e.php"
+  },
+  {
+   "char": "覧",
+   "grade": 6,
+   "strokes": "17",
+   "on": "らん",
+   "kun": "なし",
+   "radical": "見",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/089a7.php"
+  },
+  {
+   "char": "簡",
+   "grade": 6,
+   "strokes": "18",
+   "on": "かん",
+   "kun": "なし",
+   "radical": "竹",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/07c21.php"
+  },
+  {
+   "char": "臨",
+   "grade": 6,
+   "strokes": "18",
+   "on": "りん",
+   "kun": "のぞ（む）",
+   "radical": "臣",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/081e8.php"
+  },
+  {
+   "char": "難",
+   "grade": 6,
+   "strokes": "18",
+   "on": "なん",
+   "kun": "かた（い）・むずか（しい）",
+   "radical": "隹",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/096e3.php"
+  },
+  {
+   "char": "臓",
+   "grade": 6,
+   "strokes": "19",
+   "on": "ぞう",
+   "kun": "なし",
+   "radical": "月",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/081d3.php"
+  },
+  {
+   "char": "警",
+   "grade": 6,
+   "strokes": "19",
+   "on": "けい",
+   "kun": "なし",
+   "radical": "言",
+   "url": "https://eleschool-compass.com/contents/kanji/g6/08b66.php"
+  }
+ ]
+}
