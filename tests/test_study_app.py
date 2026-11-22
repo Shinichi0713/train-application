@@ -121,6 +121,103 @@ class StoreTests(unittest.TestCase):
         self.assertEqual(progress["summary"]["total"], 0)
 
 
+    def test_analysis_and_mission_claim(self):
+        account = self.store.create_account("分析", "1234")
+        aid = account["id"]
+        # 5問回答してミッション達成
+        for i in range(5):
+            self.store.record("算数", 3, "calc_add", f"1+{i}", i % 2 == 0, "2", "2", aid)
+        analysis = self.store.analysis(aid)
+        self.assertEqual(analysis["today"]["answered"], 5)
+        self.assertTrue(any(m["key"] == "daily_answer_5" and m["done"] for m in analysis["missions"]))
+        # 受け取り
+        claimed = self.store.claim_mission(aid, "daily_answer_5")
+        mission = next(m for m in claimed["missions"] if m["key"] == "daily_answer_5")
+        self.assertTrue(mission["claimed"])
+        self.assertGreater(claimed["account"]["total_points"], 0)
+        # 二重受け取りは不可
+        with self.assertRaises(ValueError):
+            self.store.claim_mission(aid, "daily_answer_5")
+
+
+class WorkerTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.store = ProgressStore(os.path.join(self.tmp.name, "worker.sqlite3"))
+        self.account = self.store.create_account("はたらく", "1234")
+        self.store.add_points(self.account["id"], "テスト", 1000)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def _db_path(self):
+        return self.store.path
+
+    def _set_worker_ready(self, worker_key, seconds_ago=999):
+        import sqlite3
+        from datetime import datetime, timedelta
+        moment = (datetime.now() - timedelta(seconds=seconds_ago)).isoformat(timespec="seconds")
+        with sqlite3.connect(self._db_path()) as conn:
+            conn.execute(
+                "UPDATE farm_workers SET ready_at = ? WHERE account_id = ? AND worker_key = ?",
+                (moment, self.account["id"], worker_key),
+            )
+
+    def test_encounter_hire_and_collect(self):
+        aid = self.account["id"]
+        # streak 5 の正解でタロウに出会う
+        for i in range(5):
+            self.store.record("算数", 1, "calc_add", f"1+{i}", True, "2", "2", aid)
+        encounters = self.store.check_worker_encounters(aid, correct=True, streak=5)
+        keys = [e["worker_key"] for e in encounters]
+        self.assertIn("taro", keys)
+
+        farm = self.store.get_farm(aid)
+        taro = next(w for w in farm["workers"] if w["key"] == "taro")
+        self.assertFalse(taro["hired"])
+
+        # 雇用にはポイント+食料が必要。食料を足す
+        import sqlite3
+        with sqlite3.connect(self._db_path()) as conn:
+            conn.execute(
+                "INSERT INTO farm_inventory (account_id, resource, amount) VALUES (?, 'food', 20) "
+                "ON CONFLICT(account_id, resource) DO UPDATE SET amount = amount + 20",
+                (aid,),
+            )
+
+        before_wallet = self.store.get_account(aid)["wallet"]
+        farm = self.store.hire_worker(aid, "taro")
+        after = self.store.get_account(aid)
+        self.assertEqual(before_wallet - after["wallet"], 120)
+        taro = next(w for w in farm["workers"] if w["key"] == "taro")
+        self.assertTrue(taro["hired"])
+        self.assertEqual(farm["inventory"]["food"], 10)  # 20 - 10
+
+        # まだ働き中は受け取れない
+        with self.assertRaises(ValueError):
+            self.store.collect_worker(aid, "taro")
+
+        self._set_worker_ready("taro")
+        farm = self.store.collect_worker(aid, "taro")
+        self.assertEqual(farm["inventory"]["food"], 22)  # 10 + 12
+
+    def test_encounter_not_duplicated(self):
+        aid = self.account["id"]
+        for i in range(5):
+            self.store.record("算数", 1, "calc_add", f"1+{i}", True, "2", "2", aid)
+        first = self.store.check_worker_encounters(aid, correct=True, streak=5)
+        second = self.store.check_worker_encounters(aid, correct=True, streak=5)
+        first_keys = [e["worker_key"] for e in first]
+        second_keys = [e["worker_key"] for e in second]
+        self.assertIn("taro", first_keys)
+        self.assertNotIn("taro", second_keys)
+
+    def test_hire_requires_meeting(self):
+        aid = self.account["id"]
+        with self.assertRaises(ValueError):
+            self.store.hire_worker(aid, "taro")
+
+
 class FarmTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
@@ -182,10 +279,21 @@ class FarmTests(unittest.TestCase):
         data = self.store.buy_animal(account_id, "chicken")
         self.assertEqual(data["account"]["wallet"], 920)
         self.assertEqual(len(data["animals"]), 1)
+        animal = data["animals"][0]
+        self.assertTrue(animal["nickname"])
+        self.assertIn(animal["personality"], {"genki", "otonashii", "kuishinbo", "nonbiri", "nakayoshi"})
+        self.assertEqual(animal["bond"], 0)
+
         self._set_animal_ready()
         data = self.store.collect_animal(account_id, data["animals"][0]["id"])
         self.assertEqual(data["account"]["wallet"], 920)
-        self.assertEqual(data["inventory"]["food"], 10)
+        self.assertIn("event", data)
+        bonus = data["event"]["bonus_yield"]
+        self.assertGreaterEqual(data["inventory"]["food"], 10)
+        self.assertEqual(data["inventory"]["food"], 10 + bonus)
+        collected = data["animals"][0]
+        self.assertGreaterEqual(collected["bond"], 1)
+        self.assertTrue(collected["last_event"])
 
     def test_gather_materials(self):
         account_id = self.account["id"]
@@ -309,6 +417,50 @@ class ApiTests(unittest.TestCase):
         poor = self._new_account("農場びんぼう")
         with self.assertRaises(HTTPException):
             self.main.farm_plant(FarmPlantRequest(account_id=poor["id"], plot=0, crop="cabbage"))
+
+    def test_worker_encounter_hire_collect_api(self):
+        from study_app.models import AnswerRequest, FarmCollectWorkerRequest, FarmHireWorkerRequest, QuizRequest
+        account = self._new_account("働き手")
+        aid = account["id"]
+        self.main.store.add_points(aid, "テスト", 1000)
+
+        # 出会い: streak 5
+        created = self.main.create_quiz(QuizRequest(
+            grade=1, subject="math", topics=["calc_add"], count=5, account_id=aid
+        ))
+        encountered = []
+        for q in created["questions"]:
+            # 正解を送る
+            from study_app.generator.base import answers_match
+            # find correct answer by trying to answer via store? easier: get quiz internal
+            quiz = self.main._get_quiz(created["quiz_id"])
+            correct_ans = quiz["questions"][q["id"]].answer
+            res = self.main.answer(created["quiz_id"], AnswerRequest(question_id=q["id"], answer=correct_ans))
+            encountered.extend(res.get("encounters", []))
+        self.assertTrue(any(e["worker_key"] == "taro" for e in encountered))
+
+        # 食料を付与して雇用
+        import sqlite3
+        with sqlite3.connect(self.main.store.path) as conn:
+            conn.execute(
+                "INSERT INTO farm_inventory (account_id, resource, amount) VALUES (?, 'food', 20) "
+                "ON CONFLICT(account_id, resource) DO UPDATE SET amount = amount + 20",
+                (aid,),
+            )
+        data = self.main.farm_hire_worker(FarmHireWorkerRequest(account_id=aid, worker_key="taro"))
+        taro = next(w for w in data["workers"] if w["key"] == "taro")
+        self.assertTrue(taro["hired"])
+
+        # 時間を進めて収穫
+        from datetime import datetime, timedelta
+        moment = (datetime.now() - timedelta(seconds=999)).isoformat(timespec="seconds")
+        with sqlite3.connect(self.main.store.path) as conn:
+            conn.execute(
+                "UPDATE farm_workers SET ready_at = ? WHERE account_id = ? AND worker_key = ?",
+                (moment, aid, "taro"),
+            )
+        data = self.main.farm_collect_worker(FarmCollectWorkerRequest(account_id=aid, worker_key="taro"))
+        self.assertGreaterEqual(data["inventory"]["food"], 22)
 
 
 if __name__ == "__main__":

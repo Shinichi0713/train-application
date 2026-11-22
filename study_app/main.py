@@ -28,8 +28,9 @@ from .generator.base import answers_match
 from .generator.registry import config, generate_quiz
 from .models import (
     AccountCreate, AnswerRequest, DeleteAccountRequest, FarmAccountRequest, FarmAnimalBuyRequest,
-    FarmBuildingRequest, FarmCollectRequest, FarmGatherRequest, FarmHarvestRequest, FarmPlantRequest,
-    LoginRequest, QuizRequest,
+    FarmBuildingRequest, FarmCollectRequest, FarmCollectWorkerRequest, FarmGatherRequest,
+    FarmHarvestRequest, FarmHireWorkerRequest, FarmPlantRequest,
+    LoginRequest, MissionClaimRequest, QuizRequest,
 )
 from .store import ProgressStore
 
@@ -137,14 +138,38 @@ def get_account_progress(account_id: int):
         _handle_account_error(error)
 
 
+@app.get("/api/accounts/{account_id}/analysis")
+def get_account_analysis(account_id: int):
+    try:
+        return store.analysis(account_id)
+    except LookupError as error:
+        _handle_account_error(error)
+
+
+@app.post("/api/missions/claim")
+def claim_mission(request: MissionClaimRequest):
+    try:
+        return store.claim_mission(request.account_id, request.mission_key)
+    except LookupError as error:
+        raise HTTPException(status_code=404, detail=str(error))
+    except ValueError as error:
+        raise HTTPException(status_code=400, detail=str(error))
+
+
 # ---------------- クイズ ----------------
 @app.post("/api/quiz")
 def create_quiz(request: QuizRequest):
     _account_or_404(request.account_id)
+    topics = request.topics
+    if request.adaptive:
+        weak = store.weak_topics(request.account_id, subject=request.subject, grade=request.grade, limit=5)
+        weak_keys = [item["topic"] for item in weak]
+        if weak_keys:
+            topics = weak_keys
     questions = generate_quiz(
         subject=request.subject,
         grade=request.grade,
-        topics=request.topics,
+        topics=topics,
         count=request.count,
         difficulty=request.difficulty,
     )
@@ -156,6 +181,7 @@ def create_quiz(request: QuizRequest):
         "order": [q.id for q in questions],
         "answered": {},
         "rewarded": False,
+        "adaptive": bool(request.adaptive),
     }
     return {
         "quiz_id": _save_quiz(payload),
@@ -163,6 +189,7 @@ def create_quiz(request: QuizRequest):
         "subject": request.subject,
         "total": len(questions),
         "questions": [q.public() for q in questions],
+        "adaptive": bool(request.adaptive),
     }
 
 
@@ -186,6 +213,7 @@ def answer(quiz_id: str, request: AnswerRequest):
             "total": len(quiz["order"]),
             "earned": 0,
             "account": account,
+            "encounters": [],
         }
 
     correct = answers_match(request.answer, question.answer)
@@ -226,6 +254,7 @@ def answer(quiz_id: str, request: AnswerRequest):
         store.add_points(account_id, completion[0], completion[1])
         earned += completion[1]
 
+    encounters = store.check_worker_encounters(account_id, correct, streak)
     return {
         "correct": correct,
         "correct_answer": question.answer,
@@ -234,6 +263,7 @@ def answer(quiz_id: str, request: AnswerRequest):
         "total": len(quiz["order"]),
         "earned": earned,
         "account": store.get_account(account_id),
+        "encounters": encounters,
     }
 
 
@@ -310,6 +340,16 @@ def farm_gather(request: FarmGatherRequest):
 @app.post("/api/farm/expand")
 def farm_expand(request: FarmAccountRequest):
     return _farm_action(store.expand_farm, request.account_id)
+
+
+@app.post("/api/farm/hire-worker")
+def farm_hire_worker(request: FarmHireWorkerRequest):
+    return _farm_action(store.hire_worker, request.account_id, request.worker_key)
+
+
+@app.post("/api/farm/collect-worker")
+def farm_collect_worker(request: FarmCollectWorkerRequest):
+    return _farm_action(store.collect_worker, request.account_id, request.worker_key)
 
 
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")

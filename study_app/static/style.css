@@ -235,9 +235,38 @@ footer a { color: var(--blue); }
 }
 .farm-card .title { font-weight: 800; font-size: 15px; }
 .farm-card .desc { font-size: 12px; color: #8a8a8a; }
+.farm-card .meta { font-size: 12px; color: #5f7a68; margin-top: 2px; }
+.farm-card .event { font-size: 12px; color: #7a5a00; background: #fff8d8; border-radius: 8px; padding: 6px 8px; margin-top: 6px; }
 .farm-card button { margin-top: 8px; width: 100%; }
+.farm-message {
+  background: #fff4cc; border: 2px solid #ffd76a; color: #6b4f00;
+  border-radius: 12px; padding: 10px 14px; margin-bottom: 14px; font-weight: 700;
+}
 
 .hidden { display: none !important; }
+
+.toggle-row { display: flex; gap: 10px; align-items: center; font-weight: 700; }
+.toggle-row input { width: 20px; height: 20px; }
+
+.mission-list { display: grid; gap: 10px; margin-bottom: 18px; }
+.mission-card { border: 2px solid var(--line); border-radius: 14px; padding: 12px; background: #fff; }
+.mission-card.done { border-color: #9fd0ad; background: #f3fbf5; }
+.mission-card.claimed { opacity: .75; background: #f8faf8; }
+.mission-head { display: flex; justify-content: space-between; gap: 10px; align-items: center; }
+.mission-title { font-weight: 800; }
+.mission-status { font-size: 13px; font-weight: 800; color: var(--blue); }
+.mission-desc, .mission-reward, .weak-meta { font-size: 13px; color: #687a8a; }
+.mission-card .small-btn { margin-top: 8px; }
+
+.encounter-note { margin-top: 8px; padding: 8px 10px; border-radius: 10px; background: #fff4cc; color: #7a5600; font-size: 13px; font-weight: 700; }
+
+.room-actions { margin: 12px 0 16px; }
+.room-actions .big-btn { width: 100%; }
+
+.weak-list { display: grid; gap: 8px; }
+.weak-item { border-bottom: 1px dashed var(--line); padding: 8px 0; }
+.weak-label { font-weight: 700; }
+.weak-meta { font-size: 13px; }
 
 @media (max-width: 600px) {
   .card { padding: 18px; }

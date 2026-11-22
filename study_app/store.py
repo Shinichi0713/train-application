@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import hashlib
 import hmac
+import random
 import secrets
 import sqlite3
 import threading
@@ -100,7 +101,11 @@ class ProgressStore:
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     account_id INTEGER NOT NULL,
                     animal TEXT NOT NULL,
-                    ready_at TEXT NOT NULL
+                    ready_at TEXT NOT NULL,
+                    nickname TEXT,
+                    personality TEXT,
+                    bond INTEGER NOT NULL DEFAULT 0,
+                    last_event TEXT
                 )
             """)
             conn.execute("""
@@ -127,6 +132,26 @@ class ProgressStore:
                     PRIMARY KEY (account_id, spot)
                 )
             """)
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS mission_claims (
+                    account_id INTEGER NOT NULL,
+                    mission_date TEXT NOT NULL,
+                    mission_key TEXT NOT NULL,
+                    claimed_at TEXT NOT NULL DEFAULT (datetime('now','localtime')),
+                    PRIMARY KEY (account_id, mission_date, mission_key)
+                )
+            """)
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS farm_workers (
+                    account_id INTEGER NOT NULL,
+                    worker_key TEXT NOT NULL,
+                    hired INTEGER NOT NULL DEFAULT 0,
+                    met_at TEXT NOT NULL DEFAULT (datetime('now','localtime')),
+                    hired_at TEXT,
+                    ready_at TEXT,
+                    PRIMARY KEY (account_id, worker_key)
+                )
+            """)
 
             # 既存DBからの移行
             columns = [row[1] for row in conn.execute("PRAGMA table_info(answers)")]
@@ -136,6 +161,14 @@ class ProgressStore:
             if "wallet" not in account_columns:
                 conn.execute("ALTER TABLE accounts ADD COLUMN wallet INTEGER NOT NULL DEFAULT 0")
                 conn.execute("UPDATE accounts SET wallet = total_points")
+
+            animal_columns = [row[1] for row in conn.execute("PRAGMA table_info(farm_animals)")]
+            if "nickname" not in animal_columns:
+                conn.execute("ALTER TABLE farm_animals ADD COLUMN nickname TEXT")
+                conn.execute("ALTER TABLE farm_animals ADD COLUMN personality TEXT")
+                conn.execute("ALTER TABLE farm_animals ADD COLUMN bond INTEGER NOT NULL DEFAULT 0")
+                conn.execute("ALTER TABLE farm_animals ADD COLUMN last_event TEXT")
+
             count = conn.execute("SELECT COUNT(*) FROM accounts").fetchone()[0]
             if count == 0:
                 cursor = conn.execute(
@@ -239,6 +272,8 @@ class ProgressStore:
             conn.execute("DELETE FROM farm_buildings WHERE account_id = ?", (account_id,))
             conn.execute("DELETE FROM farm_inventory WHERE account_id = ?", (account_id,))
             conn.execute("DELETE FROM farm_gathers WHERE account_id = ?", (account_id,))
+            conn.execute("DELETE FROM mission_claims WHERE account_id = ?", (account_id,))
+            conn.execute("DELETE FROM farm_workers WHERE account_id = ?", (account_id,))
             conn.execute("DELETE FROM farm_state WHERE account_id = ?", (account_id,))
             conn.execute("DELETE FROM accounts WHERE id = ?", (account_id,))
 
@@ -342,6 +377,180 @@ class ProgressStore:
             "recent_events": events,
         }
 
+    # ---------------- 分析・ミッション ----------------
+    def weak_topics(self, account_id: int, subject: Optional[str] = None, grade: Optional[int] = None, limit: int = 5) -> List[Dict[str, Any]]:
+        conditions = ["account_id = ?"]
+        params: List[Any] = [account_id]
+        if subject:
+            conditions.append("subject = ?")
+            params.append(subject)
+        if grade is not None:
+            conditions.append("grade = ?")
+            params.append(grade)
+        params.append(limit)
+        with self.lock, self._connect() as conn:
+            rows = conn.execute(
+                f"SELECT topic, subject, grade, COUNT(*) AS total, SUM(correct) AS correct "
+                f"FROM answers WHERE {' AND '.join(conditions)} "
+                "GROUP BY topic, subject, grade "
+                "HAVING COUNT(*) >= 1 "
+                "ORDER BY (1.0 * SUM(correct) / COUNT(*)) ASC, COUNT(*) DESC LIMIT ?",
+                params,
+            ).fetchall()
+        items = []
+        for topic, subj, grd, total, correct in rows:
+            accuracy = round(correct / total * 100, 1) if total else 0.0
+            items.append({
+                "topic": topic, "subject": subj, "grade": grd,
+                "total": total, "correct": correct, "accuracy": accuracy,
+            })
+        return items
+
+    def analysis(self, account_id: int) -> Dict[str, Any]:
+        account = self.get_account(account_id)
+        if not account:
+            raise LookupError("アカウントが見つかりません")
+        summary = self.summary(account_id)
+        weak = self.weak_topics(account_id, limit=5)
+        today = datetime.now().strftime("%Y-%m-%d")
+        with self.lock, self._connect() as conn:
+            today_total, today_correct = conn.execute(
+                "SELECT COUNT(*), COALESCE(SUM(correct),0) FROM answers WHERE account_id = ? AND date(created_at)=date(?)",
+                (account_id, today),
+            ).fetchone()
+            by_topic = [
+                {"topic": row[0], "subject": row[1], "total": row[2], "correct": row[3],
+                 "accuracy": round(row[3] / row[2] * 100, 1) if row[2] else 0.0}
+                for row in conn.execute(
+                    "SELECT topic, subject, COUNT(*), SUM(correct) FROM answers WHERE account_id = ? "
+                    "GROUP BY topic, subject ORDER BY (1.0*SUM(correct)/COUNT(*)) ASC, COUNT(*) DESC LIMIT 8",
+                    (account_id,),
+                ).fetchall()
+            ]
+        missions = self._missions_status(account_id, today, today_total, today_correct)
+        return {
+            "account": account,
+            "summary": summary,
+            "weak_topics": weak,
+            "topic_accuracy": by_topic,
+            "today": {"answered": today_total, "correct": today_correct},
+            "missions": missions,
+            "recommended_mode": "adaptive" if weak else "normal",
+        }
+
+    def _mission_templates(self) -> List[Dict[str, Any]]:
+        return [
+            {"key": "daily_answer_5", "title": "5問チャレンジ", "description": "きょう 5問 とこう",
+             "type": "answered", "goal": 5, "reward_points": 20, "reward_resources": {"food": 3}},
+            {"key": "daily_correct_3", "title": "3問せいかい", "description": "きょう 3問 せいかいしよう",
+             "type": "correct", "goal": 3, "reward_points": 15, "reward_resources": {"wood": 2}},
+            {"key": "daily_answer_10", "title": "10問マスター", "description": "きょう 10問 といて 牧場を応援",
+             "type": "answered", "goal": 10, "reward_points": 30, "reward_resources": {"stone": 2, "food": 2}},
+        ]
+
+    def _missions_status(self, account_id: int, today: str, today_total: int, today_correct: int) -> List[Dict[str, Any]]:
+        with self.lock, self._connect() as conn:
+            claimed = {
+                row[0]
+                for row in conn.execute(
+                    "SELECT mission_key FROM mission_claims WHERE account_id = ? AND mission_date = ?",
+                    (account_id, today),
+                ).fetchall()
+            }
+        missions = []
+        for tpl in self._mission_templates():
+            progress = today_correct if tpl["type"] == "correct" else today_total
+            done = progress >= tpl["goal"]
+            missions.append({
+                **tpl,
+                "progress": min(progress, tpl["goal"]),
+                "done": done,
+                "claimed": tpl["key"] in claimed,
+            })
+        return missions
+
+    def claim_mission(self, account_id: int, mission_key: str) -> Dict[str, Any]:
+        account = self.get_account(account_id)
+        if not account:
+            raise LookupError("アカウントが見つかりません")
+        today = datetime.now().strftime("%Y-%m-%d")
+        with self.lock, self._connect() as conn:
+            today_total, today_correct = conn.execute(
+                "SELECT COUNT(*), COALESCE(SUM(correct),0) FROM answers WHERE account_id = ? AND date(created_at)=date(?)",
+                (account_id, today),
+            ).fetchone()
+        missions = self._missions_status(account_id, today, today_total, today_correct)
+        mission = next((m for m in missions if m["key"] == mission_key), None)
+        if not mission:
+            raise ValueError("ミッションが見つかりません")
+        if not mission["done"]:
+            raise ValueError("まだ ミッション達成していません")
+        if mission["claimed"]:
+            raise ValueError("このミッションは もう受け取りました")
+
+        with self.lock, self._connect() as conn:
+            conn.execute(
+                "INSERT OR IGNORE INTO mission_claims (account_id, mission_date, mission_key) VALUES (?, ?, ?)",
+                (account_id, today, mission_key),
+            )
+            inserted = conn.execute(
+                "SELECT changes()"
+            ).fetchone()[0]
+            for resource, amount in mission.get("reward_resources", {}).items():
+                self._add_resource(conn, account_id, resource, amount)
+        if not inserted:
+            # already claimed in race; treat as already claimed
+            raise ValueError("このミッションは もう受け取りました")
+        self.add_points(account_id, f"ミッション:{mission['title']}", mission["reward_points"])
+        return self.analysis(account_id)
+
+    def check_worker_encounters(self, account_id: int, correct: bool, streak: int) -> List[Dict[str, Any]]:
+        with self.lock, self._connect() as conn:
+            met_keys = {
+                row[0] for row in conn.execute(
+                    "SELECT worker_key FROM farm_workers WHERE account_id = ?", (account_id,)
+                ).fetchall()
+            }
+            total_answered, total_correct = conn.execute(
+                "SELECT COUNT(*), COALESCE(SUM(correct),0) FROM answers WHERE account_id = ?",
+                (account_id,),
+            ).fetchone()
+
+        newly_met = []
+        rng = random.Random()
+        for key, worker in farm_catalog.WORKER_CANDIDATES.items():
+            if key in met_keys:
+                continue
+            encounter = worker.get("encounter", {})
+            etype = encounter.get("type")
+            matched = False
+            if etype == "correct_streak" and correct and streak >= encounter.get("value", 999):
+                matched = True
+            elif etype == "total_correct" and total_correct >= encounter.get("value", 999999):
+                matched = True
+            elif etype == "total_answered" and total_answered >= encounter.get("value", 999999):
+                matched = True
+            elif etype == "random_correct" and correct and rng.random() < encounter.get("chance", 0):
+                matched = True
+            if not matched:
+                continue
+            with self.lock, self._connect() as conn:
+                conn.execute(
+                    "INSERT OR IGNORE INTO farm_workers (account_id, worker_key, hired, met_at) VALUES (?, ?, 0, datetime('now','localtime'))",
+                    (account_id, key),
+                )
+                inserted = conn.execute("SELECT changes()").fetchone()[0]
+            if inserted:
+                newly_met.append({
+                    "worker_key": key,
+                    "name": worker["name"],
+                    "emoji": worker["emoji"],
+                    "role": worker["role"],
+                    "description": worker["description"],
+                    "message": encounter.get("text", f"{worker['name']} と出会った！"),
+                })
+        return newly_met
+
     # ---------------- 農場ゲーム ----------------
     def _ensure_farm_state(self, conn, account_id: int) -> None:
         conn.execute("INSERT OR IGNORE INTO farm_state (account_id) VALUES (?)", (account_id,))
@@ -389,6 +598,10 @@ class ProgressStore:
                 row["spot"]: row
                 for row in conn.execute("SELECT * FROM farm_gathers WHERE account_id = ?", (account_id,))
             }
+            worker_rows = {
+                row["worker_key"]: row
+                for row in conn.execute("SELECT * FROM farm_workers WHERE account_id = ?", (account_id,))
+            }
             inventory = self._inventory(conn, account_id)
 
         unlocked = state["unlocked_plots"]
@@ -416,11 +629,20 @@ class ProgressStore:
             if not animal:
                 continue
             remaining = farm_catalog.remaining_seconds(row["ready_at"])
+            personality_key = row["personality"] if "personality" in row.keys() and row["personality"] else "genki"
+            personality = farm_catalog.ANIMAL_PERSONALITIES.get(personality_key, farm_catalog.ANIMAL_PERSONALITIES["genki"])
+            nickname = row["nickname"] if "nickname" in row.keys() and row["nickname"] else animal["name"]
+            bond = row["bond"] if "bond" in row.keys() and row["bond"] is not None else 0
+            last_event = row["last_event"] if "last_event" in row.keys() else None
             animals.append({
                 "id": row["id"], "key": row["animal"], "name": animal["name"], "emoji": animal["emoji"],
                 "product": animal["product"], "product_emoji": animal["product_emoji"],
                 "yield": animal["yield"], "resource": animal["resource"],
                 "ready": remaining == 0, "remaining": remaining,
+                "nickname": nickname, "personality": personality_key,
+                "personality_name": personality["name"], "personality_emoji": personality["emoji"],
+                "personality_description": personality["description"],
+                "bond": bond, "last_event": last_event,
             })
 
         buildings = []
@@ -446,6 +668,30 @@ class ProgressStore:
                 "ready": remaining == 0, "remaining": remaining,
             })
 
+        workers = []
+        for key, worker in farm_catalog.WORKER_CANDIDATES.items():
+            row = worker_rows.get(key)
+            if not row:
+                continue
+            hired = bool(row["hired"])
+            ready_at = row["ready_at"] if "ready_at" in row.keys() else None
+            remaining = farm_catalog.remaining_seconds(ready_at) if hired and ready_at else 0
+            workers.append({
+                "key": key,
+                "name": worker["name"],
+                "emoji": worker["emoji"],
+                "role": worker["role"],
+                "description": worker["description"],
+                "hire_cost": worker["hire_cost"],
+                "work_interval": worker["work_interval"],
+                "yield": worker["yield"],
+                "hired": hired,
+                "met_at": row["met_at"],
+                "hired_at": row["hired_at"] if "hired_at" in row.keys() else None,
+                "ready": hired and remaining == 0,
+                "remaining": remaining if hired else 0,
+            })
+
         level = farm_catalog.farm_level(state["exp"])
         expansion_cost = (
             farm_catalog.PLOT_EXPANSION_COST * ((unlocked - 9) // 3 + 1)
@@ -466,6 +712,7 @@ class ProgressStore:
             "animals": animals,
             "buildings": buildings,
             "gathers": gathers,
+            "workers": workers,
             "catalog": farm_catalog.catalog(),
             "expansion_cost": expansion_cost,
         }
@@ -520,9 +767,20 @@ class ProgressStore:
                 raise ValueError("そのどうぶつは いません")
             self._spend(conn, account_id, animal["cost"])
             ready_at = (datetime.now() + timedelta(seconds=animal["interval"])).isoformat(timespec="seconds")
+            rng = random.Random()
+            existing = {
+                row["nickname"]
+                for row in conn.execute(
+                    "SELECT nickname FROM farm_animals WHERE account_id = ? AND nickname IS NOT NULL",
+                    (account_id,),
+                ).fetchall()
+            }
+            nickname = farm_catalog.pick_nickname(rng, existing)
+            personality = farm_catalog.pick_personality(rng)
             conn.execute(
-                "INSERT INTO farm_animals (account_id, animal, ready_at) VALUES (?, ?, ?)",
-                (account_id, animal_key, ready_at),
+                "INSERT INTO farm_animals (account_id, animal, ready_at, nickname, personality, bond, last_event) "
+                "VALUES (?, ?, ?, ?, ?, 0, NULL)",
+                (account_id, animal_key, ready_at, nickname, personality),
             )
             conn.execute("UPDATE farm_state SET exp = exp + 10 WHERE account_id = ?", (account_id,))
         return self.get_farm(account_id)
@@ -531,19 +789,33 @@ class ProgressStore:
         with self.lock, self._connect() as conn:
             conn.row_factory = sqlite3.Row
             row = conn.execute(
-                "SELECT animal, ready_at FROM farm_animals WHERE id = ? AND account_id = ?",
+                "SELECT * FROM farm_animals WHERE id = ? AND account_id = ?",
                 (animal_id, account_id),
             ).fetchone()
             if not row or row["animal"] not in farm_catalog.ANIMALS:
                 raise ValueError("どうぶつが 見つかりません")
             if farm_catalog.remaining_seconds(row["ready_at"]) > 0:
                 raise ValueError("まだ とれるものが ありません")
-            animal = farm_catalog.ANIMALS[row["animal"]]
-            self._add_resource(conn, account_id, animal["resource"], animal["yield"])
+            animal_def = farm_catalog.ANIMALS[row["animal"]]
+            personality_key = row["personality"] if "personality" in row.keys() and row["personality"] else "genki"
+            nickname = row["nickname"] if "nickname" in row.keys() and row["nickname"] else animal_def["name"]
+            bond = row["bond"] if "bond" in row.keys() and row["bond"] is not None else 0
+            rng = random.Random()
+            event = farm_catalog.roll_animal_event(
+                {**animal_def, "nickname": nickname}, personality_key, bond, rng
+            )
+            total_yield = animal_def["yield"] + event["bonus_yield"]
+            new_bond = bond + event["bond_gain"]
+            self._add_resource(conn, account_id, animal_def["resource"], total_yield)
             conn.execute("UPDATE farm_state SET exp = exp + 8 WHERE account_id = ?", (account_id,))
-            next_at = (datetime.now() + timedelta(seconds=animal["interval"])).isoformat(timespec="seconds")
-            conn.execute("UPDATE farm_animals SET ready_at = ? WHERE id = ?", (next_at, animal_id))
-        return self.get_farm(account_id)
+            next_at = (datetime.now() + timedelta(seconds=animal_def["interval"])).isoformat(timespec="seconds")
+            conn.execute(
+                "UPDATE farm_animals SET ready_at = ?, bond = ?, last_event = ? WHERE id = ?",
+                (next_at, new_bond, event["message"], animal_id),
+            )
+        data = self.get_farm(account_id)
+        data["event"] = event
+        return data
 
     def gather(self, account_id: int, spot_key: str) -> Dict[str, Any]:
         with self.lock, self._connect() as conn:
@@ -601,11 +873,87 @@ class ProgressStore:
             conn.execute("UPDATE farm_state SET exp = exp + 15 WHERE account_id = ?", (account_id,))
         return self.get_farm(account_id)
 
+    def hire_worker(self, account_id: int, worker_key: str) -> Dict[str, Any]:
+        with self.lock, self._connect() as conn:
+            conn.row_factory = sqlite3.Row
+            self._ensure_farm_state(conn, account_id)
+            worker = farm_catalog.WORKER_CANDIDATES.get(worker_key)
+            if not worker:
+                raise ValueError("その働き手は いません")
+            row = conn.execute(
+                "SELECT * FROM farm_workers WHERE account_id = ? AND worker_key = ?",
+                (account_id, worker_key),
+            ).fetchone()
+            if not row:
+                raise ValueError("まだ この人には 出会っていません")
+            if row["hired"]:
+                raise ValueError("この人は もう 雇っています")
+
+            hire_cost = worker.get("hire_cost", {})
+            points_cost = int(hire_cost.get("points", 0))
+            resource_costs = {k: int(v) for k, v in hire_cost.items() if k != "points" and int(v) > 0}
+
+            if points_cost:
+                self._spend(conn, account_id, points_cost)
+            if resource_costs:
+                inventory = self._inventory(conn, account_id)
+                for resource, amount in resource_costs.items():
+                    if inventory.get(resource, 0) < amount:
+                        name = farm_catalog.RESOURCE_META.get(resource, {}).get("name", resource)
+                        raise ValueError(f"{name} が 足りません（必要: {amount}）")
+                for resource, amount in resource_costs.items():
+                    self._add_resource(conn, account_id, resource, -amount)
+
+            now = datetime.now()
+            ready_at = (now + timedelta(seconds=worker["work_interval"])).isoformat(timespec="seconds")
+            conn.execute(
+                "UPDATE farm_workers SET hired = 1, hired_at = ?, ready_at = ? WHERE account_id = ? AND worker_key = ?",
+                (now.isoformat(timespec="seconds"), ready_at, account_id, worker_key),
+            )
+            conn.execute("UPDATE farm_state SET exp = exp + 15 WHERE account_id = ?", (account_id,))
+        data = self.get_farm(account_id)
+        data["event"] = {"message": f"{worker['name']} を雇いました！牧場を手伝ってくれます。"}
+        return data
+
+    def collect_worker(self, account_id: int, worker_key: str) -> Dict[str, Any]:
+        with self.lock, self._connect() as conn:
+            conn.row_factory = sqlite3.Row
+            self._ensure_farm_state(conn, account_id)
+            worker = farm_catalog.WORKER_CANDIDATES.get(worker_key)
+            if not worker:
+                raise ValueError("その働き手は いません")
+            row = conn.execute(
+                "SELECT * FROM farm_workers WHERE account_id = ? AND worker_key = ?",
+                (account_id, worker_key),
+            ).fetchone()
+            if not row or not row["hired"]:
+                raise ValueError("この人は まだ 雇っていません")
+            if farm_catalog.remaining_seconds(row["ready_at"]) > 0:
+                remaining = farm_catalog.remaining_seconds(row["ready_at"])
+                raise ValueError(f"まだ はたらき中です（あと {remaining} 秒）")
+            for resource, amount in worker.get("yield", {}).items():
+                self._add_resource(conn, account_id, resource, amount)
+            next_at = (datetime.now() + timedelta(seconds=worker["work_interval"])).isoformat(timespec="seconds")
+            conn.execute(
+                "UPDATE farm_workers SET ready_at = ? WHERE account_id = ? AND worker_key = ?",
+                (next_at, account_id, worker_key),
+            )
+            conn.execute("UPDATE farm_state SET exp = exp + 5 WHERE account_id = ?", (account_id,))
+        data = self.get_farm(account_id)
+        gained = " / ".join(
+            f"{farm_catalog.RESOURCE_META.get(r, {}).get('name', r)}+{a}"
+            for r, a in worker.get("yield", {}).items()
+        )
+        data["event"] = {"message": f"{worker['name']} が仕事を終えました！ {gained}"}
+        return data
+
     def clear(self, account_id: Optional[int] = None) -> None:
         with self.lock, self._connect() as conn:
             if account_id is None:
                 conn.execute("DELETE FROM answers")
                 conn.execute("DELETE FROM point_events")
+                conn.execute("DELETE FROM mission_claims")
+                conn.execute("DELETE FROM farm_workers")
                 conn.execute("DELETE FROM farm_plots")
                 conn.execute("DELETE FROM farm_animals")
                 conn.execute("DELETE FROM farm_buildings")
@@ -615,6 +963,8 @@ class ProgressStore:
             else:
                 conn.execute("DELETE FROM answers WHERE account_id = ?", (account_id,))
                 conn.execute("DELETE FROM point_events WHERE account_id = ?", (account_id,))
+                conn.execute("DELETE FROM mission_claims WHERE account_id = ?", (account_id,))
+                conn.execute("DELETE FROM farm_workers WHERE account_id = ?", (account_id,))
                 conn.execute("DELETE FROM farm_plots WHERE account_id = ?", (account_id,))
                 conn.execute("DELETE FROM farm_animals WHERE account_id = ?", (account_id,))
                 conn.execute("DELETE FROM farm_buildings WHERE account_id = ?", (account_id,))

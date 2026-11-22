@@ -17,13 +17,18 @@
 
   <main class="wrap">
     <nav class="mode-nav">
-      <button id="mode-drill" class="mode-btn selected">📝 ドリル</button>
-      <button id="mode-farm" class="mode-btn">🌱 農場ゲーム</button>
+      <button id="mode-farm" class="mode-btn">🏡 牧場の部屋</button>
+      <button id="mode-drill" class="mode-btn selected">📚 学習部屋</button>
     </nav>
 
     <div id="drill-view">
     <section id="setup" class="card">
-      <h1>きょうは 何を 練習する？</h1>
+      <div class="section-head">
+        <h1>📚 学習部屋</h1>
+        <button id="go-farm-room" class="link-btn">🏡 牧場の部屋へ</button>
+      </div>
+      <p class="hint">学習部屋で 勉強して 成果を上げると ポイントが もらえます。ポイントは 牧場の部屋で 使えます。</p>
+      <h2>きょうは 何を 練習する？</h2>
 
       <div class="field account-field">
         <h2>① だれが がんばる？</h2>
@@ -70,6 +75,13 @@
         </label>
       </div>
 
+      <div class="field">
+        <label class="toggle-row">
+          <input id="adaptive" type="checkbox">
+          <span>にがて復習モード（これまでの まちがいが 多いところを 出す）</span>
+        </label>
+      </div>
+
       <button id="start" class="big-btn">問題をスタート ▶</button>
     </section>
 
@@ -104,6 +116,17 @@
 
     <section class="card">
       <div class="section-head">
+        <h1>今日のミッション・にがて分析</h1>
+        <button id="refresh-analysis" class="link-btn">🔄 更新</button>
+      </div>
+      <p class="hint">ミッションを 達成すると ポイントや 牧場の資源が もらえます。ポイントは そのまま 農場でも 使えます。</p>
+      <div id="mission-list" class="mission-list"></div>
+      <h2>にがてなところ</h2>
+      <div id="weak-topics" class="weak-list"></div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
         <h1>これまでの 記録</h1>
         <button id="clear-progress" class="link-btn">記録を 消す</button>
       </div>
@@ -120,10 +143,14 @@
 
     <section id="farm-view" class="card hidden">
       <div class="section-head">
-        <h1>🌱 わたしの農場</h1>
+        <h1>🏡 牧場の部屋</h1>
         <button id="farm-refresh" class="link-btn">🔄 更新</button>
       </div>
-      <p class="hint">お金は ドリルで ためた ポイント。食料や 資材は 農場の中で ためます。</p>
+      <p class="hint">お金は 学習部屋で ためた ポイント。食料や 資材は 農場の中で ためます。</p>
+      <div class="room-actions">
+        <button id="go-study-room" class="big-btn">📚 学習部屋へ行って 勉強する</button>
+      </div>
+      <div id="farm-message" class="farm-message hidden"></div>
 
       <div id="farm-status" class="farm-status"></div>
       <div class="farm-exp"><div id="farm-exp-bar"></div></div>
@@ -143,6 +170,10 @@
       <h2>採集（木材・石炭・鉄などの 資材を ためる）</h2>
       <p class="hint">近くの もり や こうみゃくで 資材を 集めましょう。</p>
       <div id="farm-gathers" class="farm-cards"></div>
+
+      <h2>働き手（学習で出会って 雇おう）</h2>
+      <p class="hint">ドリルで 条件を みたしたり ランダムで 出会った人を、ポイントや資源で 雇って 牧場を 手伝ってもらえます。</p>
+      <div id="farm-workers" class="farm-cards"></div>
 
       <h2>たてもの</h2>
       <div id="farm-buildings" class="farm-cards"></div>

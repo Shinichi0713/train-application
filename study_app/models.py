@@ -27,6 +27,7 @@ class QuizRequest(BaseModel):
     topics: List[str] = Field(default_factory=list)
     count: int = Field(default=10, ge=1, le=50)
     difficulty: str = "normal"
+    adaptive: bool = False
     account_id: int
 
 
@@ -76,6 +77,21 @@ class FarmBuildingRequest(BaseModel):
 class FarmGatherRequest(BaseModel):
     account_id: int
     spot: str
+
+
+class MissionClaimRequest(BaseModel):
+    account_id: int
+    mission_key: str
+
+
+class FarmHireWorkerRequest(BaseModel):
+    account_id: int
+    worker_key: str
+
+
+class FarmCollectWorkerRequest(BaseModel):
+    account_id: int
+    worker_key: str
 
 
 class AnswerResponse(BaseModel):

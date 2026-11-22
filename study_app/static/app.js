@@ -9,6 +9,7 @@
     topics: new Set(),
     count: 10,
     difficulty: 'normal',
+    adaptive: false,
     quizId: null,
     questions: [],
     index: 0,
@@ -91,6 +92,7 @@
       renderAccounts();
       localStorage.setItem('study_account_id', String(updated.id));
       await loadProgress();
+      await loadAnalysis();
       if (state.view === 'farm') await loadFarm();
     } catch (error) {
       alert(error.message);
@@ -167,6 +169,7 @@
           topics: Array.from(state.topics),
           count: state.count,
           difficulty: state.difficulty,
+          adaptive: state.adaptive,
           account_id: state.account.id,
         }),
       });
@@ -244,6 +247,14 @@
       note.textContent = `${result.explanation}　／　+${result.earned} pt（合計 ${result.account.total_points} pt）`;
       feedback.appendChild(headline);
       feedback.appendChild(note);
+      if (result.encounters && result.encounters.length) {
+        result.encounters.forEach((enc) => {
+          const box = document.createElement('div');
+          box.className = 'encounter-note';
+          box.textContent = `🤝 ${enc.message} 農場で雇えるようになりました！`;
+          feedback.appendChild(box);
+        });
+      }
       feedback.classList.remove('hidden');
 
       const next = $('next');
@@ -282,6 +293,7 @@
       });
       show('result');
       await loadProgress();
+      await loadAnalysis();
     } catch (error) {
       alert(error.message);
     }
@@ -349,6 +361,83 @@
     } catch (error) {
       console.error(error);
     }
+  }
+
+  async function loadAnalysis() {
+    if (!state.account) return;
+    try {
+      const data = await api(`/api/accounts/${state.account.id}/analysis`);
+      syncAccount(data.account);
+      renderMissions(data.missions || []);
+      renderWeakTopics(data.weak_topics || []);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function renderMissions(missions) {
+    const list = $('mission-list');
+    list.innerHTML = '';
+    if (!missions.length) {
+      list.textContent = 'ミッションは ありません';
+      return;
+    }
+    missions.forEach((mission) => {
+      const card = el('div', 'mission-card' + (mission.claimed ? ' claimed' : mission.done ? ' done' : ''));
+      const head = el('div', 'mission-head');
+      head.appendChild(el('div', 'mission-title', mission.title));
+      const status = mission.claimed ? '受取済み' : mission.done ? '達成！' : `${mission.progress}/${mission.goal}`;
+      head.appendChild(el('div', 'mission-status', status));
+      card.appendChild(head);
+      card.appendChild(el('div', 'mission-desc', mission.description));
+      const resNames = { food: '食料', wood: '木材', stone: '石', coal: '石炭', iron: '鉄' };
+      const rewards = [`+${mission.reward_points}pt`].concat(
+        Object.entries(mission.reward_resources || {}).map(([k, v]) => `${resNames[k] || k}+${v}`)
+      );
+      card.appendChild(el('div', 'mission-reward', `ほうしゅう: ${rewards.join(' / ')}`));
+      if (!mission.claimed) {
+        const btn = el('button', 'small-btn' + (mission.done ? ' sub' : ''));
+        btn.type = 'button';
+        btn.textContent = mission.done ? '受け取る' : 'まだ';
+        btn.disabled = !mission.done;
+        btn.addEventListener('click', async () => {
+          try {
+            const data = await api('/api/missions/claim', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ account_id: state.account.id, mission_key: mission.key }),
+            });
+            syncAccount(data.account);
+            renderMissions(data.missions || []);
+            renderWeakTopics(data.weak_topics || []);
+            await loadProgress();
+            if (state.view === 'farm') await loadFarm();
+            alert(`${mission.title} のほうしゅうを 受け取ったよ！`);
+          } catch (error) {
+            alert(error.message);
+          }
+        });
+        card.appendChild(btn);
+      }
+      list.appendChild(card);
+    });
+  }
+
+  function renderWeakTopics(topics) {
+    const list = $('weak-topics');
+    list.innerHTML = '';
+    if (!topics.length) {
+      list.textContent = 'まだ 分析データが ありません。問題を とくと にがてが 見えてきます。';
+      return;
+    }
+    topics.forEach((item) => {
+      const row = el('div', 'weak-item');
+      const label = el('div', 'weak-label', `${item.subject} / ${item.topic}`);
+      const meta = el('div', 'weak-meta', `正答率 ${item.accuracy}%（${item.correct}/${item.total}）`);
+      row.appendChild(label);
+      row.appendChild(meta);
+      list.appendChild(row);
+    });
   }
 
   async function createAccount() {
@@ -421,9 +510,10 @@
     const animals = data.animals.map((a) => `${a.id}:${a.ready ? 1 : 0}`).join('|');
     const buildings = data.buildings.map((b) => `${b.key}:${b.count}`).join('|');
     const gathers = (data.gathers || []).map((g) => `${g.key}:${g.ready ? 1 : 0}`).join('|');
+    const workers = (data.workers || []).map((w) => `${w.key}:${w.hired ? 1 : 0}:${w.ready ? 1 : 0}`).join('|');
     const inventory = Object.entries(data.inventory || {}).map(([k, v]) => `${k}:${v}`).join('|');
     return [data.farm.unlocked_plots, data.farm.exp, data.account.wallet,
-      data.expansion_cost, plots, animals, buildings, gathers, inventory].join('#');
+      data.expansion_cost, plots, animals, buildings, gathers, workers, inventory].join('#');
   }
 
   // 生育中だけ表示を書き換え、ボタンの作り直しでクリックが消えないようにする
@@ -455,6 +545,14 @@
         ? `${spot.resource_name} を 集められます！`
         : `あと ${spot.remaining} 秒`;
     });
+    (data.workers || []).forEach((worker) => {
+      if (!worker.hired || worker.ready) return;
+      const card = document.querySelector(`.farm-card[data-worker-key="${worker.key}"]`);
+      if (!card) return;
+      const desc = card.querySelector('.desc');
+      if (!desc) return;
+      desc.textContent = `はたらき中… あと ${worker.remaining} 秒`;
+    });
   }
 
   async function loadFarm(silent = false) {
@@ -473,6 +571,19 @@
     }
   }
 
+  function showFarmMessage(text) {
+    const box = $('farm-message');
+    if (!text) {
+      box.classList.add('hidden');
+      box.textContent = '';
+      return;
+    }
+    box.textContent = text;
+    box.classList.remove('hidden');
+    clearTimeout(showFarmMessage._timer);
+    showFarmMessage._timer = setTimeout(() => box.classList.add('hidden'), 5000);
+  }
+
   async function farmPost(path, payload) {
     try {
       const data = await api(path, {
@@ -483,6 +594,7 @@
       state.farm = data;
       syncAccount(data.account);
       renderFarm(data);
+      if (data.event && data.event.message) showFarmMessage(`🎉 ${data.event.message}`);
     } catch (error) {
       alert(error.message);
     }
@@ -574,9 +686,13 @@
     data.animals.forEach((animal) => {
       const card = el('div', 'farm-card');
       card.dataset.animalId = String(animal.id);
-      card.appendChild(el('div', 'title', `${animal.emoji} ${animal.name}`));
+      const title = animal.nickname ? `${animal.emoji} ${animal.nickname}（${animal.name}）` : `${animal.emoji} ${animal.name}`;
+      card.appendChild(el('div', 'title', title));
+      const personality = animal.personality_name ? `${animal.personality_emoji || ''} ${animal.personality_name}` : '';
+      card.appendChild(el('div', 'meta', `${personality} ・ なかよし度 ${animal.bond ?? 0}`));
       card.appendChild(el('div', 'desc',
         animal.ready ? `${animal.product_emoji} ${animal.product} が とれます！` : `あと ${animal.remaining} 秒`));
+      if (animal.last_event) card.appendChild(el('div', 'event', `最近のイベント: ${animal.last_event}`));
       const button = el('button', 'small-btn' + (animal.ready ? ' sub' : ''));
       button.type = 'button';
       button.textContent = animal.ready ? `とる（食料+${animal.yield}）` : 'まだ とれない';
@@ -592,6 +708,7 @@
       card.appendChild(el('div', 'title', `${animal.emoji} ${animal.name}`));
       card.appendChild(el('div', 'desc',
         `${animal.product_emoji} ${animal.product} が ${animal.interval} 秒ごとに とれる（食料+${animal.yield}）`));
+      card.appendChild(el('div', 'meta', '買うと 個性と なまえが つきます'));
       const button = el('button', 'small-btn');
       button.type = 'button';
       button.textContent = `買う（${animal.cost} pt）`;
@@ -619,6 +736,50 @@
       }));
       card.appendChild(button);
       gathers.appendChild(card);
+    });
+
+    const workers = $('farm-workers');
+    workers.innerHTML = '';
+    const resNames = { food: '食料', wood: '木材', stone: '石', coal: '石炭', iron: '鉄' };
+    const fmtRes = (obj) => Object.entries(obj || {}).map(([k, v]) => `${resNames[k] || k}+${v}`).join(' / ');
+    const fmtCost = (cost) => {
+      const parts = [];
+      if (cost.points) parts.push(`${cost.points}pt`);
+      Object.entries(cost || {}).forEach(([k, v]) => { if (k !== 'points') parts.push(`${resNames[k] || k}${v}`); });
+      return parts.join(' + ');
+    };
+    const metWorkers = data.workers || [];
+    if (!metWorkers.length) {
+      workers.appendChild(el('div', 'hint', 'まだ 出会った人はいません。ドリルで 学習すると 出会えることがあります。'));
+    }
+    metWorkers.forEach((worker) => {
+      const card = el('div', 'farm-card');
+      card.dataset.workerKey = worker.key;
+      card.appendChild(el('div', 'title', `${worker.emoji} ${worker.name}（${worker.role}）`));
+      card.appendChild(el('div', 'desc', worker.description));
+      card.appendChild(el('div', 'meta', `仕事: ${worker.work_interval}秒ごとに ${fmtRes(worker.yield)}`));
+      if (!worker.hired) {
+        card.appendChild(el('div', 'meta', `雇うコスト: ${fmtCost(worker.hire_cost)}`));
+        const button = el('button', 'small-btn');
+        button.type = 'button';
+        button.textContent = `雇う（${fmtCost(worker.hire_cost)}）`;
+        button.addEventListener('click', () => farmPost('/api/farm/hire-worker', {
+          account_id: accountId, worker_key: worker.key,
+        }));
+        card.appendChild(button);
+      } else {
+        const status = worker.ready ? '仕事完了！受け取れます' : `はたらき中… あと ${worker.remaining} 秒`;
+        card.appendChild(el('div', 'desc', status));
+        const button = el('button', 'small-btn' + (worker.ready ? ' sub' : ''));
+        button.type = 'button';
+        button.textContent = worker.ready ? `受け取る（${fmtRes(worker.yield)}）` : 'はたらき中';
+        button.disabled = !worker.ready;
+        button.addEventListener('click', () => farmPost('/api/farm/collect-worker', {
+          account_id: accountId, worker_key: worker.key,
+        }));
+        card.appendChild(button);
+      }
+      workers.appendChild(card);
     });
 
     const buildings = $('farm-buildings');
@@ -657,8 +818,8 @@
 
   $('start').addEventListener('click', startQuiz);
   $('again').addEventListener('click', startQuiz);
-  $('back').addEventListener('click', () => { show('setup'); loadProgress(); });
-  $('quit').addEventListener('click', () => { show('setup'); loadProgress(); });
+  $('back').addEventListener('click', () => { show('setup'); loadProgress(); loadAnalysis(); });
+  $('quit').addEventListener('click', () => { show('setup'); loadProgress(); loadAnalysis(); });
   $('count').addEventListener('change', (e) => { state.count = Number(e.target.value); });
   $('difficulty').addEventListener('change', (e) => { state.difficulty = e.target.value; });
   $('submit').addEventListener('click', () => submitAnswer($('answer-input').value));
@@ -675,6 +836,7 @@
     if (!confirm('このアカウントの 記録と ポイントを 全部 消しますか？')) return;
     await api(`/api/progress?account_id=${state.account.id}`, { method: 'DELETE' });
     await loadProgress();
+    await loadAnalysis();
   });
 
   $('account-login').addEventListener('click', () => {
@@ -687,8 +849,13 @@
   $('create-account').addEventListener('click', createAccount);
   $('account-delete').addEventListener('click', deleteAccount);
 
+  $('adaptive').addEventListener('change', (e) => { state.adaptive = e.target.checked; });
+  $('refresh-analysis').addEventListener('click', () => loadAnalysis());
+
   $('mode-drill').addEventListener('click', () => setView('drill'));
   $('mode-farm').addEventListener('click', () => setView('farm'));
+  $('go-study-room').addEventListener('click', () => setView('drill'));
+  $('go-farm-room').addEventListener('click', () => setView('farm'));
   $('farm-refresh').addEventListener('click', () => loadFarm());
   $('farm-expand').addEventListener('click', () => {
     farmPost('/api/farm/expand', { account_id: state.account.id });
