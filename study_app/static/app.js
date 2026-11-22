@@ -420,8 +420,10 @@
     const plots = data.plots.map((p) => `${p.index}:${p.crop || '-'}:${p.ready ? 1 : 0}`).join('|');
     const animals = data.animals.map((a) => `${a.id}:${a.ready ? 1 : 0}`).join('|');
     const buildings = data.buildings.map((b) => `${b.key}:${b.count}`).join('|');
+    const gathers = (data.gathers || []).map((g) => `${g.key}:${g.ready ? 1 : 0}`).join('|');
+    const inventory = Object.entries(data.inventory || {}).map(([k, v]) => `${k}:${v}`).join('|');
     return [data.farm.unlocked_plots, data.farm.exp, data.account.wallet,
-      data.expansion_cost, plots, animals, buildings].join('#');
+      data.expansion_cost, plots, animals, buildings, gathers, inventory].join('#');
   }
 
   // 生育中だけ表示を書き換え、ボタンの作り直しでクリックが消えないようにする
@@ -443,6 +445,15 @@
       desc.textContent = animal.ready
         ? `${animal.product_emoji} ${animal.product} が とれます！`
         : `あと ${animal.remaining} 秒`;
+    });
+    (data.gathers || []).forEach((spot) => {
+      const card = document.querySelector(`.farm-card[data-gather-key="${spot.key}"]`);
+      if (!card) return;
+      const desc = card.querySelector('.desc');
+      if (!desc) return;
+      desc.textContent = spot.ready
+        ? `${spot.resource_name} を 集められます！`
+        : `あと ${spot.remaining} 秒`;
     });
   }
 
@@ -496,12 +507,21 @@
     renderStat(status, '畑', `${farm.unlocked_plots} / ${farm.max_plots}`);
     $('farm-exp-bar').style.width = `${farm.exp % 100}%`;
 
+    const inventory = $('farm-inventory');
+    inventory.innerHTML = '';
+    (data.catalog.resources || []).forEach((res) => {
+      const amount = (data.inventory || {})[res.key] || 0;
+      renderStat(inventory, `${res.emoji} ${res.name}`, amount);
+    });
+
     const picker = $('seed-picker');
     picker.innerHTML = '';
     data.catalog.crops.forEach((crop) => {
       const button = el('button', 'seed' + (state.selectedCrop === crop.key ? ' selected' : ''));
       button.type = 'button';
-      button.appendChild(document.createTextNode(`${crop.emoji} ${crop.name}（${crop.cost}pt・${crop.grow}秒）`));
+      button.appendChild(document.createTextNode(
+        `${crop.emoji} ${crop.name}（${crop.cost}pt・${crop.grow}秒・食料+${crop.yield}）`
+      ));
       button.addEventListener('click', () => {
         state.selectedCrop = crop.key;
         renderFarm(data);
@@ -524,9 +544,8 @@
         }));
       } else {
         cell.appendChild(el('span', 'emoji', plot.emoji));
-        const crop = data.catalog.crops.find((item) => item.key === plot.crop);
         if (plot.ready) {
-          cell.appendChild(el('div', '', `収穫！ +${crop ? crop.sell : 0} pt`));
+          cell.appendChild(el('div', '', `収穫！ 食料+${plot.yield || 0}`));
           cell.addEventListener('click', () => farmPost('/api/farm/harvest', {
             account_id: accountId, plot: plot.index,
           }));
@@ -560,7 +579,7 @@
         animal.ready ? `${animal.product_emoji} ${animal.product} が とれます！` : `あと ${animal.remaining} 秒`));
       const button = el('button', 'small-btn' + (animal.ready ? ' sub' : ''));
       button.type = 'button';
-      button.textContent = animal.ready ? 'とる' : 'まだ とれない';
+      button.textContent = animal.ready ? `とる（食料+${animal.yield}）` : 'まだ とれない';
       button.disabled = !animal.ready;
       button.addEventListener('click', () => farmPost('/api/farm/collect-animal', {
         account_id: accountId, animal_id: animal.id,
@@ -571,7 +590,8 @@
     data.catalog.animals.forEach((animal) => {
       const card = el('div', 'farm-card');
       card.appendChild(el('div', 'title', `${animal.emoji} ${animal.name}`));
-      card.appendChild(el('div', 'desc', `${animal.product_emoji} ${animal.product} が ${animal.interval} 秒ごとに とれる`));
+      card.appendChild(el('div', 'desc',
+        `${animal.product_emoji} ${animal.product} が ${animal.interval} 秒ごとに とれる（食料+${animal.yield}）`));
       const button = el('button', 'small-btn');
       button.type = 'button';
       button.textContent = `買う（${animal.cost} pt）`;
@@ -580,6 +600,25 @@
       }));
       card.appendChild(button);
       animals.appendChild(card);
+    });
+
+    const gathers = $('farm-gathers');
+    gathers.innerHTML = '';
+    (data.gathers || []).forEach((spot) => {
+      const card = el('div', 'farm-card');
+      card.dataset.gatherKey = spot.key;
+      card.appendChild(el('div', 'title', `${spot.emoji} ${spot.name}`));
+      card.appendChild(el('div', 'desc',
+        spot.ready ? `${spot.resource_name} を 集められます！` : `あと ${spot.remaining} 秒`));
+      const button = el('button', 'small-btn' + (spot.ready ? ' sub' : ''));
+      button.type = 'button';
+      button.textContent = spot.ready ? `集める（${spot.resource_name}+${spot.yield}）` : 'まだ 集められない';
+      button.disabled = !spot.ready;
+      button.addEventListener('click', () => farmPost('/api/farm/gather', {
+        account_id: accountId, spot: spot.key,
+      }));
+      card.appendChild(button);
+      gathers.appendChild(card);
     });
 
     const buildings = $('farm-buildings');

@@ -73,6 +73,11 @@ class FarmBuildingRequest(BaseModel):
     building: str
 
 
+class FarmGatherRequest(BaseModel):
+    account_id: int
+    spot: str
+
+
 class AnswerResponse(BaseModel):
     correct: bool
     correct_answer: str

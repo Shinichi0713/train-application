@@ -111,6 +111,22 @@ class ProgressStore:
                     PRIMARY KEY (account_id, building)
                 )
             """)
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS farm_inventory (
+                    account_id INTEGER NOT NULL,
+                    resource TEXT NOT NULL,
+                    amount INTEGER NOT NULL DEFAULT 0,
+                    PRIMARY KEY (account_id, resource)
+                )
+            """)
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS farm_gathers (
+                    account_id INTEGER NOT NULL,
+                    spot TEXT NOT NULL,
+                    ready_at TEXT NOT NULL,
+                    PRIMARY KEY (account_id, spot)
+                )
+            """)
 
             # 既存DBからの移行
             columns = [row[1] for row in conn.execute("PRAGMA table_info(answers)")]
@@ -221,6 +237,8 @@ class ProgressStore:
             conn.execute("DELETE FROM farm_plots WHERE account_id = ?", (account_id,))
             conn.execute("DELETE FROM farm_animals WHERE account_id = ?", (account_id,))
             conn.execute("DELETE FROM farm_buildings WHERE account_id = ?", (account_id,))
+            conn.execute("DELETE FROM farm_inventory WHERE account_id = ?", (account_id,))
+            conn.execute("DELETE FROM farm_gathers WHERE account_id = ?", (account_id,))
             conn.execute("DELETE FROM farm_state WHERE account_id = ?", (account_id,))
             conn.execute("DELETE FROM accounts WHERE id = ?", (account_id,))
 
@@ -336,15 +354,21 @@ class ProgressStore:
             raise ValueError(f"ポイントが 足りません（必要: {cost} pt）")
         conn.execute("UPDATE accounts SET wallet = wallet - ? WHERE id = ?", (cost, account_id))
 
-    def _earn(self, conn, account_id: int, amount: int, reason: str) -> None:
+    def _add_resource(self, conn, account_id: int, resource: str, amount: int) -> None:
         conn.execute(
-            "UPDATE accounts SET total_points = total_points + ?, wallet = wallet + ? WHERE id = ?",
-            (amount, amount, account_id),
+            "INSERT INTO farm_inventory (account_id, resource, amount) VALUES (?, ?, ?) "
+            "ON CONFLICT(account_id, resource) DO UPDATE SET amount = amount + excluded.amount",
+            (account_id, resource, amount),
         )
-        conn.execute(
-            "INSERT INTO point_events (account_id, reason, amount) VALUES (?, ?, ?)",
-            (account_id, reason, amount),
-        )
+
+    def _inventory(self, conn, account_id: int) -> Dict[str, int]:
+        rows = conn.execute(
+            "SELECT resource, amount FROM farm_inventory WHERE account_id = ?", (account_id,)
+        ).fetchall()
+        inv = {key: 0 for key in farm_catalog.RESOURCE_META}
+        for row in rows:
+            inv[row["resource"]] = row["amount"]
+        return inv
 
     def get_farm(self, account_id: int) -> Dict[str, Any]:
         with self.lock, self._connect() as conn:
@@ -361,6 +385,11 @@ class ProgressStore:
             building_rows = conn.execute(
                 "SELECT * FROM farm_buildings WHERE account_id = ? ORDER BY building", (account_id,)
             ).fetchall()
+            gather_rows = {
+                row["spot"]: row
+                for row in conn.execute("SELECT * FROM farm_gathers WHERE account_id = ?", (account_id,))
+            }
+            inventory = self._inventory(conn, account_id)
 
         unlocked = state["unlocked_plots"]
         plots = []
@@ -375,7 +404,8 @@ class ProgressStore:
                 info = farm_catalog.growth_info(row["planted_at"], crop["grow"])
                 plots.append({
                     "index": index, "unlocked": True, "crop": crop_key,
-                    "name": crop["name"], "emoji": crop["emoji"], **info,
+                    "name": crop["name"], "emoji": crop["emoji"],
+                    "yield": crop["yield"], "resource": crop["resource"], **info,
                 })
             else:
                 plots.append({"index": index, "unlocked": True, "crop": None})
@@ -389,7 +419,8 @@ class ProgressStore:
             animals.append({
                 "id": row["id"], "key": row["animal"], "name": animal["name"], "emoji": animal["emoji"],
                 "product": animal["product"], "product_emoji": animal["product_emoji"],
-                "ready": remaining == 0, "remaining": remaining, "sell": animal["sell"],
+                "yield": animal["yield"], "resource": animal["resource"],
+                "ready": remaining == 0, "remaining": remaining,
             })
 
         buildings = []
@@ -400,6 +431,19 @@ class ProgressStore:
             buildings.append({
                 "key": row["building"], "name": building["name"], "emoji": building["emoji"],
                 "count": row["count"], "description": building["description"],
+            })
+
+        gathers = []
+        for key, spot in farm_catalog.GATHER_SPOTS.items():
+            row = gather_rows.get(key)
+            ready_at = row["ready_at"] if row else farm_catalog.now_iso()
+            remaining = farm_catalog.remaining_seconds(ready_at)
+            gathers.append({
+                "key": key, "name": spot["name"], "emoji": spot["emoji"],
+                "resource": spot["resource"], "resource_name": spot["resource_name"],
+                "yield": spot["yield"], "interval": spot["interval"],
+                "description": spot["description"],
+                "ready": remaining == 0, "remaining": remaining,
             })
 
         level = farm_catalog.farm_level(state["exp"])
@@ -417,9 +461,11 @@ class ProgressStore:
                 "unlocked_plots": unlocked,
                 "max_plots": farm_catalog.MAX_PLOTS,
             },
+            "inventory": inventory,
             "plots": plots,
             "animals": animals,
             "buildings": buildings,
+            "gathers": gathers,
             "catalog": farm_catalog.catalog(),
             "expansion_cost": expansion_cost,
         }
@@ -459,7 +505,7 @@ class ProgressStore:
             info = farm_catalog.growth_info(row["planted_at"], crop["grow"])
             if not info["ready"]:
                 raise ValueError(f"まだ 育っていません（あと {info['remaining']} 秒）")
-            self._earn(conn, account_id, crop["sell"], f"収穫:{crop['name']}")
+            self._add_resource(conn, account_id, crop["resource"], crop["yield"])
             conn.execute("UPDATE farm_state SET exp = exp + 5 WHERE account_id = ?", (account_id,))
             conn.execute(
                 "DELETE FROM farm_plots WHERE account_id = ? AND plot_index = ?", (account_id, plot)
@@ -493,10 +539,35 @@ class ProgressStore:
             if farm_catalog.remaining_seconds(row["ready_at"]) > 0:
                 raise ValueError("まだ とれるものが ありません")
             animal = farm_catalog.ANIMALS[row["animal"]]
-            self._earn(conn, account_id, animal["sell"], f"どうぶつ:{animal['product']}")
+            self._add_resource(conn, account_id, animal["resource"], animal["yield"])
             conn.execute("UPDATE farm_state SET exp = exp + 8 WHERE account_id = ?", (account_id,))
             next_at = (datetime.now() + timedelta(seconds=animal["interval"])).isoformat(timespec="seconds")
             conn.execute("UPDATE farm_animals SET ready_at = ? WHERE id = ?", (next_at, animal_id))
+        return self.get_farm(account_id)
+
+    def gather(self, account_id: int, spot_key: str) -> Dict[str, Any]:
+        with self.lock, self._connect() as conn:
+            conn.row_factory = sqlite3.Row
+            self._ensure_farm_state(conn, account_id)
+            spot = farm_catalog.GATHER_SPOTS.get(spot_key)
+            if not spot:
+                raise ValueError("その場所では 集められません")
+            row = conn.execute(
+                "SELECT ready_at FROM farm_gathers WHERE account_id = ? AND spot = ?",
+                (account_id, spot_key),
+            ).fetchone()
+            ready_at = row["ready_at"] if row else farm_catalog.now_iso()
+            if farm_catalog.remaining_seconds(ready_at) > 0:
+                remaining = farm_catalog.remaining_seconds(ready_at)
+                raise ValueError(f"まだ 集められません（あと {remaining} 秒）")
+            self._add_resource(conn, account_id, spot["resource"], spot["yield"])
+            next_at = (datetime.now() + timedelta(seconds=spot["interval"])).isoformat(timespec="seconds")
+            conn.execute(
+                "INSERT INTO farm_gathers (account_id, spot, ready_at) VALUES (?, ?, ?) "
+                "ON CONFLICT(account_id, spot) DO UPDATE SET ready_at = excluded.ready_at",
+                (account_id, spot_key, next_at),
+            )
+            conn.execute("UPDATE farm_state SET exp = exp + 5 WHERE account_id = ?", (account_id,))
         return self.get_farm(account_id)
 
     def buy_building(self, account_id: int, building_key: str) -> Dict[str, Any]:
@@ -538,6 +609,8 @@ class ProgressStore:
                 conn.execute("DELETE FROM farm_plots")
                 conn.execute("DELETE FROM farm_animals")
                 conn.execute("DELETE FROM farm_buildings")
+                conn.execute("DELETE FROM farm_inventory")
+                conn.execute("DELETE FROM farm_gathers")
                 conn.execute("DELETE FROM farm_state")
             else:
                 conn.execute("DELETE FROM answers WHERE account_id = ?", (account_id,))
@@ -545,6 +618,8 @@ class ProgressStore:
                 conn.execute("DELETE FROM farm_plots WHERE account_id = ?", (account_id,))
                 conn.execute("DELETE FROM farm_animals WHERE account_id = ?", (account_id,))
                 conn.execute("DELETE FROM farm_buildings WHERE account_id = ?", (account_id,))
+                conn.execute("DELETE FROM farm_inventory WHERE account_id = ?", (account_id,))
+                conn.execute("DELETE FROM farm_gathers WHERE account_id = ?", (account_id,))
                 conn.execute("DELETE FROM farm_state WHERE account_id = ?", (account_id,))
                 conn.execute(
                     "UPDATE accounts SET total_points = 0, wallet = 0, streak = 0, best_streak = 0 WHERE id = ?",

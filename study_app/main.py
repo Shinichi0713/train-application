@@ -28,7 +28,8 @@ from .generator.base import answers_match
 from .generator.registry import config, generate_quiz
 from .models import (
     AccountCreate, AnswerRequest, DeleteAccountRequest, FarmAccountRequest, FarmAnimalBuyRequest,
-    FarmBuildingRequest, FarmCollectRequest, FarmHarvestRequest, FarmPlantRequest, LoginRequest, QuizRequest,
+    FarmBuildingRequest, FarmCollectRequest, FarmGatherRequest, FarmHarvestRequest, FarmPlantRequest,
+    LoginRequest, QuizRequest,
 )
 from .store import ProgressStore
 
@@ -299,6 +300,11 @@ def farm_collect_animal(request: FarmCollectRequest):
 @app.post("/api/farm/buy-building")
 def farm_buy_building(request: FarmBuildingRequest):
     return _farm_action(store.buy_building, request.account_id, request.building)
+
+
+@app.post("/api/farm/gather")
+def farm_gather(request: FarmGatherRequest):
+    return _farm_action(store.gather, request.account_id, request.spot)
 
 
 @app.post("/api/farm/expand")

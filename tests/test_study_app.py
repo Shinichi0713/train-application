@@ -151,7 +151,18 @@ class FarmTests(unittest.TestCase):
         with sqlite3.connect(self._db_path()) as conn:
             conn.execute("UPDATE farm_animals SET ready_at = ? WHERE account_id = ?", (moment, self.account["id"]))
 
-    def test_plant_and_harvest(self):
+    def _set_gather_ready(self, spot, seconds_ago=999):
+        import sqlite3
+        from datetime import datetime, timedelta
+        moment = (datetime.now() - timedelta(seconds=seconds_ago)).isoformat(timespec="seconds")
+        with sqlite3.connect(self._db_path()) as conn:
+            conn.execute(
+                "INSERT INTO farm_gathers (account_id, spot, ready_at) VALUES (?, ?, ?) "
+                "ON CONFLICT(account_id, spot) DO UPDATE SET ready_at = excluded.ready_at",
+                (self.account["id"], spot, moment),
+            )
+
+    def test_plant_and_harvest_gives_food(self):
         account_id = self.account["id"]
         data = self.store.plant(account_id, 0, "cabbage")
         self.assertEqual(data["account"]["wallet"], 990)
@@ -160,18 +171,38 @@ class FarmTests(unittest.TestCase):
 
         self._set_plot_time(0, 60)
         data = self.store.harvest(account_id, 0)
-        self.assertEqual(data["account"]["wallet"], 1010)
-        self.assertEqual(data["account"]["total_points"], 1020)
+        # お金(ポイント)は勉強で貯める。収穫は食料を増やす
+        self.assertEqual(data["account"]["wallet"], 990)
+        self.assertEqual(data["account"]["total_points"], 1000)
+        self.assertEqual(data["inventory"]["food"], 8)
         self.assertIsNone(data["plots"][0]["crop"])
 
-    def test_animal_buy_and_collect(self):
+    def test_animal_buy_and_collect_gives_food(self):
         account_id = self.account["id"]
         data = self.store.buy_animal(account_id, "chicken")
         self.assertEqual(data["account"]["wallet"], 920)
         self.assertEqual(len(data["animals"]), 1)
         self._set_animal_ready()
         data = self.store.collect_animal(account_id, data["animals"][0]["id"])
-        self.assertEqual(data["account"]["wallet"], 945)
+        self.assertEqual(data["account"]["wallet"], 920)
+        self.assertEqual(data["inventory"]["food"], 10)
+
+    def test_gather_materials(self):
+        account_id = self.account["id"]
+        data = self.store.gather(account_id, "forest")
+        self.assertEqual(data["inventory"]["wood"], 6)
+        with self.assertRaises(ValueError):
+            self.store.gather(account_id, "forest")
+        self._set_gather_ready("forest")
+        data = self.store.gather(account_id, "forest")
+        self.assertEqual(data["inventory"]["wood"], 12)
+
+        self._set_gather_ready("coal_mine")
+        self._set_gather_ready("iron_mine")
+        data = self.store.gather(account_id, "coal_mine")
+        data = self.store.gather(account_id, "iron_mine")
+        self.assertEqual(data["inventory"]["coal"], 4)
+        self.assertEqual(data["inventory"]["iron"], 3)
 
     def test_expand_and_insufficient_points(self):
         account_id = self.account["id"]
@@ -237,7 +268,7 @@ class ApiTests(unittest.TestCase):
         from fastapi import HTTPException
         from study_app.models import (
             FarmAccountRequest, FarmAnimalBuyRequest, FarmBuildingRequest,
-            FarmCollectRequest, FarmHarvestRequest, FarmPlantRequest,
+            FarmCollectRequest, FarmGatherRequest, FarmHarvestRequest, FarmPlantRequest,
         )
         account = self._new_account("農場API")
         account_id = account["id"]
@@ -247,6 +278,8 @@ class ApiTests(unittest.TestCase):
         data = self.main.get_farm(account_id)
         self.assertEqual(data["farm"]["unlocked_plots"], 9)
         self.assertEqual(len(data["catalog"]["crops"]), 4)
+        self.assertIn("food", data["inventory"])
+        self.assertEqual(len(data["gathers"]), 4)
 
         data = self.main.farm_plant(FarmPlantRequest(account_id=account_id, plot=0, crop="cabbage"))
         self.assertEqual(data["plots"][0]["crop"], "cabbage")
@@ -266,6 +299,12 @@ class ApiTests(unittest.TestCase):
         data = self.main.farm_expand(FarmAccountRequest(account_id=account_id))
         self.assertEqual(data["farm"]["unlocked_plots"], 12)
         self.assertEqual(data["account"]["wallet"], starting_wallet - (10 + 80 + 200 * 2 + 150))
+
+        # 採集: 資材は農場内で貯める
+        data = self.main.farm_gather(FarmGatherRequest(account_id=account_id, spot="forest"))
+        self.assertEqual(data["inventory"]["wood"], 6)
+        with self.assertRaises(HTTPException):
+            self.main.farm_gather(FarmGatherRequest(account_id=account_id, spot="forest"))
 
         poor = self._new_account("農場びんぼう")
         with self.assertRaises(HTTPException):
