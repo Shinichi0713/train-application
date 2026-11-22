@@ -486,6 +486,288 @@
     }
   }
 
+  // ---------------- 農場GUI ----------------
+  const farmGame = (() => {
+    const canvas = $('farm-canvas');
+    const ctx = canvas.getContext('2d');
+    const panel = $('farm-action-panel');
+    const player = { x: 480, y: 300, tx: 480, ty: 300, speed: 180, moving: false, facing: 'down' };
+    let interactables = [];
+    let selected = null;
+    let lastTs = 0;
+    let raf = 0;
+
+    function toCanvasPos(evt) {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: (evt.clientX - rect.left) * (canvas.width / rect.width),
+        y: (evt.clientY - rect.top) * (canvas.height / rect.height),
+      };
+    }
+
+    function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
+
+    function hidePanel() { panel.classList.add('hidden'); panel.innerHTML = ''; }
+
+    function showPanel(item) {
+      selected = item;
+      panel.innerHTML = '';
+      panel.appendChild(el('h3', '', item.title));
+      panel.appendChild(el('p', '', item.info || ''));
+      if (item.detail) panel.appendChild(el('p', '', item.detail));
+      const actions = el('div', 'actions');
+      (item.actions || []).forEach((a) => {
+        const btn = el('button', 'small-btn' + (a.primary ? ' sub' : ''));
+        btn.type = 'button';
+        btn.textContent = a.label;
+        btn.disabled = !!a.disabled;
+        btn.addEventListener('click', () => a.run());
+        actions.appendChild(btn);
+      });
+      const close = el('button', 'small-btn');
+      close.type = 'button';
+      close.textContent = 'とじる';
+      close.addEventListener('click', () => { selected = null; hidePanel(); });
+      actions.appendChild(close);
+      panel.appendChild(actions);
+      panel.classList.remove('hidden');
+    }
+
+    function buildInteractables(data) {
+      const items = [];
+      const accountId = state.account.id;
+      const plots = data.plots.filter(p => p.unlocked);
+      const cols = 6;
+      const plotW = 92, plotH = 72, startX = 40, startY = 90;
+      plots.forEach((plot, i) => {
+        const col = i % cols;
+        const row = Math.floor(i / cols);
+        const x = startX + col * (plotW + 14) + plotW / 2;
+        const y = startY + row * (plotH + 14) + plotH / 2;
+        const actions = [];
+        if (!plot.crop) {
+          actions.push({ label: 'たねを植える', primary: true, run: () => farmPost('/api/farm/plant', { account_id: accountId, plot: plot.index, crop: state.selectedCrop }) });
+        } else if (plot.ready) {
+          actions.push({ label: '収穫する', primary: true, run: () => farmPost('/api/farm/harvest', { account_id: accountId, plot: plot.index }) });
+        }
+        items.push({
+          id: `plot-${plot.index}`, type: 'plot', x, y, w: plotW, h: plotH, r: 52,
+          title: `畑 ${plot.index + 1}`, plot,
+          info: !plot.crop ? '空き畑です。たねを植えられます。' : plot.ready ? `${plot.emoji} ${plot.name} が収穫できます！` : `${plot.emoji} ${plot.name} 育成中`,
+          detail: !plot.crop ? `選択中のたね: ${state.selectedCrop}` : plot.ready ? `食料+${plot.yield || 0}` : `あと ${plot.remaining} 秒`,
+          actions,
+        });
+      });
+
+      (data.gathers || []).forEach((g, i) => {
+        const x = 90 + i * 150;
+        const y = 430;
+        items.push({
+          id: `gather-${g.key}`, type: 'gather', x, y, r: 42, gather: g,
+          title: `${g.emoji} ${g.name}`,
+          info: g.ready ? `${g.resource_name}を集められます` : `あと ${g.remaining} 秒`,
+          detail: `${g.resource_name}+${g.yield}`,
+          actions: [{ label: g.ready ? '集める' : '準備中', primary: g.ready, disabled: !g.ready, run: () => farmPost('/api/farm/gather', { account_id: accountId, spot: g.key }) }],
+        });
+      });
+
+      (data.animals || []).forEach((a, i) => {
+        const x = 690 + (i % 3) * 85;
+        const y = 120 + Math.floor(i / 3) * 70;
+        items.push({
+          id: `animal-${a.id}`, type: 'animal', x, y, r: 34, animal: a,
+          title: `${a.emoji} ${a.nickname || a.name}`,
+          info: a.ready ? `${a.product_emoji} ${a.product} がとれます` : `あと ${a.remaining} 秒`,
+          detail: `なかよし度 ${a.bond ?? 0}`,
+          actions: [{ label: a.ready ? 'とる' : 'まだ', primary: a.ready, disabled: !a.ready, run: () => farmPost('/api/farm/collect-animal', { account_id: accountId, animal_id: a.id }) }],
+        });
+      });
+
+      (data.workers || []).forEach((w, i) => {
+        const x = 690 + (i % 3) * 85;
+        const y = 320 + Math.floor(i / 3) * 75;
+        const actions = [];
+        if (!w.hired) actions.push({ label: '雇う', primary: true, run: () => farmPost('/api/farm/hire-worker', { account_id: accountId, worker_key: w.key }) });
+        else actions.push({ label: w.ready ? '受け取る' : 'はたらき中', primary: w.ready, disabled: !w.ready, run: () => farmPost('/api/farm/collect-worker', { account_id: accountId, worker_key: w.key }) });
+        items.push({
+          id: `worker-${w.key}`, type: 'worker', x, y, r: 34, worker: w,
+          title: `${w.emoji} ${w.name}`,
+          info: !w.hired ? `出会った人。雇えます` : w.ready ? '仕事完了！' : `あと ${w.remaining} 秒`,
+          detail: w.hired ? '' : '雇用コストは下のカードでも確認できます',
+          actions,
+        });
+      });
+
+      interactables = items;
+      if (selected) {
+        const fresh = items.find(it => it.id === selected.id);
+        if (fresh && dist(player, fresh) < fresh.r + 40) showPanel(fresh);
+        else { selected = null; hidePanel(); }
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // background
+      ctx.fillStyle = '#cfeec4';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#b9dfae';
+      ctx.fillRect(0, 380, canvas.width, 160);
+      ctx.fillStyle = '#efe0b8';
+      ctx.fillRect(20, 70, 660, 290);
+      ctx.strokeStyle = '#d2c08f';
+      ctx.strokeRect(20, 70, 660, 290);
+      ctx.fillStyle = '#f7efd3';
+      ctx.fillRect(660, 70, 280, 440);
+      ctx.fillStyle = '#5a7b46';
+      ctx.font = 'bold 18px sans-serif';
+      ctx.fillText('畑エリア', 30, 62);
+      ctx.fillText('どうぶつ・働き手', 670, 62);
+      ctx.fillText('採集エリア', 30, 402);
+
+      interactables.forEach((it) => {
+        if (it.type === 'plot') {
+          const p = it.plot;
+          ctx.fillStyle = !p.crop ? '#d8b07a' : p.ready ? '#9bd27e' : '#bcdca0';
+          ctx.fillRect(it.x - it.w / 2, it.y - it.h / 2, it.w, it.h);
+          ctx.strokeStyle = selected && selected.id === it.id ? '#ff8a00' : '#8b6a3e';
+          ctx.lineWidth = selected && selected.id === it.id ? 4 : 2;
+          ctx.strokeRect(it.x - it.w / 2, it.y - it.h / 2, it.w, it.h);
+          ctx.fillStyle = '#3f3a2f';
+          ctx.font = '24px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(p.crop ? p.emoji : '＋', it.x, it.y + 2);
+          ctx.font = '12px sans-serif';
+          ctx.fillText(p.crop ? (p.ready ? '収穫OK' : `${p.remaining}s`) : '空き', it.x, it.y + 28);
+        } else if (it.type === 'gather') {
+          const g = it.gather;
+          ctx.beginPath();
+          ctx.fillStyle = g.ready ? '#8fd0ff' : '#9ec5de';
+          ctx.arc(it.x, it.y, 34, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = selected && selected.id === it.id ? '#ff8a00' : '#4f88aa';
+          ctx.lineWidth = selected && selected.id === it.id ? 4 : 2;
+          ctx.stroke();
+          ctx.fillStyle = '#203040';
+          ctx.font = '26px sans-serif'; ctx.textAlign = 'center'; ctx.fillText(g.emoji, it.x, it.y + 4);
+          ctx.font = '12px sans-serif'; ctx.fillText(g.name, it.x, it.y + 52);
+        } else if (it.type === 'animal' || it.type === 'worker') {
+          const obj = it.animal || it.worker;
+          ctx.beginPath();
+          ctx.fillStyle = it.type === 'worker' ? (obj.hired ? '#fff2b0' : '#ffe0e0') : '#fff8dd';
+          ctx.arc(it.x, it.y, 28, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = selected && selected.id === it.id ? '#ff8a00' : '#bba86a';
+          ctx.lineWidth = selected && selected.id === it.id ? 4 : 2;
+          ctx.stroke();
+          ctx.fillStyle = '#333';
+          ctx.font = '24px sans-serif'; ctx.textAlign = 'center';
+          ctx.fillText(obj.emoji, it.x, it.y + 6);
+          ctx.font = '11px sans-serif';
+          const label = it.type === 'worker' ? obj.name : (obj.nickname || obj.name);
+          ctx.fillText(label, it.x, it.y + 44);
+        }
+      });
+
+      // target marker
+      if (player.moving) {
+        ctx.strokeStyle = 'rgba(255,120,0,.8)';
+        ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.arc(player.tx, player.ty, 10, 0, Math.PI * 2); ctx.stroke();
+      }
+
+      // player
+      ctx.save();
+      ctx.translate(player.x, player.y);
+      ctx.fillStyle = 'rgba(0,0,0,.15)';
+      ctx.beginPath(); ctx.ellipse(0, 18, 16, 6, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#4f7cff';
+      ctx.fillRect(-12, -4, 24, 22);
+      ctx.fillStyle = '#ffd8b0';
+      ctx.beginPath(); ctx.arc(0, -14, 12, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#6b3f1d';
+      ctx.beginPath(); ctx.arc(0, -18, 12, Math.PI, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#333';
+      ctx.fillRect(-4, -16, 2, 2); ctx.fillRect(2, -16, 2, 2);
+      ctx.fillStyle = '#2d5b2d';
+      ctx.fillRect(-14, 12, 10, 10); ctx.fillRect(4, 12, 10, 10);
+      ctx.restore();
+      ctx.textAlign = 'left';
+    }
+
+    function update(dt) {
+      const dx = player.tx - player.x;
+      const dy = player.ty - player.y;
+      const d = Math.hypot(dx, dy);
+      if (d > 2) {
+        player.moving = true;
+        const step = Math.min(d, player.speed * dt);
+        player.x += dx / d * step;
+        player.y += dy / d * step;
+        player.facing = Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : (dy > 0 ? 'down' : 'up');
+      } else {
+        player.moving = false;
+      }
+      if (selected) {
+        const item = interactables.find(it => it.id === selected.id);
+        if (item && dist(player, item) < item.r + 28) showPanel(item);
+      }
+    }
+
+    function loop(ts) {
+      if (!lastTs) lastTs = ts;
+      const dt = Math.min(0.05, (ts - lastTs) / 1000);
+      lastTs = ts;
+      update(dt);
+      draw();
+      raf = requestAnimationFrame(loop);
+    }
+
+    let pointerDown = false;
+    function pickHit(pos) {
+      return interactables.find(it => {
+        if (it.type === 'plot') return pos.x >= it.x - it.w / 2 && pos.x <= it.x + it.w / 2 && pos.y >= it.y - it.h / 2 && pos.y <= it.y + it.h / 2;
+        return dist(pos, it) < it.r;
+      });
+    }
+    function pointTo(pos) {
+      player.tx = pos.x; player.ty = pos.y;
+      const hit = pickHit(pos);
+      if (hit) {
+        selected = hit;
+        if (dist(player, hit) < hit.r + 28) showPanel(hit);
+        else hidePanel();
+      } else {
+        selected = null;
+        hidePanel();
+      }
+    }
+    canvas.addEventListener('pointerdown', (evt) => {
+      pointerDown = true;
+      canvas.setPointerCapture(evt.pointerId);
+      pointTo(toCanvasPos(evt));
+    });
+    canvas.addEventListener('pointermove', (evt) => {
+      if (!pointerDown) return;
+      const pos = toCanvasPos(evt);
+      player.tx = pos.x; player.ty = pos.y;
+    });
+    canvas.addEventListener('pointerup', () => { pointerDown = false; });
+    canvas.addEventListener('pointerleave', () => { pointerDown = false; });
+
+    function ensureLoop() {
+      if (!raf) raf = requestAnimationFrame(loop);
+    }
+
+    function updateFromFarm(data) {
+      buildInteractables(data);
+      ensureLoop();
+      draw();
+    }
+
+    return { updateFromFarm, hidePanel };
+  })();
+
   // ---------------- 農場ゲーム ----------------
   function setView(view) {
     state.view = view;
@@ -566,6 +848,7 @@
       } else {
         renderFarm(data);
       }
+      if (state.view === 'farm') farmGame.updateFromFarm(data);
     } catch (error) {
       if (!silent) console.error(error);
     }
@@ -800,6 +1083,7 @@
       buildings.appendChild(card);
     });
     state.farmSignature = farmSignature(data);
+    farmGame.updateFromFarm(data);
   }
 
   async function init() {

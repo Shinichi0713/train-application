@@ -263,6 +263,14 @@ footer a { color: var(--blue); }
 .room-actions { margin: 12px 0 16px; }
 .room-actions .big-btn { width: 100%; }
 
+.farm-scene-wrap { position: relative; margin: 12px 0 8px; border: 2px solid var(--line); border-radius: 16px; overflow: hidden; background: #dff3d8; }
+#farm-canvas { display: block; width: 100%; height: auto; cursor: pointer; touch-action: none; }
+.farm-action-panel { position: absolute; right: 12px; bottom: 12px; min-width: 220px; max-width: min(320px, calc(100% - 24px)); background: rgba(255,255,255,.96); border: 2px solid var(--line); border-radius: 14px; padding: 12px; box-shadow: 0 8px 24px rgba(0,0,0,.12); }
+.farm-action-panel h3 { margin: 0 0 6px; font-size: 16px; }
+.farm-action-panel p { margin: 4px 0; font-size: 13px; color: #556; }
+.farm-action-panel .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.farm-action-panel .small-btn { margin: 0; }
+
 .weak-list { display: grid; gap: 8px; }
 .weak-item { border-bottom: 1px dashed var(--line); padding: 8px 0; }
 .weak-label { font-weight: 700; }
