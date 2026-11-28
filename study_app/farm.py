@@ -14,20 +14,23 @@ from typing import Any, Dict
 
 # 作物: 種代はポイント(wallet)、収穫で食料を得る
 CROPS: Dict[str, Dict[str, Any]] = {
-    "cabbage": {"name": "キャベツ", "emoji": "🥬", "cost": 10, "grow": 30, "yield": 8, "resource": "food"},
-    "tomato": {"name": "トマト", "emoji": "🍅", "cost": 20, "grow": 60, "yield": 16, "resource": "food"},
-    "strawberry": {"name": "イチゴ", "emoji": "🍓", "cost": 35, "grow": 120, "yield": 30, "resource": "food"},
-    "sunflower": {"name": "ひまわり", "emoji": "🌻", "cost": 50, "grow": 180, "yield": 45, "resource": "food"},
+    "cabbage": {"name": "キャベツ", "emoji": "🥬", "cost": 10, "grow": 30, "yield": 8, "resource": "vegetable", "food_type": "野菜"},
+    "tomato": {"name": "トマト", "emoji": "🍅", "cost": 20, "grow": 60, "yield": 16, "resource": "vegetable", "food_type": "野菜"},
+    "strawberry": {"name": "イチゴ", "emoji": "🍓", "cost": 35, "grow": 120, "yield": 30, "resource": "fruit", "food_type": "くだもの"},
+    "sunflower": {"name": "ひまわり", "emoji": "🌻", "cost": 50, "grow": 180, "yield": 45, "resource": "fruit", "food_type": "くだもの"},
 }
 
-# どうぶつ: 購入はポイント(wallet)、一定時間ごとに食料を得る
+# どうぶつ: 購入はポイント(wallet)。畑の収穫物を与えると満腹度が上がり、一定以上で食料を生産する
 ANIMALS: Dict[str, Dict[str, Any]] = {
-    "chicken": {"name": "にわとり", "emoji": "🐔", "cost": 80, "interval": 90,
-                "product": "たまご", "product_emoji": "🥚", "yield": 10, "resource": "food"},
-    "rabbit": {"name": "うさぎ", "emoji": "🐰", "cost": 140, "interval": 150,
-               "product": "にんじん", "product_emoji": "🥕", "yield": 18, "resource": "food"},
-    "cow": {"name": "うし", "emoji": "🐄", "cost": 300, "interval": 240,
-            "product": "ぎゅうにゅう", "product_emoji": "🥛", "yield": 35, "resource": "food"},
+    "chicken": {"name": "にわとり", "emoji": "🐔", "cost": 80,
+                "product": "たまご", "product_emoji": "🥚", "yield": 10, "resource": "egg",
+                "fullness_need": 60, "favorite_food": ["vegetable", "fruit"]},
+    "rabbit": {"name": "うさぎ", "emoji": "🐰", "cost": 140,
+               "product": "にんじん", "product_emoji": "🥕", "yield": 18, "resource": "carrot",
+               "fullness_need": 70, "favorite_food": ["vegetable", "carrot"]},
+    "cow": {"name": "うし", "emoji": "🐄", "cost": 300,
+            "product": "ミルク", "product_emoji": "🥛", "yield": 35, "resource": "milk",
+            "fullness_need": 80, "favorite_food": ["vegetable", "fruit"]},
 }
 
 ANIMAL_PERSONALITIES: Dict[str, Dict[str, Any]] = {
@@ -44,27 +47,66 @@ ANIMAL_NICKNAMES = [
 ]
 
 
-# 建物: 購入はポイント(wallet)。農場の見た目と達成感のための要素
+# 建物: ポイントと資材で建設する
 BUILDINGS: Dict[str, Dict[str, Any]] = {
-    "barn": {"name": "こや", "emoji": "🏠", "cost": 200, "description": "農場が にぎやかに なる"},
-    "pond": {"name": "いけ", "emoji": "💧", "cost": 350, "description": "みずが たまって きれい"},
-    "windmill": {"name": "かざぐるま", "emoji": "🌬️", "cost": 500, "description": "かぜで くるくる まわります"},
+    "barn": {"name": "こや", "emoji": "🏠", "cost": {"points": 200, "wood": 15}, "description": "農場が にぎやかに なる"},
+    "pond": {"name": "いけ", "emoji": "💧", "cost": {"points": 350, "stone": 20}, "description": "みずが たまって きれい"},
+    "windmill": {"name": "かざぐるま", "emoji": "🌬️", "cost": {"points": 500, "wood": 20, "iron": 5}, "description": "かぜで くるくる まわります"},
+}
+
+# 道具: 資材とポイントで入手。次のグレードの道具や動作を解放する
+TOOLS: Dict[str, Dict[str, Any]] = {
+    "axe": {
+        "name": "オノ", "emoji": "🪓", "grade": 1, "prereq": None,
+        "cost": {"points": 100, "wood": 5, "stone": 2},
+        "description": "木を うまく 切れる。森で 追加の木材を 集められる。",
+        "unlocks": ["chop_bonus"],
+        "unlock_label": "木材ボーナス採集",
+    },
+    "pickaxe": {
+        "name": "ツルハシ", "emoji": "⛏️", "grade": 1, "prereq": None,
+        "cost": {"points": 120, "wood": 5, "stone": 5},
+        "description": "石炭こうみゃくで 採掘できるようになる。",
+        "unlocks": ["mine_coal"],
+        "unlock_label": "石炭こうみゃく採掘",
+    },
+    "watering_can": {
+        "name": "ジョウロ", "emoji": "🪣", "grade": 1, "prereq": None,
+        "cost": {"points": 80, "wood": 8},
+        "description": "畑に水をやって、作物の成長を早められる。",
+        "unlocks": ["water_crop"],
+        "unlock_label": "作物に水やり",
+    },
+    "steel_pickaxe": {
+        "name": "鋼のツルハシ", "emoji": "⚒️", "grade": 2, "prereq": "pickaxe",
+        "cost": {"points": 250, "iron": 5, "wood": 10},
+        "description": "鉄こうみゃくで 採掘できるようになる。",
+        "unlocks": ["mine_iron"],
+        "unlock_label": "鉄こうみゃく採掘",
+    },
+    "hammer": {
+        "name": "ハンマー", "emoji": "🔨", "grade": 2, "prereq": "axe",
+        "cost": {"points": 220, "iron": 4, "wood": 8},
+        "description": "丈夫な工作ができる。採集した資材を まとめて 加工できる。",
+        "unlocks": ["craft_bundle"],
+        "unlock_label": "資材加工",
+    },
 }
 
 # 働き手候補: 学習イベントで出会い、牧場で雇用できる
 WORKER_CANDIDATES: Dict[str, Dict[str, Any]] = {
     "taro": {
         "name": "タロウ", "emoji": "👨‍🌾", "role": "農夫",
-        "description": "畑の手伝いが得意。食料を作ってくれる。",
-        "hire_cost": {"points": 120, "food": 10},
-        "work_interval": 120, "yield": {"food": 12},
+        "description": "畑の手伝いが得意。野菜を育ててくれる。",
+        "hire_cost": {"points": 120, "vegetable": 10},
+        "work_interval": 120, "yield": {"vegetable": 12},
         "encounter": {"type": "correct_streak", "value": 5, "text": "畑仕事が得意な タロウ と出会った！"},
     },
     "hana": {
         "name": "ハナ", "emoji": "👩‍🌾", "role": "酪農家",
-        "description": "どうぶつの世話が上手。食料を集めてくれる。",
-        "hire_cost": {"points": 150, "food": 8, "wood": 5},
-        "work_interval": 150, "yield": {"food": 14},
+        "description": "どうぶつの世話が上手。たまごやミルクを集めてくれる。",
+        "hire_cost": {"points": 150, "carrot": 8, "wood": 5},
+        "work_interval": 150, "yield": {"egg": 8, "milk": 6},
         "encounter": {"type": "total_correct", "value": 30, "text": "どうぶつ好きの ハナ と出会った！"},
     },
     "ken": {
@@ -94,22 +136,39 @@ WORKER_CANDIDATES: Dict[str, Dict[str, Any]] = {
 # 採集スポット: 時間がたつと資材を集められる（農場内で資材を貯める）
 GATHER_SPOTS: Dict[str, Dict[str, Any]] = {
     "forest": {"name": "もり", "emoji": "🌲", "resource": "wood", "resource_name": "木材",
-               "interval": 45, "yield": 6, "description": "木を きって 木材を 集める"},
+               "interval": 45, "yield": 6, "description": "木を きって 木材を 集める", "required_tool": None},
     "quarry": {"name": "いしきりば", "emoji": "🪨", "resource": "stone", "resource_name": "石",
-               "interval": 60, "yield": 5, "description": "石を ほって 石材を 集める"},
+               "interval": 60, "yield": 5, "description": "石を ほって 石材を 集める", "required_tool": None},
     "coal_mine": {"name": "石炭こうみゃく", "emoji": "⛏️", "resource": "coal", "resource_name": "石炭",
-                  "interval": 90, "yield": 4, "description": "石炭こうみゃくで 石炭を 掘る"},
+                  "interval": 90, "yield": 4, "description": "石炭こうみゃくで 石炭を 掘る", "required_tool": "pickaxe"},
     "iron_mine": {"name": "鉄こうみゃく", "emoji": "🔩", "resource": "iron", "resource_name": "鉄",
-                  "interval": 120, "yield": 3, "description": "鉄こうみゃくで 鉄を 掘る"},
+                  "interval": 120, "yield": 3, "description": "鉄こうみゃくで 鉄を 掘る", "required_tool": "steel_pickaxe"},
 }
 
-RESOURCE_META: Dict[str, Dict[str, str]] = {
-    "food": {"name": "食料", "emoji": "🍚"},
-    "wood": {"name": "木材", "emoji": "🪵"},
-    "stone": {"name": "石", "emoji": "🪨"},
-    "coal": {"name": "石炭", "emoji": "⚫"},
-    "iron": {"name": "鉄", "emoji": "🔩"},
+RESOURCE_META: Dict[str, Dict[str, Any]] = {
+    "vegetable": {"name": "野菜", "emoji": "🥬", "category": "food", "feed_value": 2, "eat_value": 12},
+    "fruit": {"name": "くだもの", "emoji": "🍓", "category": "food", "feed_value": 2, "eat_value": 10},
+    "egg": {"name": "たまご", "emoji": "🥚", "category": "food", "feed_value": 1, "eat_value": 15},
+    "milk": {"name": "ミルク", "emoji": "🥛", "category": "food", "feed_value": 1, "eat_value": 14},
+    "carrot": {"name": "にんじん", "emoji": "🥕", "category": "food", "feed_value": 2, "eat_value": 8},
+    "feed": {"name": "飼料", "emoji": "🌾", "category": "food", "feed_value": 0, "eat_value": 4},
+    "wood": {"name": "木材", "emoji": "🪵", "category": "material", "feed_value": 0, "eat_value": 0},
+    "stone": {"name": "石", "emoji": "🪨", "category": "material", "feed_value": 0, "eat_value": 0},
+    "coal": {"name": "石炭", "emoji": "⚫", "category": "material", "feed_value": 0, "eat_value": 0},
+    "iron": {"name": "鉄", "emoji": "🔩", "category": "material", "feed_value": 0, "eat_value": 0},
 }
+
+# 主人公の空腹度: 時間で上がる。食べ物で下げる。
+HUNGER_MAX = 100
+HUNGER_INTERVAL_SECONDS = 120  # この秒数ごとに+1
+HUNGER_WARNING = 70
+HUNGER_STARVING = 100
+HUNGER_PENALTY_POINTS_PER_TICK = 2  # 満腹度が限界を超えて放置された時のポイント減少
+
+# どうぶつ: 畑の収穫物を与えると満腹度が上がり、一定以上で食料を生産
+ANIMAL_FULLNESS_MAX = 100
+ANIMAL_FULLNESS_DECAY_PER_HOUR = 8  # 放置で減る（さぼると赤字）
+ANIMAL_PRODUCE_THRESHOLD = 80
 
 ANIMAL_EVENTS = [
     {"key": "bonus_food", "name": "おまけ", "message": "{nickname} が うれしそう！ {product} を おまけで {bonus} こ くれたよ。", "bonus": 3, "bond": 1, "weight": 18},
@@ -177,6 +236,7 @@ def catalog() -> Dict[str, Any]:
         "crops": [{"key": key, **value} for key, value in CROPS.items()],
         "animals": [{"key": key, **value} for key, value in ANIMALS.items()],
         "buildings": [{"key": key, **value} for key, value in BUILDINGS.items()],
+        "tools": [{"key": key, **value} for key, value in TOOLS.items()],
         "gather_spots": [{"key": key, **value} for key, value in GATHER_SPOTS.items()],
         "resources": [{"key": key, **value} for key, value in RESOURCE_META.items()],
         "personalities": [{"key": key, **value} for key, value in ANIMAL_PERSONALITIES.items()],

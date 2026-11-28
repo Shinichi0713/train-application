@@ -94,6 +94,36 @@ class FarmCollectWorkerRequest(BaseModel):
     worker_key: str
 
 
+class FarmConvertFeedRequest(BaseModel):
+    account_id: int
+    resource: str
+    amount: int = Field(default=1, ge=1, le=99)
+
+
+class FarmBuyToolRequest(BaseModel):
+    account_id: int
+    tool: str
+
+
+class FarmToolActionRequest(BaseModel):
+    account_id: int
+    action: str
+    plot: Optional[int] = Field(default=None, ge=0, le=17)
+
+
+class FarmFeedAnimalRequest(BaseModel):
+    account_id: int
+    animal_id: int
+    resource: str
+    amount: int = Field(default=1, ge=1, le=99)
+
+
+class FarmEatRequest(BaseModel):
+    account_id: int
+    resource: str
+    amount: int = Field(default=1, ge=1, le=99)
+
+
 class AnswerResponse(BaseModel):
     correct: bool
     correct_answer: str

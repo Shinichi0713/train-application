@@ -176,11 +176,11 @@ class WorkerTests(unittest.TestCase):
         taro = next(w for w in farm["workers"] if w["key"] == "taro")
         self.assertFalse(taro["hired"])
 
-        # 雇用にはポイント+食料が必要。食料を足す
+        # 雇用にはポイント+野菜が必要。野菜を足す
         import sqlite3
         with sqlite3.connect(self._db_path()) as conn:
             conn.execute(
-                "INSERT INTO farm_inventory (account_id, resource, amount) VALUES (?, 'food', 20) "
+                "INSERT INTO farm_inventory (account_id, resource, amount) VALUES (?, 'vegetable', 20) "
                 "ON CONFLICT(account_id, resource) DO UPDATE SET amount = amount + 20",
                 (aid,),
             )
@@ -191,7 +191,7 @@ class WorkerTests(unittest.TestCase):
         self.assertEqual(before_wallet - after["wallet"], 120)
         taro = next(w for w in farm["workers"] if w["key"] == "taro")
         self.assertTrue(taro["hired"])
-        self.assertEqual(farm["inventory"]["food"], 10)  # 20 - 10
+        self.assertEqual(farm["inventory"]["vegetable"], 10)  # 20 - 10
 
         # まだ働き中は受け取れない
         with self.assertRaises(ValueError):
@@ -199,7 +199,7 @@ class WorkerTests(unittest.TestCase):
 
         self._set_worker_ready("taro")
         farm = self.store.collect_worker(aid, "taro")
-        self.assertEqual(farm["inventory"]["food"], 22)  # 10 + 12
+        self.assertEqual(farm["inventory"]["vegetable"], 22)  # 10 + 12
 
     def test_encounter_not_duplicated(self):
         aid = self.account["id"]
@@ -268,10 +268,10 @@ class FarmTests(unittest.TestCase):
 
         self._set_plot_time(0, 60)
         data = self.store.harvest(account_id, 0)
-        # お金(ポイント)は勉強で貯める。収穫は食料を増やす
+        # お金(ポイント)は勉強で貯める。収穫は野菜を増やす
         self.assertEqual(data["account"]["wallet"], 990)
         self.assertEqual(data["account"]["total_points"], 1000)
-        self.assertEqual(data["inventory"]["food"], 8)
+        self.assertEqual(data["inventory"]["vegetable"], 8)
         self.assertIsNone(data["plots"][0]["crop"])
 
     def test_animal_buy_and_collect_gives_food(self):
@@ -283,14 +283,29 @@ class FarmTests(unittest.TestCase):
         self.assertTrue(animal["nickname"])
         self.assertIn(animal["personality"], {"genki", "otonashii", "kuishinbo", "nonbiri", "nakayoshi"})
         self.assertEqual(animal["bond"], 0)
+        self.assertEqual(animal["fullness"], 0)
 
-        self._set_animal_ready()
-        data = self.store.collect_animal(account_id, data["animals"][0]["id"])
+        # 畑の収穫物を与えると満腹度が上がり、生産できる
+        import sqlite3
+        conn = sqlite3.connect(self.store.path)
+        try:
+            conn.execute("INSERT OR REPLACE INTO farm_inventory (account_id, resource, amount) VALUES (?, 'vegetable', 5)", (account_id,))
+            conn.commit()
+        finally:
+            conn.close()
+        animal_id = data["animals"][0]["id"]
+        data = self.store.feed_animal(account_id, animal_id, "vegetable", 1)
+        self.assertGreater(data["animals"][0]["fullness"], 0)
+        with self.assertRaises(ValueError):
+            self.store.collect_animal(account_id, animal_id)
+        data = self.store.feed_animal(account_id, animal_id, "vegetable", 2)
+        self.assertTrue(data["animals"][0]["ready"])
+        data = self.store.collect_animal(account_id, animal_id)
         self.assertEqual(data["account"]["wallet"], 920)
         self.assertIn("event", data)
         bonus = data["event"]["bonus_yield"]
-        self.assertGreaterEqual(data["inventory"]["food"], 10)
-        self.assertEqual(data["inventory"]["food"], 10 + bonus)
+        self.assertGreaterEqual(data["inventory"]["egg"], 10)
+        self.assertEqual(data["inventory"]["egg"], 10 + bonus)
         collected = data["animals"][0]
         self.assertGreaterEqual(collected["bond"], 1)
         self.assertTrue(collected["last_event"])
@@ -305,12 +320,53 @@ class FarmTests(unittest.TestCase):
         data = self.store.gather(account_id, "forest")
         self.assertEqual(data["inventory"]["wood"], 12)
 
+        # 上級こうみゃくは道具が必要
+        with self.assertRaises(ValueError):
+            self.store.gather(account_id, "coal_mine")
+        import sqlite3
+        conn = sqlite3.connect(self.store.path)
+        try:
+            conn.execute("INSERT OR REPLACE INTO farm_inventory (account_id, resource, amount) VALUES (?, 'wood', 20)", (account_id,))
+            conn.execute("INSERT OR REPLACE INTO farm_inventory (account_id, resource, amount) VALUES (?, 'stone', 20)", (account_id,))
+            conn.execute("INSERT OR REPLACE INTO farm_inventory (account_id, resource, amount) VALUES (?, 'iron', 20)", (account_id,))
+            conn.commit()
+        finally:
+            conn.close()
+        self.store.buy_tool(account_id, "pickaxe")
+        self.store.buy_tool(account_id, "steel_pickaxe")
         self._set_gather_ready("coal_mine")
         self._set_gather_ready("iron_mine")
         data = self.store.gather(account_id, "coal_mine")
         data = self.store.gather(account_id, "iron_mine")
         self.assertEqual(data["inventory"]["coal"], 4)
-        self.assertEqual(data["inventory"]["iron"], 3)
+        self.assertEqual(data["inventory"]["iron"], 18)  # 20 - 5(steel_pickaxe) + 3
+
+    def test_tool_progression_and_actions(self):
+        account_id = self.account["id"]
+        import sqlite3
+        conn = sqlite3.connect(self.store.path)
+        try:
+            conn.execute("INSERT OR REPLACE INTO farm_inventory (account_id, resource, amount) VALUES (?, 'wood', 30)", (account_id,))
+            conn.execute("INSERT OR REPLACE INTO farm_inventory (account_id, resource, amount) VALUES (?, 'stone', 20)", (account_id,))
+            conn.execute("INSERT OR REPLACE INTO farm_inventory (account_id, resource, amount) VALUES (?, 'iron', 20)", (account_id,))
+            conn.commit()
+        finally:
+            conn.close()
+        # 次グレードは前提が必要
+        with self.assertRaises(ValueError):
+            self.store.buy_tool(account_id, "hammer")
+        # prereqなしで買える
+        data = self.store.buy_tool(account_id, "axe")
+        self.assertTrue(any(t["key"] == "axe" and t["owned"] for t in data["tools"]))
+        data = self.store.buy_tool(account_id, "hammer")
+        self.assertTrue(any(t["key"] == "hammer" and t["owned"] for t in data["tools"]))
+        # 道具アクション
+        before_wood = data["inventory"]["wood"]
+        data = self.store.use_tool_action(account_id, "chop_bonus")
+        self.assertEqual(data["inventory"]["wood"], before_wood + 4)
+        before_iron = data["inventory"]["iron"]
+        data = self.store.use_tool_action(account_id, "craft_bundle")
+        self.assertEqual(data["inventory"]["iron"], before_iron + 1)
 
     def test_expand_and_insufficient_points(self):
         account_id = self.account["id"]
@@ -386,7 +442,8 @@ class ApiTests(unittest.TestCase):
         data = self.main.get_farm(account_id)
         self.assertEqual(data["farm"]["unlocked_plots"], 9)
         self.assertEqual(len(data["catalog"]["crops"]), 4)
-        self.assertIn("food", data["inventory"])
+        self.assertIn("vegetable", data["inventory"])
+        self.assertIn("feed", data["inventory"])
         self.assertEqual(len(data["gathers"]), 4)
 
         data = self.main.farm_plant(FarmPlantRequest(account_id=account_id, plot=0, crop="cabbage"))
@@ -399,18 +456,27 @@ class ApiTests(unittest.TestCase):
         with self.assertRaises(HTTPException):  # まだ産んでいない
             self.main.farm_collect_animal(FarmCollectRequest(account_id=account_id, animal_id=data["animals"][0]["id"]))
 
+        # 建物はポイント+資材が必要
+        import sqlite3
+        with sqlite3.connect(self.main.store.path) as conn:
+            conn.execute(
+                "INSERT INTO farm_inventory (account_id, resource, amount) VALUES (?, 'wood', 40) "
+                "ON CONFLICT(account_id, resource) DO UPDATE SET amount = amount + 40",
+                (account_id,),
+            )
         data = self.main.farm_buy_building(FarmBuildingRequest(account_id=account_id, building="barn"))
         self.assertEqual(data["buildings"][0]["count"], 1)
         data = self.main.farm_buy_building(FarmBuildingRequest(account_id=account_id, building="barn"))
         self.assertEqual(data["buildings"][0]["count"], 2)
+        self.assertEqual(data["inventory"]["wood"], 10)  # 40 - 15 - 15
 
         data = self.main.farm_expand(FarmAccountRequest(account_id=account_id))
         self.assertEqual(data["farm"]["unlocked_plots"], 12)
         self.assertEqual(data["account"]["wallet"], starting_wallet - (10 + 80 + 200 * 2 + 150))
 
-        # 採集: 資材は農場内で貯める
+        # 採集: 資材は農場内で貯める（木材は建物で10残っている）
         data = self.main.farm_gather(FarmGatherRequest(account_id=account_id, spot="forest"))
-        self.assertEqual(data["inventory"]["wood"], 6)
+        self.assertEqual(data["inventory"]["wood"], 16)
         with self.assertRaises(HTTPException):
             self.main.farm_gather(FarmGatherRequest(account_id=account_id, spot="forest"))
 
@@ -439,11 +505,11 @@ class ApiTests(unittest.TestCase):
             encountered.extend(res.get("encounters", []))
         self.assertTrue(any(e["worker_key"] == "taro" for e in encountered))
 
-        # 食料を付与して雇用
+        # 野菜を付与して雇用
         import sqlite3
         with sqlite3.connect(self.main.store.path) as conn:
             conn.execute(
-                "INSERT INTO farm_inventory (account_id, resource, amount) VALUES (?, 'food', 20) "
+                "INSERT INTO farm_inventory (account_id, resource, amount) VALUES (?, 'vegetable', 20) "
                 "ON CONFLICT(account_id, resource) DO UPDATE SET amount = amount + 20",
                 (aid,),
             )
@@ -460,7 +526,7 @@ class ApiTests(unittest.TestCase):
                 (moment, aid, "taro"),
             )
         data = self.main.farm_collect_worker(FarmCollectWorkerRequest(account_id=aid, worker_key="taro"))
-        self.assertGreaterEqual(data["inventory"]["food"], 22)
+        self.assertGreaterEqual(data["inventory"]["vegetable"], 22)
 
 
 if __name__ == "__main__":
