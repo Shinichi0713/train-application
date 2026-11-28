@@ -84,6 +84,8 @@ class ProgressStore:
                     account_id INTEGER PRIMARY KEY,
                     exp INTEGER NOT NULL DEFAULT 0,
                     unlocked_plots INTEGER NOT NULL DEFAULT 9,
+                    hunger INTEGER NOT NULL DEFAULT 0,
+                    hunger_updated_at TEXT,
                     created_at TEXT NOT NULL DEFAULT (datetime('now','localtime'))
                 )
             """)
@@ -105,7 +107,8 @@ class ProgressStore:
                     nickname TEXT,
                     personality TEXT,
                     bond INTEGER NOT NULL DEFAULT 0,
-                    last_event TEXT
+                    last_event TEXT,
+                    fullness INTEGER NOT NULL DEFAULT 0
                 )
             """)
             conn.execute("""
@@ -152,6 +155,14 @@ class ProgressStore:
                     PRIMARY KEY (account_id, worker_key)
                 )
             """)
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS farm_tools (
+                    account_id INTEGER NOT NULL,
+                    tool_key TEXT NOT NULL,
+                    acquired_at TEXT NOT NULL DEFAULT (datetime('now','localtime')),
+                    PRIMARY KEY (account_id, tool_key)
+                )
+            """)
 
             # 既存DBからの移行
             columns = [row[1] for row in conn.execute("PRAGMA table_info(answers)")]
@@ -168,6 +179,21 @@ class ProgressStore:
                 conn.execute("ALTER TABLE farm_animals ADD COLUMN personality TEXT")
                 conn.execute("ALTER TABLE farm_animals ADD COLUMN bond INTEGER NOT NULL DEFAULT 0")
                 conn.execute("ALTER TABLE farm_animals ADD COLUMN last_event TEXT")
+            if "fullness" not in animal_columns:
+                conn.execute("ALTER TABLE farm_animals ADD COLUMN fullness INTEGER NOT NULL DEFAULT 0")
+
+            farm_state_columns = [row[1] for row in conn.execute("PRAGMA table_info(farm_state)")]
+            if "hunger" not in farm_state_columns:
+                conn.execute("ALTER TABLE farm_state ADD COLUMN hunger INTEGER NOT NULL DEFAULT 0")
+                conn.execute("ALTER TABLE farm_state ADD COLUMN hunger_updated_at TEXT")
+
+            # 旧食料(food)を野菜(vegetable)へ移行
+            conn.execute(
+                "INSERT INTO farm_inventory (account_id, resource, amount) "
+                "SELECT account_id, 'vegetable', amount FROM farm_inventory WHERE resource = 'food' "
+                "ON CONFLICT(account_id, resource) DO UPDATE SET amount = amount + excluded.amount"
+            )
+            conn.execute("DELETE FROM farm_inventory WHERE resource = 'food'")
 
             count = conn.execute("SELECT COUNT(*) FROM accounts").fetchone()[0]
             if count == 0:
@@ -274,6 +300,7 @@ class ProgressStore:
             conn.execute("DELETE FROM farm_gathers WHERE account_id = ?", (account_id,))
             conn.execute("DELETE FROM mission_claims WHERE account_id = ?", (account_id,))
             conn.execute("DELETE FROM farm_workers WHERE account_id = ?", (account_id,))
+            conn.execute("DELETE FROM farm_tools WHERE account_id = ?", (account_id,))
             conn.execute("DELETE FROM farm_state WHERE account_id = ?", (account_id,))
             conn.execute("DELETE FROM accounts WHERE id = ?", (account_id,))
 
@@ -441,11 +468,11 @@ class ProgressStore:
     def _mission_templates(self) -> List[Dict[str, Any]]:
         return [
             {"key": "daily_answer_5", "title": "5問チャレンジ", "description": "きょう 5問 とこう",
-             "type": "answered", "goal": 5, "reward_points": 20, "reward_resources": {"food": 3}},
+             "type": "answered", "goal": 5, "reward_points": 20, "reward_resources": {"vegetable": 3}},
             {"key": "daily_correct_3", "title": "3問せいかい", "description": "きょう 3問 せいかいしよう",
              "type": "correct", "goal": 3, "reward_points": 15, "reward_resources": {"wood": 2}},
             {"key": "daily_answer_10", "title": "10問マスター", "description": "きょう 10問 といて 牧場を応援",
-             "type": "answered", "goal": 10, "reward_points": 30, "reward_resources": {"stone": 2, "food": 2}},
+             "type": "answered", "goal": 10, "reward_points": 30, "reward_resources": {"stone": 2, "fruit": 2}},
         ]
 
     def _missions_status(self, account_id: int, today: str, today_total: int, today_correct: int) -> List[Dict[str, Any]]:
@@ -563,6 +590,24 @@ class ProgressStore:
             raise ValueError(f"ポイントが 足りません（必要: {cost} pt）")
         conn.execute("UPDATE accounts SET wallet = wallet - ? WHERE id = ?", (cost, account_id))
 
+    def _spend_cost(self, conn, account_id: int, cost: Any) -> None:
+        """ポイント+資材の複合コスト、または従来のポイントコストを支払う。"""
+        if isinstance(cost, dict):
+            points = int(cost.get("points", 0))
+            resources = {k: int(v) for k, v in cost.items() if k != "points" and int(v) > 0}
+            if points:
+                self._spend(conn, account_id, points)
+            if resources:
+                inv = self._inventory(conn, account_id)
+                for resource, amount in resources.items():
+                    if inv.get(resource, 0) < amount:
+                        name = farm_catalog.RESOURCE_META.get(resource, {}).get("name", resource)
+                        raise ValueError(f"{name} が 足りません（必要: {amount}）")
+                for resource, amount in resources.items():
+                    self._add_resource(conn, account_id, resource, -amount)
+            return
+        self._spend(conn, account_id, int(cost))
+
     def _add_resource(self, conn, account_id: int, resource: str, amount: int) -> None:
         conn.execute(
             "INSERT INTO farm_inventory (account_id, resource, amount) VALUES (?, ?, ?) "
@@ -584,6 +629,45 @@ class ProgressStore:
             conn.row_factory = sqlite3.Row
             self._ensure_farm_state(conn, account_id)
             state = conn.execute("SELECT * FROM farm_state WHERE account_id = ?", (account_id,)).fetchone()
+            # 主人公の空腹度を時間経過で更新（さぼると赤字）
+            hunger = int(state["hunger"] or 0) if "hunger" in state.keys() else 0
+            hunger_updated_at = state["hunger_updated_at"] if "hunger_updated_at" in state.keys() else None
+            now_dt = datetime.now()
+            if hunger_updated_at:
+                try:
+                    last_dt = datetime.fromisoformat(hunger_updated_at)
+                    elapsed = max(0, int((now_dt - last_dt).total_seconds()))
+                except Exception:
+                    elapsed = 0
+            else:
+                elapsed = 0
+            ticks = elapsed // farm_catalog.HUNGER_INTERVAL_SECONDS if farm_catalog.HUNGER_INTERVAL_SECONDS else 0
+            if ticks > 0:
+                old_hunger = hunger
+                hunger = min(farm_catalog.HUNGER_MAX, hunger + ticks)
+                # 空腹限界を超えて放置した分はポイント減少（赤字要素）
+                if old_hunger >= farm_catalog.HUNGER_MAX and hunger >= farm_catalog.HUNGER_MAX:
+                    penalty = ticks * farm_catalog.HUNGER_PENALTY_POINTS_PER_TICK
+                    conn.execute("UPDATE accounts SET wallet = MAX(0, wallet - ?) WHERE id = ?", (penalty, account_id))
+                elif hunger >= farm_catalog.HUNGER_MAX and old_hunger < farm_catalog.HUNGER_MAX:
+                    over_ticks = hunger - farm_catalog.HUNGER_MAX + max(0, ticks - (farm_catalog.HUNGER_MAX - old_hunger))
+                    # 簡易: 上限到達後の余剰tick分を軽く減点
+                    penalty = max(0, over_ticks) * farm_catalog.HUNGER_PENALTY_POINTS_PER_TICK
+                    if penalty:
+                        conn.execute("UPDATE accounts SET wallet = MAX(0, wallet - ?) WHERE id = ?", (penalty, account_id))
+                new_updated_at = (last_dt + timedelta(seconds=ticks * farm_catalog.HUNGER_INTERVAL_SECONDS)).isoformat(timespec="seconds") if hunger_updated_at else now_dt.isoformat(timespec="seconds")
+                conn.execute(
+                    "UPDATE farm_state SET hunger = ?, hunger_updated_at = ? WHERE account_id = ?",
+                    (hunger, new_updated_at, account_id),
+                )
+                state = conn.execute("SELECT * FROM farm_state WHERE account_id = ?", (account_id,)).fetchone()
+            elif not hunger_updated_at:
+                conn.execute(
+                    "UPDATE farm_state SET hunger_updated_at = ? WHERE account_id = ?",
+                    (now_dt.isoformat(timespec="seconds"), account_id),
+                )
+                state = conn.execute("SELECT * FROM farm_state WHERE account_id = ?", (account_id,)).fetchone()
+
             plot_rows = {
                 row["plot_index"]: row
                 for row in conn.execute("SELECT * FROM farm_plots WHERE account_id = ?", (account_id,))
@@ -594,6 +678,10 @@ class ProgressStore:
             building_rows = conn.execute(
                 "SELECT * FROM farm_buildings WHERE account_id = ? ORDER BY building", (account_id,)
             ).fetchall()
+            tool_rows = {
+                row["tool_key"]: row
+                for row in conn.execute("SELECT * FROM farm_tools WHERE account_id = ?", (account_id,))
+            }
             gather_rows = {
                 row["spot"]: row
                 for row in conn.execute("SELECT * FROM farm_gathers WHERE account_id = ?", (account_id,))
@@ -628,17 +716,19 @@ class ProgressStore:
             animal = farm_catalog.ANIMALS.get(row["animal"])
             if not animal:
                 continue
-            remaining = farm_catalog.remaining_seconds(row["ready_at"])
             personality_key = row["personality"] if "personality" in row.keys() and row["personality"] else "genki"
             personality = farm_catalog.ANIMAL_PERSONALITIES.get(personality_key, farm_catalog.ANIMAL_PERSONALITIES["genki"])
             nickname = row["nickname"] if "nickname" in row.keys() and row["nickname"] else animal["name"]
             bond = row["bond"] if "bond" in row.keys() and row["bond"] is not None else 0
             last_event = row["last_event"] if "last_event" in row.keys() else None
+            fullness = self._animal_fullness(row)
+            need = int(animal.get("fullness_need", farm_catalog.ANIMAL_PRODUCE_THRESHOLD))
             animals.append({
                 "id": row["id"], "key": row["animal"], "name": animal["name"], "emoji": animal["emoji"],
                 "product": animal["product"], "product_emoji": animal["product_emoji"],
                 "yield": animal["yield"], "resource": animal["resource"],
-                "ready": remaining == 0, "remaining": remaining,
+                "ready": fullness >= need, "remaining": 0,
+                "fullness": fullness, "fullness_need": need,
                 "nickname": nickname, "personality": personality_key,
                 "personality_name": personality["name"], "personality_emoji": personality["emoji"],
                 "personality_description": personality["description"],
@@ -655,17 +745,39 @@ class ProgressStore:
                 "count": row["count"], "description": building["description"],
             })
 
+        tools = []
+        for key, tool in farm_catalog.TOOLS.items():
+            owned = key in tool_rows
+            prereq = tool.get("prereq")
+            prereq_met = prereq is None or prereq in tool_rows
+            tools.append({
+                "key": key, "name": tool["name"], "emoji": tool["emoji"],
+                "grade": tool["grade"], "prereq": prereq,
+                "prereq_name": farm_catalog.TOOLS.get(prereq, {}).get("name") if prereq else None,
+                "cost": tool["cost"], "description": tool["description"],
+                "unlocks": tool.get("unlocks", []),
+                "unlock_label": tool.get("unlock_label", ""),
+                "owned": owned,
+                "acquired_at": tool_rows[key]["acquired_at"] if owned else None,
+                "prereq_met": prereq_met,
+            })
+
         gathers = []
         for key, spot in farm_catalog.GATHER_SPOTS.items():
             row = gather_rows.get(key)
             ready_at = row["ready_at"] if row else farm_catalog.now_iso()
             remaining = farm_catalog.remaining_seconds(ready_at)
+            required_tool = spot.get("required_tool")
+            tool_owned = required_tool is None or required_tool in tool_rows
             gathers.append({
                 "key": key, "name": spot["name"], "emoji": spot["emoji"],
                 "resource": spot["resource"], "resource_name": spot["resource_name"],
                 "yield": spot["yield"], "interval": spot["interval"],
                 "description": spot["description"],
-                "ready": remaining == 0, "remaining": remaining,
+                "ready": remaining == 0 and tool_owned, "remaining": remaining,
+                "required_tool": required_tool,
+                "required_tool_name": farm_catalog.TOOLS.get(required_tool, {}).get("name") if required_tool else None,
+                "locked": not tool_owned,
             })
 
         workers = []
@@ -706,11 +818,14 @@ class ProgressStore:
                 "exp_to_next": 100 - state["exp"] % 100,
                 "unlocked_plots": unlocked,
                 "max_plots": farm_catalog.MAX_PLOTS,
+                "hunger": int(state["hunger"] or 0) if "hunger" in state.keys() else 0,
+                "hunger_max": farm_catalog.HUNGER_MAX,
             },
             "inventory": inventory,
             "plots": plots,
             "animals": animals,
             "buildings": buildings,
+            "tools": tools,
             "gathers": gathers,
             "workers": workers,
             "catalog": farm_catalog.catalog(),
@@ -759,6 +874,20 @@ class ProgressStore:
             )
         return self.get_farm(account_id)
 
+    def _animal_fullness(self, row) -> int:
+        """満腹度を取得（放置による減衰を反映）。ready_atを最終更新時刻として使う。"""
+        base = row["fullness"] if "fullness" in row.keys() and row["fullness"] is not None else 0
+        updated_at = row["ready_at"] if "ready_at" in row.keys() else None
+        if updated_at:
+            try:
+                updated = datetime.fromisoformat(updated_at)
+                hours = max(0.0, (datetime.now() - updated).total_seconds() / 3600)
+                decay = int(hours * farm_catalog.ANIMAL_FULLNESS_DECAY_PER_HOUR)
+                base = base - decay
+            except Exception:
+                pass
+        return max(0, min(farm_catalog.ANIMAL_FULLNESS_MAX, int(base)))
+
     def buy_animal(self, account_id: int, animal_key: str) -> Dict[str, Any]:
         with self.lock, self._connect() as conn:
             conn.row_factory = sqlite3.Row
@@ -766,7 +895,7 @@ class ProgressStore:
             if not animal:
                 raise ValueError("そのどうぶつは いません")
             self._spend(conn, account_id, animal["cost"])
-            ready_at = (datetime.now() + timedelta(seconds=animal["interval"])).isoformat(timespec="seconds")
+            now = farm_catalog.now_iso()
             rng = random.Random()
             existing = {
                 row["nickname"]
@@ -778,12 +907,55 @@ class ProgressStore:
             nickname = farm_catalog.pick_nickname(rng, existing)
             personality = farm_catalog.pick_personality(rng)
             conn.execute(
-                "INSERT INTO farm_animals (account_id, animal, ready_at, nickname, personality, bond, last_event) "
-                "VALUES (?, ?, ?, ?, ?, 0, NULL)",
-                (account_id, animal_key, ready_at, nickname, personality),
+                "INSERT INTO farm_animals (account_id, animal, ready_at, nickname, personality, bond, last_event, fullness) "
+                "VALUES (?, ?, ?, ?, ?, 0, NULL, 0)",
+                (account_id, animal_key, now, nickname, personality),
             )
             conn.execute("UPDATE farm_state SET exp = exp + 10 WHERE account_id = ?", (account_id,))
         return self.get_farm(account_id)
+
+    def feed_animal(self, account_id: int, animal_id: int, resource: str, amount: int = 1) -> Dict[str, Any]:
+        if amount < 1:
+            raise ValueError("あげる数は1以上にしてください")
+        meta = farm_catalog.RESOURCE_META.get(resource)
+        if not meta or meta.get("category") != "food" or int(meta.get("feed_value", 0)) <= 0:
+            raise ValueError("その食べ物は どうぶつに あげられません")
+        # 畑の収穫物・飼料を中心に許可
+        if resource not in {"vegetable", "fruit", "carrot", "feed"}:
+            raise ValueError("畑の収穫物や飼料を あげてください")
+        with self.lock, self._connect() as conn:
+            conn.row_factory = sqlite3.Row
+            self._ensure_farm_state(conn, account_id)
+            row = conn.execute(
+                "SELECT * FROM farm_animals WHERE id = ? AND account_id = ?",
+                (animal_id, account_id),
+            ).fetchone()
+            if not row or row["animal"] not in farm_catalog.ANIMALS:
+                raise ValueError("どうぶつが 見つかりません")
+            inv = self._inventory(conn, account_id)
+            if inv.get(resource, 0) < amount:
+                raise ValueError(f"{meta['name']} が 足りません")
+            self._add_resource(conn, account_id, resource, -amount)
+
+            animal_def = farm_catalog.ANIMALS[row["animal"]]
+            fullness = self._animal_fullness(row)
+            gain_per = int(meta.get("feed_value", 1)) * 12
+            # 好物ボーナス
+            if resource in animal_def.get("favorite_food", []):
+                gain_per += 6
+            fullness = min(farm_catalog.ANIMAL_FULLNESS_MAX, fullness + gain_per * amount)
+            bond = row["bond"] if "bond" in row.keys() and row["bond"] is not None else 0
+            bond = bond + max(1, amount // 2)
+            nickname = row["nickname"] if "nickname" in row.keys() and row["nickname"] else animal_def["name"]
+            msg = f"{nickname} に {meta['name']} を あげた！ 満腹度 {fullness}%"
+            conn.execute(
+                "UPDATE farm_animals SET fullness = ?, bond = ?, last_event = ?, ready_at = ? WHERE id = ?",
+                (fullness, bond, msg, farm_catalog.now_iso(), animal_id),
+            )
+            conn.execute("UPDATE farm_state SET exp = exp + ? WHERE account_id = ?", (amount, account_id))
+        data = self.get_farm(account_id)
+        data["event"] = {"message": msg}
+        return data
 
     def collect_animal(self, account_id: int, animal_id: int) -> Dict[str, Any]:
         with self.lock, self._connect() as conn:
@@ -794,9 +966,11 @@ class ProgressStore:
             ).fetchone()
             if not row or row["animal"] not in farm_catalog.ANIMALS:
                 raise ValueError("どうぶつが 見つかりません")
-            if farm_catalog.remaining_seconds(row["ready_at"]) > 0:
-                raise ValueError("まだ とれるものが ありません")
             animal_def = farm_catalog.ANIMALS[row["animal"]]
+            fullness = self._animal_fullness(row)
+            need = int(animal_def.get("fullness_need", farm_catalog.ANIMAL_PRODUCE_THRESHOLD))
+            if fullness < need:
+                raise ValueError(f"満腹度が足りません（{fullness}% / 必要 {need}%）。畑の収穫物をあげてください。")
             personality_key = row["personality"] if "personality" in row.keys() and row["personality"] else "genki"
             nickname = row["nickname"] if "nickname" in row.keys() and row["nickname"] else animal_def["name"]
             bond = row["bond"] if "bond" in row.keys() and row["bond"] is not None else 0
@@ -808,10 +982,10 @@ class ProgressStore:
             new_bond = bond + event["bond_gain"]
             self._add_resource(conn, account_id, animal_def["resource"], total_yield)
             conn.execute("UPDATE farm_state SET exp = exp + 8 WHERE account_id = ?", (account_id,))
-            next_at = (datetime.now() + timedelta(seconds=animal_def["interval"])).isoformat(timespec="seconds")
+            new_fullness = max(0, fullness - need)
             conn.execute(
-                "UPDATE farm_animals SET ready_at = ?, bond = ?, last_event = ? WHERE id = ?",
-                (next_at, new_bond, event["message"], animal_id),
+                "UPDATE farm_animals SET fullness = ?, bond = ?, last_event = ?, ready_at = ? WHERE id = ?",
+                (new_fullness, new_bond, event["message"], farm_catalog.now_iso(), animal_id),
             )
         data = self.get_farm(account_id)
         data["event"] = event
@@ -824,6 +998,15 @@ class ProgressStore:
             spot = farm_catalog.GATHER_SPOTS.get(spot_key)
             if not spot:
                 raise ValueError("その場所では 集められません")
+            required_tool = spot.get("required_tool")
+            if required_tool:
+                has = conn.execute(
+                    "SELECT 1 FROM farm_tools WHERE account_id = ? AND tool_key = ?",
+                    (account_id, required_tool),
+                ).fetchone()
+                if not has:
+                    tool_name = farm_catalog.TOOLS.get(required_tool, {}).get("name", required_tool)
+                    raise ValueError(f"{tool_name} が必要です")
             row = conn.execute(
                 "SELECT ready_at FROM farm_gathers WHERE account_id = ? AND spot = ?",
                 (account_id, spot_key),
@@ -848,7 +1031,7 @@ class ProgressStore:
             building = farm_catalog.BUILDINGS.get(building_key)
             if not building:
                 raise ValueError("そのたてものは ありません")
-            self._spend(conn, account_id, building["cost"])
+            self._spend_cost(conn, account_id, building["cost"])
             conn.execute(
                 "INSERT INTO farm_buildings (account_id, building, count) VALUES (?, ?, 1) "
                 "ON CONFLICT(account_id, building) DO UPDATE SET count = count + 1",
@@ -856,6 +1039,106 @@ class ProgressStore:
             )
             conn.execute("UPDATE farm_state SET exp = exp + 20 WHERE account_id = ?", (account_id,))
         return self.get_farm(account_id)
+
+    def buy_tool(self, account_id: int, tool_key: str) -> Dict[str, Any]:
+        with self.lock, self._connect() as conn:
+            conn.row_factory = sqlite3.Row
+            self._ensure_farm_state(conn, account_id)
+            tool = farm_catalog.TOOLS.get(tool_key)
+            if not tool:
+                raise ValueError("その道具は ありません")
+            owned = conn.execute(
+                "SELECT 1 FROM farm_tools WHERE account_id = ? AND tool_key = ?",
+                (account_id, tool_key),
+            ).fetchone()
+            if owned:
+                raise ValueError("この道具は もう持っています")
+            prereq = tool.get("prereq")
+            if prereq:
+                has_prereq = conn.execute(
+                    "SELECT 1 FROM farm_tools WHERE account_id = ? AND tool_key = ?",
+                    (account_id, prereq),
+                ).fetchone()
+                if not has_prereq:
+                    prereq_name = farm_catalog.TOOLS.get(prereq, {}).get("name", prereq)
+                    raise ValueError(f"先に {prereq_name} が必要です")
+            self._spend_cost(conn, account_id, tool["cost"])
+            conn.execute(
+                "INSERT INTO farm_tools (account_id, tool_key, acquired_at) VALUES (?, ?, ?)",
+                (account_id, tool_key, farm_catalog.now_iso()),
+            )
+            conn.execute("UPDATE farm_state SET exp = exp + 15 WHERE account_id = ?", (account_id,))
+        data = self.get_farm(account_id)
+        data["event"] = {"message": f"{tool['emoji']} {tool['name']} を 手に入れた！ {tool.get('unlock_label','')}"}
+        return data
+
+    def use_tool_action(self, account_id: int, action: str, plot: Optional[int] = None) -> Dict[str, Any]:
+        with self.lock, self._connect() as conn:
+            conn.row_factory = sqlite3.Row
+            self._ensure_farm_state(conn, account_id)
+            # action -> required tool
+            required = None
+            for key, tool in farm_catalog.TOOLS.items():
+                if action in tool.get("unlocks", []):
+                    required = key
+                    break
+            if not required:
+                raise ValueError("その動作は できません")
+            has = conn.execute(
+                "SELECT 1 FROM farm_tools WHERE account_id = ? AND tool_key = ?",
+                (account_id, required),
+            ).fetchone()
+            if not has:
+                tool_name = farm_catalog.TOOLS[required]["name"]
+                raise ValueError(f"{tool_name} が必要です")
+
+            message = ""
+            if action == "water_crop":
+                if plot is None:
+                    raise ValueError("水をやる畑を選んでください")
+                state = conn.execute("SELECT unlocked_plots FROM farm_state WHERE account_id = ?", (account_id,)).fetchone()
+                if plot < 0 or plot >= state["unlocked_plots"]:
+                    raise ValueError("この畑は まだ ひらいていません")
+                row = conn.execute(
+                    "SELECT crop, planted_at FROM farm_plots WHERE account_id = ? AND plot_index = ?",
+                    (account_id, plot),
+                ).fetchone()
+                if not row or row["crop"] not in farm_catalog.CROPS:
+                    raise ValueError("この畑には 作物がありません")
+                crop = farm_catalog.CROPS[row["crop"]]
+                info = farm_catalog.growth_info(row["planted_at"], crop["grow"])
+                if info["ready"]:
+                    raise ValueError("この作物は もう収穫できます")
+                # 成長を30秒早める（planted_atを過去にずらす）
+                try:
+                    planted = datetime.fromisoformat(row["planted_at"])
+                except Exception:
+                    planted = datetime.now()
+                new_planted = planted - timedelta(seconds=30)
+                conn.execute(
+                    "UPDATE farm_plots SET planted_at = ? WHERE account_id = ? AND plot_index = ?",
+                    (new_planted.isoformat(timespec="seconds"), account_id, plot),
+                )
+                conn.execute("UPDATE farm_state SET exp = exp + 2 WHERE account_id = ?", (account_id,))
+                message = f"{crop['emoji']} {crop['name']} に水をやった！成長が少し早まりました。"
+            elif action == "chop_bonus":
+                self._add_resource(conn, account_id, "wood", 4)
+                conn.execute("UPDATE farm_state SET exp = exp + 3 WHERE account_id = ?", (account_id,))
+                message = "オノで木を切って、木材+4 を手に入れた！"
+            elif action == "craft_bundle":
+                inv = self._inventory(conn, account_id)
+                if inv.get("wood", 0) < 3 or inv.get("stone", 0) < 2:
+                    raise ValueError("資材加工には 木材3 と 石2 が必要です")
+                self._add_resource(conn, account_id, "wood", -3)
+                self._add_resource(conn, account_id, "stone", -2)
+                self._add_resource(conn, account_id, "iron", 1)
+                conn.execute("UPDATE farm_state SET exp = exp + 5 WHERE account_id = ?", (account_id,))
+                message = "資材を加工して 鉄+1 を作った！（木材-3, 石-2）"
+            else:
+                raise ValueError("その動作は まだ使えません")
+        data = self.get_farm(account_id)
+        data["event"] = {"message": message}
+        return data
 
     def expand_farm(self, account_id: int) -> Dict[str, Any]:
         with self.lock, self._connect() as conn:
@@ -947,6 +1230,53 @@ class ProgressStore:
         data["event"] = {"message": f"{worker['name']} が仕事を終えました！ {gained}"}
         return data
 
+    def convert_to_feed(self, account_id: int, resource: str, amount: int = 1) -> Dict[str, Any]:
+        if amount < 1:
+            raise ValueError("変換する数は1以上にしてください")
+        meta = farm_catalog.RESOURCE_META.get(resource)
+        if not meta or meta.get("category") != "food" or resource == "feed":
+            raise ValueError("その食材は飼料にできません")
+        feed_value = int(meta.get("feed_value", 0))
+        if feed_value <= 0:
+            raise ValueError("その食材は飼料にできません")
+        with self.lock, self._connect() as conn:
+            conn.row_factory = sqlite3.Row
+            self._ensure_farm_state(conn, account_id)
+            inventory = self._inventory(conn, account_id)
+            if inventory.get(resource, 0) < amount:
+                raise ValueError(f"{meta['name']} が足りません")
+            self._add_resource(conn, account_id, resource, -amount)
+            self._add_resource(conn, account_id, "feed", feed_value * amount)
+            conn.execute("UPDATE farm_state SET exp = exp + ? WHERE account_id = ?", (amount, account_id))
+        data = self.get_farm(account_id)
+        data["event"] = {"message": f"{meta['name']} {amount}個を 飼料 {feed_value * amount}個に変えました！"}
+        return data
+
+    def eat(self, account_id: int, resource: str, amount: int = 1) -> Dict[str, Any]:
+        if amount < 1:
+            raise ValueError("食べる数は1以上にしてください")
+        meta = farm_catalog.RESOURCE_META.get(resource)
+        eat_value = int(meta.get("eat_value", 0)) if meta else 0
+        if not meta or meta.get("category") != "food" or eat_value <= 0:
+            raise ValueError("その食べ物は 食べられません")
+        with self.lock, self._connect() as conn:
+            conn.row_factory = sqlite3.Row
+            self._ensure_farm_state(conn, account_id)
+            inventory = self._inventory(conn, account_id)
+            if inventory.get(resource, 0) < amount:
+                raise ValueError(f"{meta['name']} が足りません")
+            state = conn.execute("SELECT hunger FROM farm_state WHERE account_id = ?", (account_id,)).fetchone()
+            hunger = int(state["hunger"] or 0) if state and "hunger" in state.keys() else 0
+            self._add_resource(conn, account_id, resource, -amount)
+            new_hunger = max(0, hunger - eat_value * amount)
+            conn.execute(
+                "UPDATE farm_state SET hunger = ?, hunger_updated_at = ? WHERE account_id = ?",
+                (new_hunger, farm_catalog.now_iso(), account_id),
+            )
+        data = self.get_farm(account_id)
+        data["event"] = {"message": f"{meta['emoji']} {meta['name']}を食べて、空腹度が {new_hunger}% になりました！"}
+        return data
+
     def clear(self, account_id: Optional[int] = None) -> None:
         with self.lock, self._connect() as conn:
             if account_id is None:
@@ -954,6 +1284,7 @@ class ProgressStore:
                 conn.execute("DELETE FROM point_events")
                 conn.execute("DELETE FROM mission_claims")
                 conn.execute("DELETE FROM farm_workers")
+                conn.execute("DELETE FROM farm_tools")
                 conn.execute("DELETE FROM farm_plots")
                 conn.execute("DELETE FROM farm_animals")
                 conn.execute("DELETE FROM farm_buildings")
@@ -965,6 +1296,7 @@ class ProgressStore:
                 conn.execute("DELETE FROM point_events WHERE account_id = ?", (account_id,))
                 conn.execute("DELETE FROM mission_claims WHERE account_id = ?", (account_id,))
                 conn.execute("DELETE FROM farm_workers WHERE account_id = ?", (account_id,))
+                conn.execute("DELETE FROM farm_tools WHERE account_id = ?", (account_id,))
                 conn.execute("DELETE FROM farm_plots WHERE account_id = ?", (account_id,))
                 conn.execute("DELETE FROM farm_animals WHERE account_id = ?", (account_id,))
                 conn.execute("DELETE FROM farm_buildings WHERE account_id = ?", (account_id,))

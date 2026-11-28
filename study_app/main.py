@@ -28,8 +28,9 @@ from .generator.base import answers_match
 from .generator.registry import config, generate_quiz
 from .models import (
     AccountCreate, AnswerRequest, DeleteAccountRequest, FarmAccountRequest, FarmAnimalBuyRequest,
-    FarmBuildingRequest, FarmCollectRequest, FarmCollectWorkerRequest, FarmGatherRequest,
-    FarmHarvestRequest, FarmHireWorkerRequest, FarmPlantRequest,
+    FarmBuildingRequest, FarmBuyToolRequest, FarmCollectRequest, FarmCollectWorkerRequest, FarmConvertFeedRequest,
+    FarmEatRequest, FarmFeedAnimalRequest, FarmGatherRequest,
+    FarmHarvestRequest, FarmHireWorkerRequest, FarmPlantRequest, FarmToolActionRequest,
     LoginRequest, MissionClaimRequest, QuizRequest,
 )
 from .store import ProgressStore
@@ -327,6 +328,11 @@ def farm_collect_animal(request: FarmCollectRequest):
     return _farm_action(store.collect_animal, request.account_id, request.animal_id)
 
 
+@app.post("/api/farm/feed-animal")
+def farm_feed_animal(request: FarmFeedAnimalRequest):
+    return _farm_action(store.feed_animal, request.account_id, request.animal_id, request.resource, request.amount)
+
+
 @app.post("/api/farm/buy-building")
 def farm_buy_building(request: FarmBuildingRequest):
     return _farm_action(store.buy_building, request.account_id, request.building)
@@ -350,6 +356,26 @@ def farm_hire_worker(request: FarmHireWorkerRequest):
 @app.post("/api/farm/collect-worker")
 def farm_collect_worker(request: FarmCollectWorkerRequest):
     return _farm_action(store.collect_worker, request.account_id, request.worker_key)
+
+
+@app.post("/api/farm/convert-feed")
+def farm_convert_feed(request: FarmConvertFeedRequest):
+    return _farm_action(store.convert_to_feed, request.account_id, request.resource, request.amount)
+
+
+@app.post("/api/farm/eat")
+def farm_eat(request: FarmEatRequest):
+    return _farm_action(store.eat, request.account_id, request.resource, request.amount)
+
+
+@app.post("/api/farm/buy-tool")
+def farm_buy_tool(request: FarmBuyToolRequest):
+    return _farm_action(store.buy_tool, request.account_id, request.tool)
+
+
+@app.post("/api/farm/tool-action")
+def farm_tool_action(request: FarmToolActionRequest):
+    return _farm_action(store.use_tool_action, request.account_id, request.action, request.plot)
 
 
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")

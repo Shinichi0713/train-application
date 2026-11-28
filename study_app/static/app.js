@@ -24,6 +24,8 @@
   };
 
   const sections = { setup: $('setup'), quiz: $('quiz'), result: $('result') };
+  const RES_NAMES = { vegetable: '野菜', fruit: 'くだもの', egg: 'たまご', milk: 'ミルク', carrot: 'にんじん', feed: '飼料', wood: '木材', stone: '石', coal: '石炭', iron: '鉄' };
+  const resLabel = (key) => RES_NAMES[key] || key;
   const show = (name) => {
     Object.entries(sections).forEach(([key, el]) => el.classList.toggle('hidden', key !== name));
   };
@@ -496,6 +498,8 @@
     let selected = null;
     let lastTs = 0;
     let raf = 0;
+    let nowMs = 0;
+    const anim = new Map();
 
     function toCanvasPos(evt) {
       const rect = canvas.getBoundingClientRect();
@@ -506,6 +510,14 @@
     }
 
     function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
+    function itemPos(it) {
+      const a = anim.get(it.id);
+      if (!a) return { x: it.x, y: it.y };
+      if (it.type === 'animal') return { x: it.x + a.ox, y: it.y + a.oy + Math.sin(nowMs / 350 + a.phase) * 2 };
+      if (it.type === 'worker') return { x: it.x + a.ox, y: it.y + a.oy };
+      if (it.type === 'gather') return { x: it.x, y: it.y + (a.oy || 0) };
+      return { x: it.x, y: it.y };
+    }
 
     function hidePanel() { panel.classList.add('hidden'); panel.innerHTML = ''; }
 
@@ -554,7 +566,7 @@
           id: `plot-${plot.index}`, type: 'plot', x, y, w: plotW, h: plotH, r: 52,
           title: `畑 ${plot.index + 1}`, plot,
           info: !plot.crop ? '空き畑です。たねを植えられます。' : plot.ready ? `${plot.emoji} ${plot.name} が収穫できます！` : `${plot.emoji} ${plot.name} 育成中`,
-          detail: !plot.crop ? `選択中のたね: ${state.selectedCrop}` : plot.ready ? `食料+${plot.yield || 0}` : `あと ${plot.remaining} 秒`,
+          detail: !plot.crop ? `選択中のたね: ${state.selectedCrop}` : plot.ready ? `${resLabel(plot.resource)}+${plot.yield || 0}` : `あと ${plot.remaining} 秒`,
           actions,
         });
       });
@@ -562,24 +574,32 @@
       (data.gathers || []).forEach((g, i) => {
         const x = 90 + i * 150;
         const y = 430;
+        const locked = !!g.locked;
         items.push({
           id: `gather-${g.key}`, type: 'gather', x, y, r: 42, gather: g,
           title: `${g.emoji} ${g.name}`,
-          info: g.ready ? `${g.resource_name}を集められます` : `あと ${g.remaining} 秒`,
+          info: locked ? `🔒 ${g.required_tool_name || '道具'} が必要` : g.ready ? `${g.resource_name}を集められます` : `あと ${g.remaining} 秒`,
           detail: `${g.resource_name}+${g.yield}`,
-          actions: [{ label: g.ready ? '集める' : '準備中', primary: g.ready, disabled: !g.ready, run: () => farmPost('/api/farm/gather', { account_id: accountId, spot: g.key }) }],
+          actions: [{ label: locked ? '道具が必要' : g.ready ? '集める' : '準備中', primary: g.ready, disabled: !g.ready || locked, run: () => farmPost('/api/farm/gather', { account_id: accountId, spot: g.key }) }],
         });
       });
 
       (data.animals || []).forEach((a, i) => {
         const x = 690 + (i % 3) * 85;
         const y = 120 + Math.floor(i / 3) * 70;
+        const feedableKeys = ['vegetable','fruit','carrot','feed'];
+        const feedRes = feedableKeys.find(k => ((data.inventory || {})[k] || 0) > 0) || 'vegetable';
+        const fullness = Number(a.fullness || 0);
+        const need = Number(a.fullness_need || 80);
         items.push({
           id: `animal-${a.id}`, type: 'animal', x, y, r: 34, animal: a,
           title: `${a.emoji} ${a.nickname || a.name}`,
-          info: a.ready ? `${a.product_emoji} ${a.product} がとれます` : `あと ${a.remaining} 秒`,
-          detail: `なかよし度 ${a.bond ?? 0}`,
-          actions: [{ label: a.ready ? 'とる' : 'まだ', primary: a.ready, disabled: !a.ready, run: () => farmPost('/api/farm/collect-animal', { account_id: accountId, animal_id: a.id }) }],
+          info: a.ready ? `${a.product_emoji} ${a.product} がとれます` : `満腹度 ${fullness}% / ${need}%`,
+          detail: `なかよし度 ${a.bond ?? 0} ・ えさ: ${resLabel(feedRes)}`,
+          actions: [
+            { label: 'えさをあげる', primary: !a.ready, disabled: false, run: () => farmPost('/api/farm/feed-animal', { account_id: accountId, animal_id: a.id, resource: feedRes, amount: 1 }) },
+            { label: a.ready ? '集める' : 'まだ', primary: a.ready, disabled: !a.ready, run: () => farmPost('/api/farm/collect-animal', { account_id: accountId, animal_id: a.id }) },
+          ],
         });
       });
 
@@ -599,9 +619,17 @@
       });
 
       interactables = items;
+      items.forEach((it) => {
+        if (!anim.has(it.id)) {
+          anim.set(it.id, {
+            ox: 0, oy: 0, vx: (Math.random() - 0.5) * 20, vy: (Math.random() - 0.5) * 20,
+            phase: Math.random() * Math.PI * 2, nextDir: Math.random() * 2,
+          });
+        }
+      });
       if (selected) {
         const fresh = items.find(it => it.id === selected.id);
-        if (fresh && dist(player, fresh) < fresh.r + 40) showPanel(fresh);
+        if (fresh && dist(player, itemPos(fresh)) < fresh.r + 40) showPanel(fresh);
         else { selected = null; hidePanel(); }
       }
     }
@@ -626,46 +654,76 @@
       ctx.fillText('採集エリア', 30, 402);
 
       interactables.forEach((it) => {
+        const a = anim.get(it.id) || { ox: 0, oy: 0, phase: 0 };
         if (it.type === 'plot') {
           const p = it.plot;
-          ctx.fillStyle = !p.crop ? '#d8b07a' : p.ready ? '#9bd27e' : '#bcdca0';
+          const pulse = p.ready ? (Math.sin(nowMs / 220 + a.phase) * 0.5 + 0.5) : 0;
+          ctx.fillStyle = !p.crop ? '#d8b07a' : p.ready ? `rgb(${155 + pulse * 35}, ${210 + pulse * 20}, ${126 + pulse * 20})` : '#bcdca0';
           ctx.fillRect(it.x - it.w / 2, it.y - it.h / 2, it.w, it.h);
           ctx.strokeStyle = selected && selected.id === it.id ? '#ff8a00' : '#8b6a3e';
           ctx.lineWidth = selected && selected.id === it.id ? 4 : 2;
           ctx.strokeRect(it.x - it.w / 2, it.y - it.h / 2, it.w, it.h);
+          if (p.crop) {
+            const sway = p.ready ? Math.sin(nowMs / 260 + a.phase) * 3 : Math.sin(nowMs / 700 + a.phase) * 1.5;
+            ctx.save();
+            ctx.translate(it.x + sway, it.y + 2);
+            ctx.font = '24px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#3f3a2f';
+            ctx.fillText(p.emoji, 0, 0);
+            ctx.restore();
+          } else {
+            ctx.fillStyle = '#6b5330';
+            ctx.font = '24px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('＋', it.x, it.y + 4);
+          }
           ctx.fillStyle = '#3f3a2f';
-          ctx.font = '24px sans-serif';
-          ctx.textAlign = 'center';
-          ctx.fillText(p.crop ? p.emoji : '＋', it.x, it.y + 2);
           ctx.font = '12px sans-serif';
+          ctx.textAlign = 'center';
           ctx.fillText(p.crop ? (p.ready ? '収穫OK' : `${p.remaining}s`) : '空き', it.x, it.y + 28);
         } else if (it.type === 'gather') {
           const g = it.gather;
+          const bob = a.oy || 0;
           ctx.beginPath();
-          ctx.fillStyle = g.ready ? '#8fd0ff' : '#9ec5de';
-          ctx.arc(it.x, it.y, 34, 0, Math.PI * 2);
+          ctx.fillStyle = g.locked ? '#c8c8c8' : g.ready ? '#8fd0ff' : '#9ec5de';
+          ctx.arc(it.x, it.y + bob, 34, 0, Math.PI * 2);
           ctx.fill();
           ctx.strokeStyle = selected && selected.id === it.id ? '#ff8a00' : '#4f88aa';
           ctx.lineWidth = selected && selected.id === it.id ? 4 : 2;
           ctx.stroke();
+          if (g.ready && !g.locked) {
+            ctx.strokeStyle = 'rgba(255,255,255,.8)';
+            ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.arc(it.x, it.y + bob, 40 + Math.sin(nowMs / 220 + a.phase) * 2, 0, Math.PI * 2); ctx.stroke();
+          }
           ctx.fillStyle = '#203040';
-          ctx.font = '26px sans-serif'; ctx.textAlign = 'center'; ctx.fillText(g.emoji, it.x, it.y + 4);
-          ctx.font = '12px sans-serif'; ctx.fillText(g.name, it.x, it.y + 52);
+          ctx.font = '26px sans-serif'; ctx.textAlign = 'center'; ctx.fillText(g.locked ? '🔒' : g.emoji, it.x, it.y + 4 + bob);
+          ctx.font = '12px sans-serif'; ctx.fillText(g.name, it.x, it.y + 52 + bob);
         } else if (it.type === 'animal' || it.type === 'worker') {
           const obj = it.animal || it.worker;
+          const ax = it.x + a.ox;
+          const ay = it.y + a.oy + (it.type === 'animal' ? Math.sin(nowMs / 350 + a.phase) * 2 : 0);
+          ctx.fillStyle = 'rgba(0,0,0,.1)';
+          ctx.beginPath(); ctx.ellipse(ax, ay + 24, 14, 5, 0, 0, Math.PI * 2); ctx.fill();
           ctx.beginPath();
           ctx.fillStyle = it.type === 'worker' ? (obj.hired ? '#fff2b0' : '#ffe0e0') : '#fff8dd';
-          ctx.arc(it.x, it.y, 28, 0, Math.PI * 2);
+          ctx.arc(ax, ay, 28, 0, Math.PI * 2);
           ctx.fill();
           ctx.strokeStyle = selected && selected.id === it.id ? '#ff8a00' : '#bba86a';
           ctx.lineWidth = selected && selected.id === it.id ? 4 : 2;
           ctx.stroke();
           ctx.fillStyle = '#333';
           ctx.font = '24px sans-serif'; ctx.textAlign = 'center';
-          ctx.fillText(obj.emoji, it.x, it.y + 6);
+          ctx.fillText(obj.emoji, ax, ay + 6);
           ctx.font = '11px sans-serif';
           const label = it.type === 'worker' ? obj.name : (obj.nickname || obj.name);
-          ctx.fillText(label, it.x, it.y + 44);
+          ctx.fillText(label, ax, ay + 44);
+          if (it.type === 'animal' && it.animal.ready) {
+            ctx.fillStyle = '#ff9f1a';
+            ctx.font = '14px sans-serif';
+            ctx.fillText('!', ax + 20, ay - 16);
+          }
         }
       });
 
@@ -696,6 +754,7 @@
     }
 
     function update(dt) {
+      nowMs += dt * 1000;
       const dx = player.tx - player.x;
       const dy = player.ty - player.y;
       const d = Math.hypot(dx, dy);
@@ -708,9 +767,35 @@
       } else {
         player.moving = false;
       }
+
+      interactables.forEach((it) => {
+        const a = anim.get(it.id);
+        if (!a) return;
+        if (it.type === 'animal') {
+          a.nextDir -= dt;
+          if (a.nextDir <= 0) {
+            a.vx = (Math.random() - 0.5) * 26;
+            a.vy = (Math.random() - 0.5) * 18;
+            a.nextDir = 1.2 + Math.random() * 2.2;
+          }
+          a.ox += a.vx * dt;
+          a.oy += a.vy * dt;
+          const limit = 18;
+          a.ox = Math.max(-limit, Math.min(limit, a.ox));
+          a.oy = Math.max(-limit, Math.min(limit, a.oy));
+          if (Math.abs(a.ox) >= limit) a.vx *= -0.8;
+          if (Math.abs(a.oy) >= limit) a.vy *= -0.8;
+        } else if (it.type === 'worker') {
+          a.ox = Math.sin(nowMs / 900 + a.phase) * 3;
+          a.oy = Math.sin(nowMs / 700 + a.phase) * 2;
+        } else if (it.type === 'gather') {
+          a.oy = (it.gather && it.gather.ready) ? Math.sin(nowMs / 280 + a.phase) * 3 : 0;
+        }
+      });
+
       if (selected) {
         const item = interactables.find(it => it.id === selected.id);
-        if (item && dist(player, item) < item.r + 28) showPanel(item);
+        if (item && dist(player, itemPos(item)) < item.r + 28) showPanel(item);
       }
     }
 
@@ -727,7 +812,7 @@
     function pickHit(pos) {
       return interactables.find(it => {
         if (it.type === 'plot') return pos.x >= it.x - it.w / 2 && pos.x <= it.x + it.w / 2 && pos.y >= it.y - it.h / 2 && pos.y <= it.y + it.h / 2;
-        return dist(pos, it) < it.r;
+        return dist(pos, itemPos(it)) < it.r;
       });
     }
     function pointTo(pos) {
@@ -735,7 +820,7 @@
       const hit = pickHit(pos);
       if (hit) {
         selected = hit;
-        if (dist(player, hit) < hit.r + 28) showPanel(hit);
+        if (dist(player, itemPos(hit)) < hit.r + 28) showPanel(hit);
         else hidePanel();
       } else {
         selected = null;
@@ -765,7 +850,12 @@
       draw();
     }
 
-    return { updateFromFarm, hidePanel };
+    function getSelectedPlot() {
+      if (!selected || selected.type !== 'plot') return null;
+      return selected.plot ? selected.plot.index : null;
+    }
+
+    return { updateFromFarm, hidePanel, getSelectedPlot };
   })();
 
   // ---------------- 農場ゲーム ----------------
@@ -789,13 +879,14 @@
 
   function farmSignature(data) {
     const plots = data.plots.map((p) => `${p.index}:${p.crop || '-'}:${p.ready ? 1 : 0}`).join('|');
-    const animals = data.animals.map((a) => `${a.id}:${a.ready ? 1 : 0}`).join('|');
+    const animals = data.animals.map((a) => `${a.id}:${a.ready ? 1 : 0}:${a.fullness || 0}`).join('|');
     const buildings = data.buildings.map((b) => `${b.key}:${b.count}`).join('|');
-    const gathers = (data.gathers || []).map((g) => `${g.key}:${g.ready ? 1 : 0}`).join('|');
+    const tools = (data.tools || []).map((t) => `${t.key}:${t.owned ? 1 : 0}`).join('|');
+    const gathers = (data.gathers || []).map((g) => `${g.key}:${g.ready ? 1 : 0}:${g.locked ? 1 : 0}`).join('|');
     const workers = (data.workers || []).map((w) => `${w.key}:${w.hired ? 1 : 0}:${w.ready ? 1 : 0}`).join('|');
     const inventory = Object.entries(data.inventory || {}).map(([k, v]) => `${k}:${v}`).join('|');
     return [data.farm.unlocked_plots, data.farm.exp, data.account.wallet,
-      data.expansion_cost, plots, animals, buildings, gathers, workers, inventory].join('#');
+      data.expansion_cost, plots, animals, buildings, tools, gathers, workers, inventory].join('#');
   }
 
   // 生育中だけ表示を書き換え、ボタンの作り直しでクリックが消えないようにする
@@ -814,9 +905,9 @@
       if (!card) return;
       const desc = card.querySelector('.desc');
       if (!desc) return;
-      desc.textContent = animal.ready
-        ? `${animal.product_emoji} ${animal.product} が とれます！`
-        : `あと ${animal.remaining} 秒`;
+      const need = animal.fullness_need || 80;
+      const fullness = Number(animal.fullness || 0);
+      desc.textContent = `満腹度 ${fullness}% / ${need}%  ${animal.ready ? '（生産OK！）' : '（えさが必要）'}`;
     });
     (data.gathers || []).forEach((spot) => {
       const card = document.querySelector(`.farm-card[data-gather-key="${spot.key}"]`);
@@ -900,7 +991,12 @@
     renderStat(status, '使えるポイント', data.account.wallet);
     renderStat(status, '農場レベル', `Lv.${farm.level}`);
     renderStat(status, '畑', `${farm.unlocked_plots} / ${farm.max_plots}`);
+    const hunger = Number(farm.hunger || 0);
+    renderStat(status, '空腹度', `${hunger}%`);
     $('farm-exp-bar').style.width = `${farm.exp % 100}%`;
+    $('hunger-text').textContent = `${hunger}%`;
+    $('hunger-bar-fill').style.width = `${Math.min(100, hunger)}%`;
+    $('hunger-bar-fill').style.background = hunger >= 90 ? '#e74c3c' : hunger >= 70 ? '#f39c12' : '#4caf50';
 
     const inventory = $('farm-inventory');
     inventory.innerHTML = '';
@@ -908,6 +1004,43 @@
       const amount = (data.inventory || {})[res.key] || 0;
       renderStat(inventory, `${res.emoji} ${res.name}`, amount);
     });
+    const feedSource = $('feed-source');
+    const prevFeed = feedSource.value;
+    feedSource.innerHTML = '';
+    (data.catalog.resources || [])
+      .filter((r) => r.category === 'food' && r.key !== 'feed' && (r.feed_value || 0) > 0)
+      .forEach((r) => {
+        const opt = document.createElement('option');
+        opt.value = r.key;
+        opt.textContent = `${r.emoji} ${r.name} → 飼料${r.feed_value}`;
+        feedSource.appendChild(opt);
+      });
+    if ([...feedSource.options].some(o => o.value === prevFeed)) feedSource.value = prevFeed;
+    const updateFeedInfo = () => {
+      const r = (data.catalog.resources || []).find(x => x.key === feedSource.value);
+      $('feed-convert-info').textContent = r ? `1個で飼料${r.feed_value}個` : '';
+    };
+    feedSource.onchange = updateFeedInfo;
+    updateFeedInfo();
+
+    const eatSource = $('eat-source');
+    const prevEat = eatSource.value;
+    eatSource.innerHTML = '';
+    (data.catalog.resources || [])
+      .filter((r) => r.category === 'food' && (r.eat_value || 0) > 0)
+      .forEach((r) => {
+        const opt = document.createElement('option');
+        opt.value = r.key;
+        opt.textContent = `${r.emoji} ${r.name}（空腹度-${r.eat_value}）`;
+        eatSource.appendChild(opt);
+      });
+    if ([...eatSource.options].some(o => o.value === prevEat)) eatSource.value = prevEat;
+    const updateEatInfo = () => {
+      const r = (data.catalog.resources || []).find(x => x.key === eatSource.value);
+      $('eat-info').textContent = r ? `1個で空腹度-${r.eat_value}` : '';
+    };
+    eatSource.onchange = updateEatInfo;
+    updateEatInfo();
 
     const picker = $('seed-picker');
     picker.innerHTML = '';
@@ -915,7 +1048,7 @@
       const button = el('button', 'seed' + (state.selectedCrop === crop.key ? ' selected' : ''));
       button.type = 'button';
       button.appendChild(document.createTextNode(
-        `${crop.emoji} ${crop.name}（${crop.cost}pt・${crop.grow}秒・食料+${crop.yield}）`
+        `${crop.emoji} ${crop.name}（${crop.cost}pt・${crop.grow}秒・${resLabel(crop.resource)}+${crop.yield}）`
       ));
       button.addEventListener('click', () => {
         state.selectedCrop = crop.key;
@@ -940,7 +1073,7 @@
       } else {
         cell.appendChild(el('span', 'emoji', plot.emoji));
         if (plot.ready) {
-          cell.appendChild(el('div', '', `収穫！ 食料+${plot.yield || 0}`));
+          cell.appendChild(el('div', '', `収穫！ ${resLabel(plot.resource)}+${plot.yield || 0}`));
           cell.addEventListener('click', () => farmPost('/api/farm/harvest', {
             account_id: accountId, plot: plot.index,
           }));
@@ -966,6 +1099,7 @@
 
     const animals = $('farm-animals');
     animals.innerHTML = '';
+    const feedable = (data.catalog.resources || []).filter(r => ['vegetable','fruit','carrot','feed'].includes(r.key));
     data.animals.forEach((animal) => {
       const card = el('div', 'farm-card');
       card.dataset.animalId = String(animal.id);
@@ -973,12 +1107,40 @@
       card.appendChild(el('div', 'title', title));
       const personality = animal.personality_name ? `${animal.personality_emoji || ''} ${animal.personality_name}` : '';
       card.appendChild(el('div', 'meta', `${personality} ・ なかよし度 ${animal.bond ?? 0}`));
-      card.appendChild(el('div', 'desc',
-        animal.ready ? `${animal.product_emoji} ${animal.product} が とれます！` : `あと ${animal.remaining} 秒`));
-      if (animal.last_event) card.appendChild(el('div', 'event', `最近のイベント: ${animal.last_event}`));
+      const need = animal.fullness_need || 80;
+      const fullness = Number(animal.fullness || 0);
+      card.appendChild(el('div', 'desc', `満腹度 ${fullness}% / ${need}%  ${animal.ready ? '（生産OK！）' : '（えさが必要）'}`));
+      const bar = el('div', 'mini-bar');
+      const fill = el('div');
+      fill.style.width = `${Math.min(100, fullness)}%`;
+      fill.style.background = animal.ready ? '#4caf50' : '#ff9800';
+      bar.appendChild(fill);
+      card.appendChild(bar);
+      if (animal.last_event) card.appendChild(el('div', 'event', `最近: ${animal.last_event}`));
+
+      const feedRow = el('div', 'actions');
+      const sel = document.createElement('select');
+      feedable.forEach(r => {
+        const opt = document.createElement('option');
+        opt.value = r.key;
+        const have = (data.inventory || {})[r.key] || 0;
+        opt.textContent = `${r.emoji}${r.name}(${have})`;
+        sel.appendChild(opt);
+      });
+      sel.style.padding = '6px'; sel.style.borderRadius = '8px';
+      const feedBtn = el('button', 'small-btn');
+      feedBtn.type = 'button';
+      feedBtn.textContent = 'えさをあげる';
+      feedBtn.addEventListener('click', () => farmPost('/api/farm/feed-animal', {
+        account_id: accountId, animal_id: animal.id, resource: sel.value, amount: 1,
+      }));
+      feedRow.appendChild(sel);
+      feedRow.appendChild(feedBtn);
+      card.appendChild(feedRow);
+
       const button = el('button', 'small-btn' + (animal.ready ? ' sub' : ''));
       button.type = 'button';
-      button.textContent = animal.ready ? `とる（食料+${animal.yield}）` : 'まだ とれない';
+      button.textContent = animal.ready ? `集める（${resLabel(animal.resource)}+${animal.yield}）` : `満腹度 ${need}% で生産`;
       button.disabled = !animal.ready;
       button.addEventListener('click', () => farmPost('/api/farm/collect-animal', {
         account_id: accountId, animal_id: animal.id,
@@ -990,7 +1152,7 @@
       const card = el('div', 'farm-card');
       card.appendChild(el('div', 'title', `${animal.emoji} ${animal.name}`));
       card.appendChild(el('div', 'desc',
-        `${animal.product_emoji} ${animal.product} が ${animal.interval} 秒ごとに とれる（食料+${animal.yield}）`));
+        `畑の収穫物をあげると満腹度UP。${animal.fullness_need || 80}%で ${animal.product_emoji}${animal.product}（${resLabel(animal.resource)}+${animal.yield}）`));
       card.appendChild(el('div', 'meta', '買うと 個性と なまえが つきます'));
       const button = el('button', 'small-btn');
       button.type = 'button';
@@ -1005,15 +1167,24 @@
     const gathers = $('farm-gathers');
     gathers.innerHTML = '';
     (data.gathers || []).forEach((spot) => {
-      const card = el('div', 'farm-card');
+      const card = el('div', 'farm-card' + (spot.locked ? ' locked' : ''));
       card.dataset.gatherKey = spot.key;
       card.appendChild(el('div', 'title', `${spot.emoji} ${spot.name}`));
-      card.appendChild(el('div', 'desc',
-        spot.ready ? `${spot.resource_name} を 集められます！` : `あと ${spot.remaining} 秒`));
+      if (spot.locked) {
+        card.appendChild(el('div', 'desc', `🔒 ${spot.required_tool_name || '道具'} が必要`));
+      } else {
+        card.appendChild(el('div', 'desc',
+          spot.ready ? `${spot.resource_name} を 集められます！` : `あと ${spot.remaining} 秒`));
+      }
       const button = el('button', 'small-btn' + (spot.ready ? ' sub' : ''));
       button.type = 'button';
-      button.textContent = spot.ready ? `集める（${spot.resource_name}+${spot.yield}）` : 'まだ 集められない';
-      button.disabled = !spot.ready;
+      if (spot.locked) {
+        button.textContent = `${spot.required_tool_name} が必要`;
+        button.disabled = true;
+      } else {
+        button.textContent = spot.ready ? `集める（${spot.resource_name}+${spot.yield}）` : 'まだ 集められない';
+        button.disabled = !spot.ready;
+      }
       button.addEventListener('click', () => farmPost('/api/farm/gather', {
         account_id: accountId, spot: spot.key,
       }));
@@ -1023,12 +1194,12 @@
 
     const workers = $('farm-workers');
     workers.innerHTML = '';
-    const resNames = { food: '食料', wood: '木材', stone: '石', coal: '石炭', iron: '鉄' };
-    const fmtRes = (obj) => Object.entries(obj || {}).map(([k, v]) => `${resNames[k] || k}+${v}`).join(' / ');
+    const fmtRes = (obj) => Object.entries(obj || {}).map(([k, v]) => `${resLabel(k)}+${v}`).join(' / ');
     const fmtCost = (cost) => {
+      if (typeof cost === 'number') return `${cost}pt`;
       const parts = [];
-      if (cost.points) parts.push(`${cost.points}pt`);
-      Object.entries(cost || {}).forEach(([k, v]) => { if (k !== 'points') parts.push(`${resNames[k] || k}${v}`); });
+      if (cost && cost.points) parts.push(`${cost.points}pt`);
+      Object.entries(cost || {}).forEach(([k, v]) => { if (k !== 'points') parts.push(`${resLabel(k)}${v}`); });
       return parts.join(' + ');
     };
     const metWorkers = data.workers || [];
@@ -1065,6 +1236,53 @@
       workers.appendChild(card);
     });
 
+    const toolsWrap = $('farm-tools');
+    toolsWrap.innerHTML = '';
+    (data.tools || []).forEach((tool) => {
+      const card = el('div', 'farm-card' + (tool.owned ? ' owned' : tool.prereq_met ? '' : ' locked'));
+      card.appendChild(el('div', 'title', `${tool.emoji} ${tool.name} ${tool.owned ? '✅' : `（G${tool.grade}）`}`));
+      card.appendChild(el('div', 'desc', tool.description));
+      card.appendChild(el('div', 'meta', `解放: ${tool.unlock_label || '—'}`));
+      if (tool.prereq_name) card.appendChild(el('div', 'meta', `前提: ${tool.prereq_name}${tool.prereq_met ? ' OK' : ' 未取得'}`));
+      if (!tool.owned) {
+        card.appendChild(el('div', 'meta', `コスト: ${fmtCost(tool.cost)}`));
+        const button = el('button', 'small-btn');
+        button.type = 'button';
+        button.disabled = !tool.prereq_met;
+        button.textContent = tool.prereq_met ? `買う（${fmtCost(tool.cost)}）` : `前提: ${tool.prereq_name} が必要`;
+        button.addEventListener('click', () => farmPost('/api/farm/buy-tool', {
+          account_id: accountId, tool: tool.key,
+        }));
+        card.appendChild(button);
+      } else {
+        // tool actions
+        (tool.unlocks || []).forEach((action) => {
+          if (action === 'mine_coal' || action === 'mine_iron') return; // gather unlocks, no button
+          const btn = el('button', 'small-btn sub');
+          btn.type = 'button';
+          if (action === 'water_crop') {
+            btn.textContent = '水やりする（選択中の畑）';
+            btn.addEventListener('click', () => {
+              const plot = farmGame.getSelectedPlot();
+              if (plot === null || plot === undefined) { alert('畑マップで水やりしたい畑を選んでください'); return; }
+              farmPost('/api/farm/tool-action', { account_id: accountId, action, plot });
+            });
+          } else if (action === 'chop_bonus') {
+            btn.textContent = '木材ボーナス採集（木材+4）';
+            btn.addEventListener('click', () => farmPost('/api/farm/tool-action', { account_id: accountId, action }));
+          } else if (action === 'craft_bundle') {
+            btn.textContent = '資材加工（木材3+石2→鉄1）';
+            btn.addEventListener('click', () => farmPost('/api/farm/tool-action', { account_id: accountId, action }));
+          } else {
+            btn.textContent = tool.unlock_label || action;
+            btn.addEventListener('click', () => farmPost('/api/farm/tool-action', { account_id: accountId, action }));
+          }
+          card.appendChild(btn);
+        });
+      }
+      toolsWrap.appendChild(card);
+    });
+
     const buildings = $('farm-buildings');
     buildings.innerHTML = '';
     const owned = {};
@@ -1073,9 +1291,10 @@
       const card = el('div', 'farm-card');
       card.appendChild(el('div', 'title', `${building.emoji} ${building.name}${owned[building.key] ? ` × ${owned[building.key]}` : ''}`));
       card.appendChild(el('div', 'desc', building.description));
+      card.appendChild(el('div', 'meta', `コスト: ${fmtCost(building.cost)}`));
       const button = el('button', 'small-btn');
       button.type = 'button';
-      button.textContent = `買う（${building.cost} pt）`;
+      button.textContent = `建てる（${fmtCost(building.cost)}）`;
       button.addEventListener('click', () => farmPost('/api/farm/buy-building', {
         account_id: accountId, building: building.key,
       }));
@@ -1143,6 +1362,18 @@
   $('farm-refresh').addEventListener('click', () => loadFarm());
   $('farm-expand').addEventListener('click', () => {
     farmPost('/api/farm/expand', { account_id: state.account.id });
+  });
+  $('feed-convert-btn').addEventListener('click', () => {
+    if (!state.account) return;
+    const resource = $('feed-source').value;
+    const amount = Number($('feed-amount').value || 1);
+    farmPost('/api/farm/convert-feed', { account_id: state.account.id, resource, amount });
+  });
+  $('eat-btn').addEventListener('click', () => {
+    if (!state.account) return;
+    const resource = $('eat-source').value;
+    const amount = Number($('eat-amount').value || 1);
+    farmPost('/api/farm/eat', { account_id: state.account.id, resource, amount });
   });
 
   init();

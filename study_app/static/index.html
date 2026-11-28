@@ -160,17 +160,49 @@
 
       <div id="farm-status" class="farm-status"></div>
       <div class="farm-exp"><div id="farm-exp-bar"></div></div>
+      <div class="hunger-wrap">
+        <div class="hunger-label">空腹度 <span id="hunger-text">0%</span></div>
+        <div class="hunger-bar"><div id="hunger-bar-fill"></div></div>
+      </div>
 
-      <h2>もちもの（食料・資材）</h2>
+      <h2>もちもの（食材・資材）</h2>
       <div id="farm-inventory" class="farm-status"></div>
+      <div class="feed-convert">
+        <label>食材を飼料にする
+          <select id="feed-source"></select>
+        </label>
+        <label>数
+          <select id="feed-amount">
+            <option value="1">1</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+          </select>
+        </label>
+        <button id="feed-convert-btn" class="small-btn sub">飼料に変える</button>
+        <span id="feed-convert-info" class="hint"></span>
+      </div>
+      <div class="feed-convert">
+        <label>主人公が食べる
+          <select id="eat-source"></select>
+        </label>
+        <label>数
+          <select id="eat-amount">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="5">5</option>
+          </select>
+        </label>
+        <button id="eat-btn" class="small-btn">食べる</button>
+        <span id="eat-info" class="hint"></span>
+      </div>
 
-      <h2>畑（農業で 食料を ためる）</h2>
-      <p class="hint">たねを えらんでから、空き畑を クリックすると 植えられます。</p>
+      <h2>畑（農業で 野菜・くだものを ためる）</h2>
+      <p class="hint">たねを えらんでから、空き畑を クリックすると 植えられます。収穫した食材は 飼料にも できます。</p>
       <div id="seed-picker" class="seed-picker"></div>
       <div id="farm-grid" class="farm-grid"></div>
       <button id="farm-expand" class="big-btn sub">畑を ひろげる</button>
 
-      <h2>どうぶつ（酪農で 食料を ためる）</h2>
+      <h2>どうぶつ（酪農で たまご・ミルクなどを ためる）</h2>
       <div id="farm-animals" class="farm-cards"></div>
 
       <h2>採集（木材・石炭・鉄などの 資材を ためる）</h2>
@@ -181,7 +213,11 @@
       <p class="hint">ドリルで 条件を みたしたり ランダムで 出会った人を、ポイントや資源で 雇って 牧場を 手伝ってもらえます。</p>
       <div id="farm-workers" class="farm-cards"></div>
 
-      <h2>たてもの</h2>
+      <h2>道具（資材とポイントで入手）</h2>
+      <p class="hint">道具を 手に入れると、次のグレードの道具や 新しい動作が できるようになります。</p>
+      <div id="farm-tools" class="farm-cards"></div>
+
+      <h2>たてもの（資材とポイントで建設）</h2>
       <div id="farm-buildings" class="farm-cards"></div>
     </section>
   </main>
