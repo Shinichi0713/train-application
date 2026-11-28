@@ -52,6 +52,7 @@ BUILDINGS: Dict[str, Dict[str, Any]] = {
     "barn": {"name": "こや", "emoji": "🏠", "cost": {"points": 200, "wood": 15}, "description": "農場が にぎやかに なる"},
     "pond": {"name": "いけ", "emoji": "💧", "cost": {"points": 350, "stone": 20}, "description": "みずが たまって きれい"},
     "windmill": {"name": "かざぐるま", "emoji": "🌬️", "cost": {"points": 500, "wood": 20, "iron": 5}, "description": "かぜで くるくる まわります"},
+    "workshop": {"name": "道具工房", "emoji": "🔧", "cost": {"points": 250, "wood": 20, "stone": 15, "iron": 3}, "description": "資材を 持ち寄って 新しい道具を 開発できる"},
 }
 
 # 道具: 資材とポイントで入手。次のグレードの道具や動作を解放する
@@ -90,6 +91,28 @@ TOOLS: Dict[str, Dict[str, Any]] = {
         "description": "丈夫な工作ができる。採集した資材を まとめて 加工できる。",
         "unlocks": ["craft_bundle"],
         "unlock_label": "資材加工",
+    },
+}
+
+# 道具工房で開発できる上位道具。対応する道具が前提
+TOOL_BLUEPRINTS: Dict[str, Dict[str, Any]] = {
+    "power_axe": {
+        "name": "パワーオノ", "emoji": "🪓✨", "grade": 3, "prereq": "axe",
+        "cost": {"points": 180, "wood": 20, "stone": 12, "iron": 6},
+        "unlocks": ["chop_many"], "unlock_label": "木材まとめ切り",
+        "description": "工房で 磨いたオノ。木材を 一度に たくさん 集められる。",
+    },
+    "sprinkler": {
+        "name": "スプリンクラー", "emoji": "🚿", "grade": 3, "prereq": "watering_can",
+        "cost": {"points": 200, "wood": 15, "stone": 10, "iron": 8},
+        "unlocks": ["water_all"], "unlock_label": "畑に 一斉水やり",
+        "description": "工房で 作った水やり道具。育ち中の 畑ぜんぶに 水を やれる。",
+    },
+    "deep_drill": {
+        "name": "深掘りドリル", "emoji": "🌀", "grade": 3, "prereq": "steel_pickaxe",
+        "cost": {"points": 260, "stone": 20, "iron": 12, "coal": 8},
+        "unlocks": ["mine_deep"], "unlock_label": "深部採掘（鉄＋石炭）",
+        "description": "工房の 力を 込めたドリル。地下の 資源を まとめて 掘り出す。",
     },
 }
 
@@ -237,6 +260,7 @@ def catalog() -> Dict[str, Any]:
         "animals": [{"key": key, **value} for key, value in ANIMALS.items()],
         "buildings": [{"key": key, **value} for key, value in BUILDINGS.items()],
         "tools": [{"key": key, **value} for key, value in TOOLS.items()],
+        "tool_blueprints": [{"key": key, **value} for key, value in TOOL_BLUEPRINTS.items()],
         "gather_spots": [{"key": key, **value} for key, value in GATHER_SPOTS.items()],
         "resources": [{"key": key, **value} for key, value in RESOURCE_META.items()],
         "personalities": [{"key": key, **value} for key, value in ANIMAL_PERSONALITIES.items()],

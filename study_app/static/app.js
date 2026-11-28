@@ -493,19 +493,65 @@
     const canvas = $('farm-canvas');
     const ctx = canvas.getContext('2d');
     const panel = $('farm-action-panel');
-    const player = { x: 480, y: 300, tx: 480, ty: 300, speed: 180, moving: false, facing: 'down' };
+    const player = {
+      x: 480, y: 300, tx: 480, ty: 300, speed: 180, moving: false, facing: 'down',
+      step: 0, blink: 0, blinkAt: 1.5, cheer: 0, wave: 0,
+    };
     let interactables = [];
     let selected = null;
     let lastTs = 0;
     let raf = 0;
     let nowMs = 0;
     const anim = new Map();
+    const bubbles = [];
+    const particles = [];
+    const PERSONALITY_LINES = {
+      genki: ['いっしょに あそぼ！', 'げんき！ げんき！', 'たのしいね！'],
+      otonashii: ['こんにちは…', 'ゆっくり していこうね', 'あなたが 来ると うれしい'],
+      kuishinbo: ['おいしいもの ある？', 'おなか すいちゃった…', 'ごはん たのしみ！'],
+      nonbiri: ['のんびり してるよ〜', '今日も いい おてんき', 'のんびり だねぇ'],
+      nakayoshi: ['だいすき！', 'また 来てね！', 'なかよし だね💛'],
+    };
 
-    function toCanvasPos(evt) {
+    // 画面より広い牧場。カメラが主人公についていく
+    const WORLD = { w: 1800, h: 1000 };
+    const view = { x: 0, y: 0 };
+    const ZONES = [
+      { name: '🌾 畑エリア', x: 30, y: 90, w: 660, h: 310, color: '#efe0b8', border: '#d2c08f' },
+      { name: '🐄 どうぶつの牧場', x: 760, y: 90, w: 500, h: 450, color: '#dcf0c4', border: '#95c47a' },
+      { name: '🏠 働き手のむら', x: 1330, y: 90, w: 440, h: 450, color: '#f7e6c8', border: '#d8b98a' },
+      { name: '🌲 もりと こうみゃく', x: 30, y: 470, w: 660, h: 470, color: '#cde9bf', border: '#8fbd80' },
+      { name: '🌻 ひろば', x: 760, y: 590, w: 1010, h: 350, color: '#e9f0c2', border: '#b4c98a' },
+    ];
+    const BUILDING_SPOTS = [[860, 700], [1060, 760], [1260, 700], [1460, 760], [1660, 700]];
+    const decor = [];
+    for (let i = 0; i < 90; i++) {
+      decor.push({
+        x: 20 + ((i * 233 + 47) % (WORLD.w - 40)),
+        y: 20 + ((i * 181 + 83) % (WORLD.h - 40)),
+        emoji: ['🌸', '🌼', '🌿', '🍀', '🌱'][i % 5],
+      });
+    }
+    let scenery = [];
+    const keys = new Set();
+    let keyWalking = false;
+    const keyDirs = {
+      ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0],
+      w: [0, -1], s: [0, 1], a: [-1, 0], d: [1, 0],
+    };
+
+    function toWorldPos(evt) {
       const rect = canvas.getBoundingClientRect();
       return {
-        x: (evt.clientX - rect.left) * (canvas.width / rect.width),
-        y: (evt.clientY - rect.top) * (canvas.height / rect.height),
+        x: (evt.clientX - rect.left) * (canvas.width / rect.width) + view.x,
+        y: (evt.clientY - rect.top) * (canvas.height / rect.height) + view.y,
+      };
+    }
+
+    function clampToWorld(pos) {
+      return {
+        x: Math.max(12, Math.min(WORLD.w - 12, pos.x)),
+        y: Math.max(12, Math.min(WORLD.h - 12, pos.y)),
       };
     }
 
@@ -513,10 +559,35 @@
     function itemPos(it) {
       const a = anim.get(it.id);
       if (!a) return { x: it.x, y: it.y };
-      if (it.type === 'animal') return { x: it.x + a.ox, y: it.y + a.oy + Math.sin(nowMs / 350 + a.phase) * 2 };
+      if (it.type === 'animal') {
+        const hop = a.happy > 0 ? Math.abs(Math.sin((1.4 - a.happy) * 12)) * 5 : 0;
+        return { x: it.x + a.ox, y: it.y + a.oy + Math.sin(nowMs / 350 + a.phase) * 2 - hop };
+      }
       if (it.type === 'worker') return { x: it.x + a.ox, y: it.y + a.oy };
       if (it.type === 'gather') return { x: it.x, y: it.y + (a.oy || 0) };
       return { x: it.x, y: it.y };
+    }
+
+    function say(x, y, text, tone = 'white') {
+      bubbles.push({ x, y: y - 40, text, tone, life: 2.6 });
+      if (bubbles.length > 8) bubbles.shift();
+    }
+
+    function burst(x, y, emojis, count = 5) {
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: x + (Math.random() - 0.5) * 34,
+          y: y + (Math.random() - 0.5) * 18,
+          vx: (Math.random() - 0.5) * 40,
+          vy: -28 - Math.random() * 48,
+          life: 0.9 + Math.random() * 0.6,
+          emoji: emojis[i % emojis.length],
+          size: 13 + Math.random() * 8,
+          rot: Math.random() * Math.PI,
+          spin: (Math.random() - 0.5) * 4,
+        });
+      }
+      if (particles.length > 70) particles.splice(0, particles.length - 70);
     }
 
     function hidePanel() { panel.classList.add('hidden'); panel.innerHTML = ''; }
@@ -572,8 +643,8 @@
       });
 
       (data.gathers || []).forEach((g, i) => {
-        const x = 90 + i * 150;
-        const y = 430;
+        const x = 150 + (i % 2) * 300;
+        const y = 630 + Math.floor(i / 2) * 190;
         const locked = !!g.locked;
         items.push({
           id: `gather-${g.key}`, type: 'gather', x, y, r: 42, gather: g,
@@ -585,8 +656,8 @@
       });
 
       (data.animals || []).forEach((a, i) => {
-        const x = 690 + (i % 3) * 85;
-        const y = 120 + Math.floor(i / 3) * 70;
+        const x = 880 + (i % 3) * 130;
+        const y = 220 + Math.floor(i / 3) * 130;
         const feedableKeys = ['vegetable','fruit','carrot','feed'];
         const feedRes = feedableKeys.find(k => ((data.inventory || {})[k] || 0) > 0) || 'vegetable';
         const fullness = Number(a.fullness || 0);
@@ -604,8 +675,8 @@
       });
 
       (data.workers || []).forEach((w, i) => {
-        const x = 690 + (i % 3) * 85;
-        const y = 320 + Math.floor(i / 3) * 75;
+        const x = 1400 + (i % 2) * 150;
+        const y = 230 + Math.floor(i / 2) * 150;
         const actions = [];
         if (!w.hired) actions.push({ label: '雇う', primary: true, run: () => farmPost('/api/farm/hire-worker', { account_id: accountId, worker_key: w.key }) });
         else actions.push({ label: w.ready ? '受け取る' : 'はたらき中', primary: w.ready, disabled: !w.ready, run: () => farmPost('/api/farm/collect-worker', { account_id: accountId, worker_key: w.key }) });
@@ -619,14 +690,21 @@
       });
 
       interactables = items;
+      scenery = [];
+      (data.buildings || []).forEach((b) => {
+        for (let i = 0; i < Math.min(3, Number(b.count || 0)); i++) scenery.push(b);
+      });
       items.forEach((it) => {
         if (!anim.has(it.id)) {
           anim.set(it.id, {
             ox: 0, oy: 0, vx: (Math.random() - 0.5) * 20, vy: (Math.random() - 0.5) * 20,
             phase: Math.random() * Math.PI * 2, nextDir: Math.random() * 2,
+            blink: 0, blinkAt: 1 + Math.random() * 2, happy: 0, wave: 0, facing: 1,
+            greetAt: 0, lastFullness: null, wasReady: null,
           });
         }
       });
+      syncReactions();
       if (selected) {
         const fresh = items.find(it => it.id === selected.id);
         if (fresh && dist(player, itemPos(fresh)) < fresh.r + 40) showPanel(fresh);
@@ -634,25 +712,256 @@
       }
     }
 
+    // データが変わったときに、キャラクターの喜びや声を出す
+    function syncReactions() {
+      interactables.forEach((it) => {
+        const a = anim.get(it.id);
+        if (!a) return;
+        if (it.type === 'plot') {
+          const ready = !!it.plot.ready;
+          if (a.wasReady === false && ready) burst(it.x, it.y, ['✨', '🌱', '⭐'], 4);
+          a.wasReady = ready;
+        } else if (it.type === 'animal') {
+          const fullness = Number(it.animal.fullness || 0);
+          const ready = !!it.animal.ready;
+          if (a.lastFullness == null) {
+            if (nowMs > 2000) {
+              a.happy = 1.1;
+              say(it.x, it.y, '👋 はじめまして！', 'pink');
+            }
+          } else if (fullness > a.lastFullness) {
+            a.happy = 1.4;
+            say(it.x, it.y, '💛 ありがとう！', 'pink');
+            burst(it.x, it.y, ['💛', '♥', '✨'], 6);
+          } else if (a.wasReady === false && ready) {
+            a.happy = 1.2;
+            say(it.x, it.y, `${it.animal.product_emoji || '✨'} とれたよ！`, 'happy');
+            burst(it.x, it.y, ['🎉', '✨', '♪'], 5);
+          }
+          a.lastFullness = fullness;
+          a.wasReady = ready;
+        } else if (it.type === 'worker') {
+          const ready = !!it.worker.ready;
+          if (a.wasReady === false && ready) {
+            a.wave = 1.4;
+            say(it.x, it.y, '🎉 できたよ！', 'happy');
+            burst(it.x, it.y, ['✨', '👏'], 4);
+          }
+          a.wasReady = ready;
+        } else if (it.type === 'gather') {
+          const ready = !!it.gather.ready;
+          if (a.wasReady === false && ready) burst(it.x, it.y, ['✨', '💫'], 3);
+          a.wasReady = ready;
+        }
+      });
+    }
+
+    function roundRect(x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+
+    function drawPlayer() {
+      const bob = player.moving ? Math.sin(player.step * 2) * 1.5 : Math.sin(nowMs / 650) * 0.8;
+      const jump = player.cheer > 0 ? Math.abs(Math.sin((0.7 - player.cheer) * 16)) * 9 : 0;
+      ctx.fillStyle = 'rgba(0,0,0,.15)';
+      ctx.beginPath(); ctx.ellipse(player.x, player.y + 18, 16 - jump * 0.2, 6, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.save();
+      ctx.translate(player.x, player.y - bob - jump);
+      const swing = player.moving ? Math.sin(player.step * 2) * 4 : Math.sin(nowMs / 800) * 0.8;
+      ctx.fillStyle = '#2d5b2d';
+      ctx.fillRect(-12 + swing * 0.5, 11, 10, 10);
+      ctx.fillRect(2 - swing * 0.5, 11, 10, 10);
+      ctx.fillStyle = '#5a3a22';
+      ctx.fillRect(-13 + swing * 0.5, 19, 12, 4);
+      ctx.fillRect(1 - swing * 0.5, 19, 12, 4);
+      const wave = player.wave > 0 ? Math.sin(nowMs / 90) * 0.5 + 1.2 : 0;
+      ctx.strokeStyle = '#ffd8b0'; ctx.lineWidth = 7; ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(-12, -1); ctx.lineTo(-17 - swing, 8 - wave * 9);
+      ctx.moveTo(12, -1); ctx.lineTo(17 + swing, 8 + wave * 9);
+      ctx.stroke();
+      ctx.fillStyle = '#4f7cff'; ctx.fillRect(-12, -5, 24, 20);
+      ctx.fillStyle = '#7aa1ff'; ctx.fillRect(-12, -5, 24, 4);
+      ctx.fillStyle = '#ffd8b0';
+      ctx.beginPath(); ctx.arc(0, -16, 12, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#6b3f1d';
+      ctx.beginPath(); ctx.arc(0, -19, 12, Math.PI, Math.PI * 2); ctx.fill();
+      if (player.facing === 'up') {
+        ctx.beginPath(); ctx.arc(0, -16, 12, 0.1, Math.PI - 0.1); ctx.fill();
+      } else if (player.facing === 'left' || player.facing === 'right') {
+        ctx.beginPath(); ctx.arc(player.facing === 'left' ? -5 : 5, -16, 10, Math.PI * 0.5, Math.PI * 1.5); ctx.fill();
+      }
+      if (player.facing !== 'up') {
+        ctx.fillStyle = '#333';
+        if (player.facing === 'down') {
+          if (player.blink > 0) {
+            ctx.fillRect(-6, -17, 4, 1.5); ctx.fillRect(2, -17, 4, 1.5);
+          } else {
+            ctx.fillRect(-5, -17, 2.5, 3); ctx.fillRect(2, -17, 2.5, 3);
+          }
+        } else {
+          const ex = player.facing === 'left' ? -5 : 2;
+          if (player.blink > 0) ctx.fillRect(ex - 1, -17, 4, 1.5);
+          else ctx.fillRect(ex, -17, 2.5, 3);
+        }
+        ctx.strokeStyle = '#a45c4c'; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.arc(0, -11, player.cheer > 0 ? 3.5 : 2.5, 0.15 * Math.PI, 0.85 * Math.PI); ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    function drawActor(it, a) {
+      const animal = it.type === 'animal';
+      const obj = animal ? it.animal : it.worker;
+      const pos = itemPos(it);
+      ctx.fillStyle = 'rgba(0,0,0,.1)';
+      ctx.beginPath(); ctx.ellipse(it.x + a.ox, it.y + a.oy + 24, 14, 5, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.save();
+      ctx.translate(pos.x, pos.y);
+      if (animal && a.facing < 0) ctx.scale(-1, 1);
+      const breathe = 1 + Math.sin(nowMs / 500 + a.phase) * 0.03;
+      ctx.scale(breathe, breathe);
+      ctx.beginPath(); ctx.arc(0, 0, 28, 0, Math.PI * 2);
+      ctx.fillStyle = animal ? '#fff8dd' : (obj.hired ? '#fff2b0' : '#ffe0e0');
+      ctx.fill();
+      ctx.strokeStyle = selected && selected.id === it.id ? '#ff8a00' : '#bba86a';
+      ctx.lineWidth = selected && selected.id === it.id ? 4 : 2;
+      ctx.stroke();
+      const w = a.wave > 0 ? Math.sin(nowMs / 70) * 7 : Math.sin(nowMs / 400 + a.phase) * 2;
+      ctx.strokeStyle = '#d8b98a'; ctx.lineWidth = 5;
+      ctx.beginPath(); ctx.moveTo(-22, 4); ctx.lineTo(-30, 10 - w);
+      ctx.moveTo(22, 4); ctx.lineTo(30, 10 + w); ctx.stroke();
+      ctx.fillStyle = '#333'; ctx.font = '24px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText(obj.emoji, 0, 6);
+      ctx.fillStyle = 'rgba(255,255,255,.45)';
+      ctx.beginPath(); ctx.ellipse(-13, -13, 7, 4, -0.5, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+      ctx.fillStyle = '#333'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+      const label = animal ? (obj.nickname || obj.name) : obj.name;
+      ctx.fillText(label, pos.x, pos.y + 44);
+      if (animal && obj.ready) {
+        ctx.fillStyle = '#ff9f1a'; ctx.font = 'bold 14px sans-serif';
+        ctx.fillText('!', pos.x + 20, pos.y - 16 + Math.sin(nowMs / 220 + a.phase) * 2);
+      }
+    }
+
+    function drawParticles() {
+      particles.forEach((p) => {
+        ctx.globalAlpha = Math.min(1, p.life / 0.4);
+        ctx.save(); ctx.translate(p.x - view.x, p.y - view.y); ctx.rotate(p.rot);
+        ctx.font = `${p.size}px sans-serif`; ctx.textAlign = 'center';
+        ctx.fillText(p.emoji, 0, 0);
+        ctx.restore();
+      });
+      ctx.globalAlpha = 1; ctx.textAlign = 'left';
+    }
+
+    function drawBubbles() {
+      ctx.font = 'bold 13px sans-serif';
+      bubbles.forEach((b) => {
+        ctx.globalAlpha = Math.min(1, b.life / 0.45);
+        const w = Math.min(220, ctx.measureText(b.text).width + 26);
+        const h = 30;
+        const bx = b.x - view.x, by = b.y - view.y;
+        const x = Math.max(6, Math.min(canvas.width - w - 6, bx - w / 2));
+        const y = Math.max(4, by - h);
+        ctx.fillStyle = b.tone === 'pink' ? '#fff0f5' : b.tone === 'happy' ? '#fff7d6' : '#fff';
+        ctx.strokeStyle = b.tone === 'pink' ? '#ff8fb1' : b.tone === 'happy' ? '#ffb740' : '#b9c9a8';
+        ctx.lineWidth = 2;
+        roundRect(x, y, w, h, 12); ctx.fill(); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(bx - 5, y + h); ctx.lineTo(bx + 5, y + h); ctx.lineTo(bx, y + h + 8);
+        ctx.closePath(); ctx.fillStyle = ctx.strokeStyle; ctx.fill();
+        ctx.fillStyle = '#33404d'; ctx.textAlign = 'center';
+        ctx.fillText(b.text, x + w / 2, y + 20);
+      });
+      ctx.globalAlpha = 1; ctx.textAlign = 'left';
+    }
+
+    function drawWorld() {
+      ctx.fillStyle = '#b9dfae';
+      ctx.fillRect(0, 0, WORLD.w, WORLD.h);
+      ZONES.forEach((z) => {
+        ctx.fillStyle = z.color;
+        ctx.fillRect(z.x, z.y, z.w, z.h);
+        ctx.strokeStyle = z.border;
+        ctx.lineWidth = 3;
+        ctx.strokeRect(z.x, z.y, z.w, z.h);
+      });
+      // エリアをつなぐ小道
+      ctx.strokeStyle = '#d9c79c'; ctx.lineWidth = 46; ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(360, 395); ctx.lineTo(360, 940);
+      ctx.moveTo(40, 435); ctx.lineTo(1540, 435);
+      ctx.moveTo(1000, 535); ctx.lineTo(1000, 930);
+      ctx.moveTo(1470, 535); ctx.lineTo(1470, 930);
+      ctx.stroke();
+      // 牧場の柵
+      ctx.strokeStyle = '#b98a55'; ctx.lineWidth = 4;
+      ctx.strokeRect(775, 100, 470, 430);
+      ctx.fillStyle = '#a87645';
+      for (let x = 775; x <= 1245; x += 58) {
+        ctx.fillRect(x - 3, 96, 6, 14); ctx.fillRect(x - 3, 520, 6, 14);
+      }
+      for (let y = 158; y <= 500; y += 58) {
+        ctx.fillRect(771, y - 3, 14, 6); ctx.fillRect(1235, y - 3, 14, 6);
+      }
+      // エリア名
+      ctx.font = 'bold 17px sans-serif';
+      ZONES.forEach((z) => {
+        const tw = ctx.measureText(z.name).width;
+        ctx.fillStyle = 'rgba(255,255,255,.8)';
+        roundRect(z.x + 10, z.y + 8, tw + 20, 28, 10); ctx.fill();
+        ctx.fillStyle = '#4b6b3f'; ctx.textAlign = 'left';
+        ctx.fillText(z.name, z.x + 20, z.y + 28);
+      });
+      ctx.globalAlpha = 0.7;
+      ctx.font = '15px sans-serif'; ctx.textAlign = 'center';
+      decor.forEach((d) => ctx.fillText(d.emoji, d.x, d.y));
+      ctx.globalAlpha = 1;
+      // 建てたたてもの
+      scenery.forEach((b, i) => {
+        const spot = BUILDING_SPOTS[i % BUILDING_SPOTS.length];
+        ctx.fillStyle = 'rgba(0,0,0,.12)';
+        ctx.beginPath(); ctx.ellipse(spot[0], spot[1] + 26, 30, 10, 0, 0, Math.PI * 2); ctx.fill();
+        ctx.font = '44px sans-serif'; ctx.textAlign = 'center';
+        ctx.fillText(b.emoji, spot[0], spot[1]);
+        ctx.fillStyle = '#5d6b45'; ctx.font = '12px sans-serif';
+        ctx.fillText(b.name, spot[0], spot[1] + 20);
+      });
+    }
+
+    function drawMiniMap() {
+      const w = 168, h = 94, x = canvas.width - w - 12, y = 12;
+      const sx = w / WORLD.w, sy = h / WORLD.h;
+      ctx.fillStyle = 'rgba(255,255,255,.9)';
+      roundRect(x, y, w, h, 8); ctx.fill();
+      ctx.strokeStyle = '#8fa886'; ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.save(); ctx.translate(x, y);
+      ZONES.forEach((z) => {
+        ctx.fillStyle = z.color;
+        ctx.fillRect(z.x * sx, z.y * sy, z.w * sx, z.h * sy);
+      });
+      ctx.strokeStyle = '#e67e22'; ctx.lineWidth = 2;
+      ctx.strokeRect(view.x * sx, view.y * sy, canvas.width * sx, canvas.height * sy);
+      ctx.fillStyle = '#2f6fd0';
+      ctx.beginPath(); ctx.arc(player.x * sx, player.y * sy, 4, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+      ctx.fillStyle = '#556'; ctx.font = 'bold 10px sans-serif'; ctx.textAlign = 'left';
+      ctx.fillText('マップ', x + 5, y + 11);
+    }
+
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      // background
-      ctx.fillStyle = '#cfeec4';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#b9dfae';
-      ctx.fillRect(0, 380, canvas.width, 160);
-      ctx.fillStyle = '#efe0b8';
-      ctx.fillRect(20, 70, 660, 290);
-      ctx.strokeStyle = '#d2c08f';
-      ctx.strokeRect(20, 70, 660, 290);
-      ctx.fillStyle = '#f7efd3';
-      ctx.fillRect(660, 70, 280, 440);
-      ctx.fillStyle = '#5a7b46';
-      ctx.font = 'bold 18px sans-serif';
-      ctx.fillText('畑エリア', 30, 62);
-      ctx.fillText('どうぶつ・働き手', 670, 62);
-      ctx.fillText('採集エリア', 30, 402);
-
+      ctx.save();
+      ctx.translate(-view.x, -view.y);
+      drawWorld();
       interactables.forEach((it) => {
         const a = anim.get(it.id) || { ox: 0, oy: 0, phase: 0 };
         if (it.type === 'plot') {
@@ -701,29 +1010,7 @@
           ctx.font = '26px sans-serif'; ctx.textAlign = 'center'; ctx.fillText(g.locked ? '🔒' : g.emoji, it.x, it.y + 4 + bob);
           ctx.font = '12px sans-serif'; ctx.fillText(g.name, it.x, it.y + 52 + bob);
         } else if (it.type === 'animal' || it.type === 'worker') {
-          const obj = it.animal || it.worker;
-          const ax = it.x + a.ox;
-          const ay = it.y + a.oy + (it.type === 'animal' ? Math.sin(nowMs / 350 + a.phase) * 2 : 0);
-          ctx.fillStyle = 'rgba(0,0,0,.1)';
-          ctx.beginPath(); ctx.ellipse(ax, ay + 24, 14, 5, 0, 0, Math.PI * 2); ctx.fill();
-          ctx.beginPath();
-          ctx.fillStyle = it.type === 'worker' ? (obj.hired ? '#fff2b0' : '#ffe0e0') : '#fff8dd';
-          ctx.arc(ax, ay, 28, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.strokeStyle = selected && selected.id === it.id ? '#ff8a00' : '#bba86a';
-          ctx.lineWidth = selected && selected.id === it.id ? 4 : 2;
-          ctx.stroke();
-          ctx.fillStyle = '#333';
-          ctx.font = '24px sans-serif'; ctx.textAlign = 'center';
-          ctx.fillText(obj.emoji, ax, ay + 6);
-          ctx.font = '11px sans-serif';
-          const label = it.type === 'worker' ? obj.name : (obj.nickname || obj.name);
-          ctx.fillText(label, ax, ay + 44);
-          if (it.type === 'animal' && it.animal.ready) {
-            ctx.fillStyle = '#ff9f1a';
-            ctx.font = '14px sans-serif';
-            ctx.fillText('!', ax + 20, ay - 16);
-          }
+          drawActor(it, a);
         }
       });
 
@@ -735,26 +1022,34 @@
       }
 
       // player
-      ctx.save();
-      ctx.translate(player.x, player.y);
-      ctx.fillStyle = 'rgba(0,0,0,.15)';
-      ctx.beginPath(); ctx.ellipse(0, 18, 16, 6, 0, 0, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = '#4f7cff';
-      ctx.fillRect(-12, -4, 24, 22);
-      ctx.fillStyle = '#ffd8b0';
-      ctx.beginPath(); ctx.arc(0, -14, 12, 0, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = '#6b3f1d';
-      ctx.beginPath(); ctx.arc(0, -18, 12, Math.PI, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = '#333';
-      ctx.fillRect(-4, -16, 2, 2); ctx.fillRect(2, -16, 2, 2);
-      ctx.fillStyle = '#2d5b2d';
-      ctx.fillRect(-14, 12, 10, 10); ctx.fillRect(4, 12, 10, 10);
-      ctx.restore();
+      drawPlayer();
       ctx.textAlign = 'left';
+      ctx.restore();
+      // 画面側に固定する演出
+      drawParticles();
+      drawBubbles();
+      drawMiniMap();
     }
 
     function update(dt) {
       nowMs += dt * 1000;
+      player.step += (player.moving ? 10 : 2) * dt;
+      player.blinkAt -= dt;
+      if (player.blinkAt <= 0) { player.blink = 0.12; player.blinkAt = 2 + Math.random() * 3; }
+      if (player.blink > 0) player.blink -= dt;
+      if (player.cheer > 0) player.cheer -= dt;
+      if (player.wave > 0) player.wave -= dt;
+      if (keys.size) {
+        let kx = 0, ky = 0;
+        keys.forEach((k) => { kx += keyDirs[k][0]; ky += keyDirs[k][1]; });
+        const len = Math.hypot(kx, ky) || 1;
+        player.tx = player.x + kx / len * 120;
+        player.ty = player.y + ky / len * 120;
+        keyWalking = true;
+      } else if (keyWalking) {
+        player.tx = player.x; player.ty = player.y;
+        keyWalking = false;
+      }
       const dx = player.tx - player.x;
       const dy = player.ty - player.y;
       const d = Math.hypot(dx, dy);
@@ -768,9 +1063,32 @@
         player.moving = false;
       }
 
+      // カメラが主人公を追いかける
+      const targetViewX = Math.max(0, Math.min(WORLD.w - canvas.width, player.x - canvas.width / 2));
+      const targetViewY = Math.max(0, Math.min(WORLD.h - canvas.height, player.y - canvas.height / 2));
+      const follow = Math.min(1, dt * 6);
+      view.x += (targetViewX - view.x) * follow;
+      view.y += (targetViewY - view.y) * follow;
+
       interactables.forEach((it) => {
         const a = anim.get(it.id);
         if (!a) return;
+        if (a.happy > 0) a.happy -= dt;
+        if (a.wave > 0) a.wave -= dt;
+        a.blinkAt -= dt;
+        if (a.blinkAt <= 0) { a.blink = 0.12; a.blinkAt = 1.8 + Math.random() * 3; }
+        if (a.blink > 0) a.blink -= dt;
+        const pos = itemPos(it);
+        const isActor = it.type === 'animal' || it.type === 'worker';
+        if (isActor && !player.moving && dist(player, pos) < it.r + 32 && nowMs > a.greetAt) {
+          a.greetAt = nowMs + 15000 + Math.random() * 8000;
+          a.wave = 1.5;
+          player.wave = 0.8;
+          const lines = it.type === 'animal'
+            ? (PERSONALITY_LINES[it.animal?.personality] || PERSONALITY_LINES.genki)
+            : (it.worker?.ready ? ['これ もっていってね！', 'やった！ できたよ'] : ['こんにちは！', 'がんばってるよ', 'おつかれさま！']);
+          say(pos.x, pos.y, lines[Math.floor(Math.random() * lines.length)], it.type === 'animal' ? 'pink' : 'white');
+        }
         if (it.type === 'animal') {
           a.nextDir -= dt;
           if (a.nextDir <= 0) {
@@ -778,9 +1096,20 @@
             a.vy = (Math.random() - 0.5) * 18;
             a.nextDir = 1.2 + Math.random() * 2.2;
           }
+          const bond = Number(it.animal?.bond || 0);
+          const px = player.x - it.x;
+          const py = player.y - it.y;
+          const pd = Math.hypot(px, py);
+          if (bond >= 6 && pd > 56 && pd < 170) {
+            a.vx += px / pd * 22 * dt;
+            a.vy += py / pd * 16 * dt;
+          }
+          a.vx = Math.max(-32, Math.min(32, a.vx));
+          a.vy = Math.max(-24, Math.min(24, a.vy));
+          if (Math.abs(a.vx) > 3) a.facing = a.vx > 0 ? 1 : -1;
           a.ox += a.vx * dt;
           a.oy += a.vy * dt;
-          const limit = 18;
+          const limit = 18 + Math.min(40, bond * 2);
           a.ox = Math.max(-limit, Math.min(limit, a.ox));
           a.oy = Math.max(-limit, Math.min(limit, a.oy));
           if (Math.abs(a.ox) >= limit) a.vx *= -0.8;
@@ -792,6 +1121,21 @@
           a.oy = (it.gather && it.gather.ready) ? Math.sin(nowMs / 280 + a.phase) * 3 : 0;
         }
       });
+
+      for (let i = bubbles.length - 1; i >= 0; i--) {
+        bubbles[i].life -= dt;
+        bubbles[i].y -= dt * 9;
+        if (bubbles[i].life <= 0) bubbles.splice(i, 1);
+      }
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.life -= dt;
+        p.vy += 45 * dt;
+        p.x += p.vx * dt;
+        p.y += p.vy * dt;
+        p.rot += p.spin * dt;
+        if (p.life <= 0) particles.splice(i, 1);
+      }
 
       if (selected) {
         const item = interactables.find(it => it.id === selected.id);
@@ -815,7 +1159,8 @@
         return dist(pos, itemPos(it)) < it.r;
       });
     }
-    function pointTo(pos) {
+    function pointTo(rawPos) {
+      const pos = clampToWorld(rawPos);
       player.tx = pos.x; player.ty = pos.y;
       const hit = pickHit(pos);
       if (hit) {
@@ -830,15 +1175,25 @@
     canvas.addEventListener('pointerdown', (evt) => {
       pointerDown = true;
       canvas.setPointerCapture(evt.pointerId);
-      pointTo(toCanvasPos(evt));
+      pointTo(toWorldPos(evt));
     });
     canvas.addEventListener('pointermove', (evt) => {
       if (!pointerDown) return;
-      const pos = toCanvasPos(evt);
+      const pos = clampToWorld(toWorldPos(evt));
       player.tx = pos.x; player.ty = pos.y;
     });
     canvas.addEventListener('pointerup', () => { pointerDown = false; });
     canvas.addEventListener('pointerleave', () => { pointerDown = false; });
+    window.addEventListener('keydown', (evt) => {
+      if (state.view !== 'farm') return;
+      if (['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+      const key = evt.key.length === 1 ? evt.key.toLowerCase() : evt.key;
+      if (keyDirs[key]) { keys.add(key); evt.preventDefault(); }
+    });
+    window.addEventListener('keyup', (evt) => {
+      const key = evt.key.length === 1 ? evt.key.toLowerCase() : evt.key;
+      keys.delete(key);
+    });
 
     function ensureLoop() {
       if (!raf) raf = requestAnimationFrame(loop);
@@ -855,7 +1210,62 @@
       return selected.plot ? selected.plot.index : null;
     }
 
-    return { updateFromFarm, hidePanel, getSelectedPlot };
+    function reactToAction(path, payload, result, before) {
+      const labels = {
+        '/api/farm/plant': ['🌱 うえたよ！', '🌱'],
+        '/api/farm/harvest': ['とれたよ！', '✨'],
+        '/api/farm/gather': ['あつめたよ！', '💪'],
+        '/api/farm/collect-animal': ['とれたよ！', '🎉'],
+        '/api/farm/feed-animal': ['たべるよ〜', '🍽️'],
+        '/api/farm/buy-animal': ['あそぼ！', '🐾'],
+        '/api/farm/collect-worker': ['おつかれさま！', '👏'],
+        '/api/farm/hire-worker': ['よろしくね！', '🤝'],
+        '/api/farm/buy-building': ['できたよ！', '🏠'],
+        '/api/farm/expand': ['ひろがった！', '🌻'],
+        '/api/farm/convert-feed': ['飼料にしたよ', '🌾'],
+        '/api/farm/eat': ['おいしい！', '😋'],
+        '/api/farm/tool-action': ['やった！', '🔧'],
+      };
+      let [text, emoji] = labels[path] || ['よし！', '✨'];
+      if (path === '/api/farm/harvest' && before) {
+        const plot = (before.plots || []).find(p => p.index === payload.plot);
+        if (plot && plot.emoji) text = `${plot.emoji} とれたよ！`;
+      } else if (path === '/api/farm/collect-animal' && before) {
+        const a = (before.animals || []).find(x => x.id === payload.animal_id);
+        if (a) text = `${a.product_emoji || '✨'} とれたよ！`;
+      } else if (path === '/api/farm/gather' && before) {
+        const g = (before.gathers || []).find(x => x.key === payload.spot);
+        if (g) text = `${g.emoji} あつめたよ！`;
+      }
+      say(player.x, player.y - 34, `${emoji} ${text}`, 'happy');
+      player.cheer = 0.7;
+      burst(player.x, player.y - 20, ['✨', '💫', '♪'], 5);
+
+      const targetId = path === '/api/farm/plant' || path === '/api/farm/harvest' ? `plot-${payload.plot}`
+        : path === '/api/farm/gather' ? `gather-${payload.spot}`
+        : path === '/api/farm/feed-animal' || path === '/api/farm/collect-animal' ? `animal-${payload.animal_id}`
+        : null;
+      const it = targetId && interactables.find(x => x.id === targetId);
+      if (it) {
+        const pos = itemPos(it);
+        if (path === '/api/farm/plant') burst(pos.x, pos.y, ['🌱', '✨'], 4);
+        if (path === '/api/farm/harvest') burst(pos.x, pos.y, ['🍃', '✨'], 5);
+        if (path === '/api/farm/gather') burst(pos.x, pos.y, ['💨', '✨'], 5);
+        if (path === '/api/farm/collect-animal') {
+          say(pos.x, pos.y, `${it.animal.product_emoji || '🥚'} どうぞ！`, 'pink');
+          const st = anim.get(targetId);
+          if (st) st.happy = 1.2;
+        }
+      }
+    }
+
+    function onEnter() {
+      say(player.x, player.y - 34, '🏡 ただいま！', 'happy');
+      burst(player.x, player.y - 20, ['✨', '🍀'], 4);
+      ensureLoop();
+    }
+
+    return { updateFromFarm, hidePanel, getSelectedPlot, reactToAction, onEnter };
   })();
 
   // ---------------- 農場ゲーム ----------------
@@ -870,6 +1280,7 @@
       state.farmTimer = null;
     }
     if (view === 'farm') {
+      farmGame.onEnter();
       loadFarm();
       state.farmTimer = setInterval(() => {
         if (state.view === 'farm') loadFarm(true);
@@ -960,6 +1371,7 @@
 
   async function farmPost(path, payload) {
     try {
+      const before = state.farm;
       const data = await api(path, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -968,6 +1380,7 @@
       state.farm = data;
       syncAccount(data.account);
       renderFarm(data);
+      farmGame.reactToAction(path, payload, data, before);
       if (data.event && data.event.message) showFarmMessage(`🎉 ${data.event.message}`);
     } catch (error) {
       alert(error.message);

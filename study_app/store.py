@@ -762,6 +762,20 @@ class ProgressStore:
                 "prereq_met": prereq_met,
             })
 
+        blueprints = []
+        for key, blueprint in farm_catalog.TOOL_BLUEPRINTS.items():
+            owned = key in tool_rows
+            prereq = blueprint.get("prereq")
+            prereq_met = prereq is None or prereq in tool_rows
+            blueprints.append({
+                "key": key, "name": blueprint["name"], "emoji": blueprint["emoji"],
+                "grade": blueprint["grade"], "prereq": prereq,
+                "prereq_name": farm_catalog.TOOLS.get(prereq, {}).get("name", ""),
+                "cost": blueprint["cost"], "description": blueprint["description"],
+                "unlock_label": blueprint.get("unlock_label", ""),
+                "owned": owned, "prereq_met": prereq_met,
+            })
+
         gathers = []
         for key, spot in farm_catalog.GATHER_SPOTS.items():
             row = gather_rows.get(key)
@@ -826,6 +840,8 @@ class ProgressStore:
             "animals": animals,
             "buildings": buildings,
             "tools": tools,
+            "blueprints": blueprints,
+            "workshop_built": any(row["building"] == "workshop" for row in building_rows),
             "gathers": gathers,
             "workers": workers,
             "catalog": farm_catalog.catalog(),
@@ -1070,6 +1086,47 @@ class ProgressStore:
             conn.execute("UPDATE farm_state SET exp = exp + 15 WHERE account_id = ?", (account_id,))
         data = self.get_farm(account_id)
         data["event"] = {"message": f"{tool['emoji']} {tool['name']} を 手に入れた！ {tool.get('unlock_label','')}"}
+        return data
+
+    def develop_tool(self, account_id: int, tool_key: str) -> Dict[str, Any]:
+        """道具工房で設計図の道具を開発する。"""
+        with self.lock, self._connect() as conn:
+            conn.row_factory = sqlite3.Row
+            self._ensure_farm_state(conn, account_id)
+            blueprint = farm_catalog.TOOL_BLUEPRINTS.get(tool_key)
+            if not blueprint:
+                raise ValueError("その設計図は ありません")
+            has_workshop = conn.execute(
+                "SELECT 1 FROM farm_buildings WHERE account_id = ? AND building = 'workshop'",
+                (account_id,),
+            ).fetchone()
+            if not has_workshop:
+                raise ValueError("道具工房を 建ててから 開発してください")
+            owned = conn.execute(
+                "SELECT 1 FROM farm_tools WHERE account_id = ? AND tool_key = ?",
+                (account_id, tool_key),
+            ).fetchone()
+            if owned:
+                raise ValueError("この道具は もう持っています")
+            prereq = blueprint.get("prereq")
+            if prereq:
+                has_prereq = conn.execute(
+                    "SELECT 1 FROM farm_tools WHERE account_id = ? AND tool_key = ?",
+                    (account_id, prereq),
+                ).fetchone()
+                if not has_prereq:
+                    prereq_name = farm_catalog.TOOLS.get(prereq, {}).get("name", prereq)
+                    raise ValueError(f"先に {prereq_name} が必要です")
+            self._spend_cost(conn, account_id, blueprint["cost"])
+            conn.execute(
+                "INSERT INTO farm_tools (account_id, tool_key, acquired_at) VALUES (?, ?, ?)",
+                (account_id, tool_key, farm_catalog.now_iso()),
+            )
+            conn.execute("UPDATE farm_state SET exp = exp + 30 WHERE account_id = ?", (account_id,))
+        data = self.get_farm(account_id)
+        data["event"] = {
+            "message": f"🔧 {blueprint['name']} を 工房で 開発した！ {blueprint.get('unlock_label', '')}"
+        }
         return data
 
     def use_tool_action(self, account_id: int, action: str, plot: Optional[int] = None) -> Dict[str, Any]:
